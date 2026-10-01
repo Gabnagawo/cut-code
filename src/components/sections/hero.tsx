@@ -2,6 +2,7 @@ import * as React from "react";
 import { ArrowRight, CalendarCheck, Clock, Gift, Play, Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { GlassBlob } from "@/components/ui/glass-blob";
 import {
   Carousel,
   Slider,
@@ -13,57 +14,42 @@ import { SafeImage } from "@/components/safe-image";
 import { SHOWCASE, type Showcase } from "@/data/content";
 import { cn } from "@/lib/utils";
 
-const HEADLINE: { text: string; sheen?: boolean; br?: boolean }[] = [
+const HEADLINE: { text: string; iris?: boolean; br?: boolean }[] = [
   { text: "Sua" },
   { text: "marca,", br: true },
-  { text: "cortada", sheen: true },
-  { text: "e" },
-  { text: "codificada", sheen: true, br: true },
+  { text: "cortada" },
+  { text: "e", br: true },
+  { text: "codificada", iris: true, br: true },
   { text: "para" },
   { text: "vender." },
 ];
 
 export function Hero() {
-  const ref = React.useRef<HTMLElement>(null);
-
-  // spotlight que acompanha o cursor no fundo do hero
-  const onPointerMove = (e: React.PointerEvent<HTMLElement>) => {
-    const el = ref.current;
-    if (!el || e.pointerType !== "mouse") return;
-    const r = el.getBoundingClientRect();
-    el.style.setProperty("--sx", `${e.clientX - r.left}px`);
-    el.style.setProperty("--sy", `${e.clientY - r.top}px`);
-  };
-
   return (
-    <section
-      id="top"
-      ref={ref}
-      onPointerMove={onPointerMove}
-      className="relative isolate overflow-hidden pt-28 pb-20 sm:pt-36 lg:min-h-svh lg:pb-24"
-    >
+    <section id="top" className="relative isolate overflow-hidden pt-28 pb-24 sm:pt-36 lg:min-h-svh">
       <HeroBackground />
 
-      <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:gap-10">
+      <div className="mx-auto grid max-w-7xl items-center gap-16 px-5 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
         {/* Texto */}
         <div className="relative">
           <a
             href="#portfolio"
-            className="glass-pill group inline-flex items-center gap-2.5 rounded-full py-1.5 pr-3 pl-2 text-[0.8rem] text-bone/90 transition-colors animate-blur-in hover:bg-white/10"
+            className="glass-pill group inline-flex items-center gap-2.5 rounded-full py-1.5 pr-3 pl-1.5 text-[0.8rem] text-graphite animate-blur-in"
           >
-            <span className="flex items-center gap-1.5 rounded-full bg-emerald-400/15 px-2 py-0.5 text-emerald-300">
+            <span className="flex items-center gap-1.5 rounded-full bg-graphite px-2.5 py-0.5 text-paper">
               <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse-ring" />
               Agenda aberta
             </span>
-            Novos projetos para este mês
+            <span className="hidden sm:inline">Novos projetos para este mês</span>
+            <span className="sm:hidden">Novos projetos</span>
             <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
           </a>
 
-          <h1 className="mt-7 font-serif text-[clamp(3.3rem,8vw,7.4rem)] leading-[0.92] tracking-[-0.02em]">
+          <h1 className="font-heading mt-8 text-[clamp(3.4rem,8vw,7.2rem)] leading-[0.9] text-graphite">
             {HEADLINE.map((w, i) => (
               <React.Fragment key={i}>
                 <span
-                  className={cn("inline-block animate-blur-in pr-[0.22em]", w.sheen && "text-sheen")}
+                  className={cn("inline-block animate-blur-in pr-[0.2em]", w.iris && "text-iris")}
                   style={{ animationDelay: `${150 + i * 90}ms` }}
                 >
                   {w.text}
@@ -73,14 +59,16 @@ export function Hero() {
             ))}
           </h1>
 
+          <span className="rule mt-9 animate-blur-in" style={{ animationDelay: "800ms" }} />
+
           <p
-            className="mt-8 max-w-xl text-lg font-light leading-relaxed text-mist animate-blur-in sm:text-xl"
+            className="mt-7 max-w-lg text-lg leading-relaxed text-mist animate-blur-in sm:text-xl"
             style={{ animationDelay: "850ms" }}
           >
             Do primeiro clique ao cliente na porta: sites guiados e vídeos curtos de divulgação para{" "}
             <RotatingWords
               words={["clínicas", "restaurantes", "lojas", "empresas", "eventos"]}
-              className="font-serif text-[1.3em] italic text-bone"
+              className="font-heading font-semibold text-graphite"
             />
           </p>
 
@@ -88,7 +76,7 @@ export function Hero() {
             <Button
               asChild
               size="lg"
-              className="group h-14 rounded-full bg-bone px-7 text-base text-ink shadow-[0_10px_40px_-10px_rgb(201_195_255/0.7)] transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_50px_-10px_rgb(201_195_255/0.95)]"
+              className="group h-14 rounded-full bg-graphite px-7 text-base text-paper shadow-[0_14px_34px_-14px_rgb(30_30_30/0.7)] transition-all hover:-translate-y-0.5 hover:bg-graphite-2 hover:shadow-[0_20px_40px_-14px_rgb(30_30_30/0.8)]"
             >
               <a href="#contato">
                 Quero meu orçamento
@@ -99,10 +87,10 @@ export function Hero() {
               asChild
               variant="outline"
               size="lg"
-              className="glass-pill group h-14 rounded-full border-white/15 bg-white/5 pr-7 pl-2.5 text-base text-bone hover:-translate-y-0.5 hover:bg-white/10 hover:text-bone"
+              className="glass-pill group h-14 rounded-full pr-7 pl-2 text-base text-graphite hover:-translate-y-0.5 hover:bg-white hover:text-graphite"
             >
               <a href="#portfolio">
-                <span className="mr-3 grid size-10 place-items-center rounded-full bg-white/10 transition-all duration-300 group-hover:scale-110 group-hover:bg-bone group-hover:text-ink">
+                <span className="mr-3 grid size-10 place-items-center rounded-full bg-graphite text-paper transition-transform duration-300 group-hover:scale-110">
                   <Play className="size-4 translate-x-px fill-current" />
                 </span>
                 Ver portfólio
@@ -111,7 +99,7 @@ export function Hero() {
           </div>
 
           <ul
-            className="mt-12 grid max-w-xl grid-cols-1 gap-3 border-t border-white/10 pt-7 text-sm animate-blur-in sm:grid-cols-3"
+            className="mt-12 grid max-w-xl grid-cols-1 gap-4 text-sm animate-blur-in sm:grid-cols-3"
             style={{ animationDelay: "1150ms" }}
           >
             {[
@@ -120,11 +108,11 @@ export function Hero() {
               { icon: Gift, strong: "+2 vídeos", text: "grátis no pacote" },
             ].map(({ icon: Icon, strong, text }) => (
               <li key={strong} className="flex items-center gap-3">
-                <span className="grid size-9 shrink-0 place-items-center rounded-full border border-white/10 bg-white/5">
-                  <Icon className="size-4 text-pearl" />
+                <span className="grid size-9 shrink-0 place-items-center rounded-full bg-graphite text-paper">
+                  <Icon className="size-4" />
                 </span>
                 <span className="leading-tight">
-                  <strong className="block font-serif text-xl font-normal text-bone">{strong}</strong>
+                  <strong className="font-heading block text-lg text-graphite">{strong}</strong>
                   <span className="text-mist">{text}</span>
                 </span>
               </li>
@@ -142,42 +130,34 @@ export function Hero() {
 function HeroBackground() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-      {/* aurora girando */}
-      <div className="absolute top-[30%] left-[62%] size-[110vmax] -translate-x-1/2 -translate-y-1/2 animate-aurora opacity-60 blur-[110px] [background:conic-gradient(from_0deg,#5b4bd6,#2b7fb8_25%,#0b0b10_45%,#b5527b_65%,#0b0b10_80%,#5b4bd6)] [mask-image:radial-gradient(circle,#000_0%,transparent_42%)]" />
-      {/* grade */}
-      <div className="bg-grid absolute inset-0 [mask-image:radial-gradient(ellipse_75%_65%_at_50%_0%,#000_25%,transparent_75%)]" />
-      {/* spotlight do cursor */}
-      <div className="absolute inset-0 [background:radial-gradient(650px_circle_at_var(--sx,70%)_var(--sy,30%),rgb(201_195_255/0.10),transparent_45%)]" />
-      {/* marca d'água da logo */}
-      <img
-        src="assets/logo-mark.png"
-        alt=""
-        className="absolute top-[6%] right-[-14%] w-[62vw] max-w-[860px] rotate-[-8deg] opacity-[0.035]"
-      />
-      <div className="bg-grain absolute inset-0 opacity-[0.06] mix-blend-overlay" />
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-ink" />
+      {/* luz ambiente menta, como nas apresentações */}
+      <div className="absolute -top-[20vmax] -left-[18vmax] size-[55vmax] rounded-full bg-[radial-gradient(circle,#d3ebe9_0%,transparent_62%)] animate-drift" />
+      <div className="absolute top-[10vh] -right-[20vmax] size-[50vmax] rounded-full bg-[radial-gradient(circle,#e1edf1_0%,transparent_60%)] animate-drift [animation-delay:-8s]" />
+      <div className="bg-grain absolute inset-0 opacity-[0.05] mix-blend-multiply" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-canvas" />
     </div>
   );
 }
 
 function HeroShowcase() {
   return (
-    <div className="relative mx-auto w-full max-w-[540px] animate-blur-in" style={{ animationDelay: "500ms" }}>
-      {/* halo atrás do vidro */}
-      <div
-        aria-hidden
-        className="absolute -inset-10 -z-10 rounded-full bg-[radial-gradient(closest-side,rgb(91_75_214/0.55),transparent)] blur-2xl"
-      />
+    <div className="relative mx-auto w-full max-w-[540px] animate-blur-in" style={{ animationDelay: "400ms" }}>
+      {/* objeto de vidro atrás da vitrine, vazando para fora */}
+      <GlassBlob className="absolute top-1/2 left-1/2 -z-10 size-[150%] -translate-x-1/2 -translate-y-1/2 sm:size-[165%] lg:-translate-x-[38%]" />
 
       <div className="glass rounded-[34px] p-2.5 sm:p-3">
-        <Carousel options={{
+        <Carousel
+          options={{
             axis: "y",
             loop: false,
             duration: 32,
             // no toque, o arrasto vertical fica com a rolagem da página (navega pelas miniaturas)
             breakpoints: { "(hover: none)": { watchDrag: false } },
-          }} autoplay={4200} className="flex gap-2.5 sm:gap-3">
-          <SliderContainer className="h-[440px] gap-3 sm:h-[560px]">
+          }}
+          autoplay={4200}
+          className="flex gap-2.5 sm:gap-3"
+        >
+          <SliderContainer className="h-[440px] gap-3 sm:h-[540px]">
             {SHOWCASE.map((item, i) => (
               <Slider key={item.niche} thumbnailSrc={item.thumb} className="h-full">
                 <ShowcaseSlide item={item} index={i} total={SHOWCASE.length} />
@@ -186,23 +166,23 @@ function HeroShowcase() {
           </SliderContainer>
           <ThumbsSlider
             className="w-14 sm:w-[4.5rem]"
-            thumbsClassName="h-[440px] gap-2.5 sm:h-[560px]"
-            thumbClassName="rounded-2xl border-white/0"
-            thumbsSliderClassName="border-pearl shadow-[0_0_24px_-4px_rgb(201_195_255/0.8)]"
+            thumbsClassName="h-[440px] gap-2.5 sm:h-[540px]"
+            thumbClassName="rounded-2xl border-white/0 bg-gradient-to-br from-[#d9dcdc] to-[#b9bfc0]"
+            thumbsSliderClassName="border-graphite"
           />
         </Carousel>
       </div>
 
       {/* cartões flutuantes */}
       <div
-        className="glass absolute top-[34%] -left-4 hidden items-center gap-3 rounded-2xl px-4 py-3 text-sm animate-float sm:flex lg:-left-16"
+        className="glass absolute top-[30%] -left-4 hidden items-center gap-3 rounded-2xl px-4 py-3 text-sm animate-float sm:flex lg:-left-16"
         style={{ animationDelay: "-2s" }}
       >
-        <span className="grid size-9 place-items-center rounded-full bg-emerald-400/15 text-emerald-300">
+        <span className="grid size-9 place-items-center rounded-full bg-graphite text-paper">
           <CalendarCheck className="size-4" />
         </span>
         <span className="leading-tight">
-          <b className="block font-medium">Agendamento confirmado</b>
+          <b className="block font-medium text-graphite">Agendamento confirmado</b>
           <small className="text-xs text-mist">via landing page guiada</small>
         </span>
       </div>
@@ -211,11 +191,11 @@ function HeroShowcase() {
         className="glass absolute -bottom-7 left-4 hidden items-center gap-3 rounded-2xl px-4 py-3 text-sm animate-float sm:left-10 sm:flex"
         style={{ animationDelay: "-5s" }}
       >
-        <span className="grid size-9 place-items-center rounded-full bg-white/15">
+        <span className="grid size-9 place-items-center rounded-full bg-graphite text-paper">
           <Play className="size-3.5 translate-x-px fill-current" />
         </span>
         <span className="leading-tight">
-          <b className="block font-medium">Reel entregue</b>
+          <b className="block font-medium text-graphite">Reel entregue</b>
           <small className="text-xs text-mist">editado em 48h</small>
         </span>
       </div>
@@ -232,22 +212,21 @@ function ShowcaseSlide({ item, index, total }: { item: Showcase; index: number; 
         loading={index === 0 ? "eager" : "lazy"}
         className="absolute inset-0 scale-[1.02] transition-transform duration-[1.6s] ease-glass group-hover/slide:scale-110"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-ink/10" />
-      <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_80%_0%,rgb(201_195_255/0.25),transparent)] mix-blend-screen" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-black/5" />
 
-      <div className="absolute inset-x-5 top-5 flex items-center justify-between text-xs">
-        <span className="glass-pill rounded-full px-3 py-1.5 tracking-[0.18em] uppercase">{item.niche}</span>
-        <span className="font-mono text-bone/70 tabular-nums">
+      <div className="absolute inset-x-5 top-5 flex items-center justify-between text-xs text-white">
+        <span className="glass-dark rounded-full px-3 py-1.5 font-medium tracking-[0.16em] uppercase">{item.niche}</span>
+        <span className="font-mono text-white/80 tabular-nums">
           {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
         </span>
       </div>
 
-      <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-4 sm:inset-x-6 sm:bottom-6">
+      <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-4 text-white sm:inset-x-6 sm:bottom-6">
         <div>
-          <p className="font-serif text-3xl leading-[1.05] sm:text-[2.6rem]">{item.title}</p>
-          <p className="mt-2 text-sm text-bone/70">{item.meta}</p>
+          <p className="font-heading text-3xl leading-[1.02] sm:text-[2.5rem]">{item.title}</p>
+          <p className="mt-2 text-sm text-white/75">{item.meta}</p>
         </div>
-        <span className="glass-pill grid size-12 shrink-0 place-items-center rounded-full transition-all duration-500 group-hover/slide:scale-110 group-hover/slide:bg-bone group-hover/slide:text-ink">
+        <span className="grid size-12 shrink-0 place-items-center rounded-full bg-white text-graphite transition-transform duration-500 group-hover/slide:scale-110">
           <Play className="size-4 translate-x-px fill-current" />
         </span>
       </div>

@@ -35,7 +35,7 @@ export const SHOWCASE: Showcase[] = [
     meta: "Landing page guiada + 4 reels",
     image: unsplash("1519494026892-80bbd2d6fd0d"),
     thumb: unsplash("1519494026892-80bbd2d6fd0d", 200),
-    tone: "from-[#1d3348] to-[#0b0f15]",
+    tone: "from-[#8fa3a4] to-[#3a4245]",
   },
   {
     niche: "Restaurantes",
@@ -43,7 +43,7 @@ export const SHOWCASE: Showcase[] = [
     meta: "Reels de pratos + site com reservas",
     image: unsplash("1517248135467-4c7edcad34c4"),
     thumb: unsplash("1517248135467-4c7edcad34c4", 200),
-    tone: "from-[#3d2516] to-[#120c08]",
+    tone: "from-[#a39a92] to-[#45403b]",
   },
   {
     niche: "Lojas",
@@ -51,7 +51,7 @@ export const SHOWCASE: Showcase[] = [
     meta: "Vídeos de produto + StoryMaker",
     image: unsplash("1441986300917-64674bd600d8"),
     thumb: unsplash("1441986300917-64674bd600d8", 200),
-    tone: "from-[#2a2347] to-[#0e0c17]",
+    tone: "from-[#9c98ad] to-[#3f3d4a]",
   },
   {
     niche: "Empresas",
@@ -59,7 +59,7 @@ export const SHOWCASE: Showcase[] = [
     meta: "Site completo + vídeo institucional",
     image: unsplash("1497366216548-37526070297c"),
     thumb: unsplash("1497366216548-37526070297c", 200),
-    tone: "from-[#1f2b2a] to-[#0a0f0e]",
+    tone: "from-[#93a0a8] to-[#3b4349]",
   },
   {
     niche: "Eventos",
@@ -67,7 +67,7 @@ export const SHOWCASE: Showcase[] = [
     meta: "Convite interativo + aftermovie",
     image: unsplash("1511578314322-379afb476865"),
     thumb: unsplash("1511578314322-379afb476865", 200),
-    tone: "from-[#3f2030] to-[#130b10]",
+    tone: "from-[#a7979f] to-[#4a3f45]",
   },
 ];
 
@@ -128,7 +128,7 @@ export const CASES = [
     domain: "clinicasantalourdes",
     kind: "Landing page guiada · agendamento de consultas",
     headline: "Agende sua consulta em 3 passos",
-    tone: "bg-[radial-gradient(120%_90%_at_85%_10%,rgb(159_216_255/0.45),transparent_55%),linear-gradient(160deg,#1b2a3a,#0e1219)]",
+    tone: "bg-[radial-gradient(90%_80%_at_85%_10%,#cfe8e6,transparent_60%),radial-gradient(60%_60%_at_10%_100%,#e6e1f5,transparent_60%),linear-gradient(160deg,#f7f7f6,#ececeb)]",
   },
   {
     name: "Dra. Vanine",
@@ -136,15 +136,15 @@ export const CASES = [
     domain: "dravanine",
     kind: "Landing page guiada · consultório particular",
     headline: "Atendimento humanizado, do primeiro contato à consulta",
-    tone: "bg-[radial-gradient(120%_90%_at_85%_10%,rgb(245_201_216/0.45),transparent_55%),linear-gradient(160deg,#3a1f2c,#140e12)]",
+    tone: "bg-[radial-gradient(90%_80%_at_85%_10%,#f3dbe6,transparent_60%),radial-gradient(60%_60%_at_10%_100%,#d9eeed,transparent_60%),linear-gradient(160deg,#f7f7f6,#ececeb)]",
   },
 ];
 
 export const REELS = [
-  { label: "Clínica", duration: "0:30", image: unsplash("1519494026892-80bbd2d6fd0d", 500), tone: "from-[#1d3348] to-[#0b0f15]" },
-  { label: "Restaurante", duration: "0:22", image: unsplash("1517248135467-4c7edcad34c4", 500), tone: "from-[#3d2516] to-[#120c08]" },
-  { label: "Loja", duration: "0:18", image: unsplash("1441986300917-64674bd600d8", 500), tone: "from-[#2a2347] to-[#0e0c17]" },
-  { label: "Evento", duration: "0:25", image: unsplash("1511578314322-379afb476865", 500), tone: "from-[#3f2030] to-[#130b10]" },
+  { label: "Clínica", duration: "0:30", image: unsplash("1519494026892-80bbd2d6fd0d", 500), tone: "from-[#8fa3a4] to-[#3a4245]" },
+  { label: "Restaurante", duration: "0:22", image: unsplash("1517248135467-4c7edcad34c4", 500), tone: "from-[#a39a92] to-[#45403b]" },
+  { label: "Loja", duration: "0:18", image: unsplash("1441986300917-64674bd600d8", 500), tone: "from-[#9c98ad] to-[#3f3d4a]" },
+  { label: "Evento", duration: "0:25", image: unsplash("1511578314322-379afb476865", 500), tone: "from-[#a7979f] to-[#4a3f45]" },
 ];
 
 export const STEPS = [

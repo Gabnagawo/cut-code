@@ -9,11 +9,10 @@ import { Services } from "@/components/sections/services";
 export default function App() {
   return (
     <>
-      {/* luz ambiente fixa atrás do vidro */}
+      {/* luz ambiente menta fixa atrás do vidro */}
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-20 overflow-hidden">
-        <span className="absolute -top-[16vmax] -left-[12vmax] size-[48vmax] rounded-full bg-[radial-gradient(circle_at_30%_30%,#5b4bd6,transparent_65%)] opacity-35 blur-[90px]" />
-        <span className="absolute top-[40vh] -right-[14vmax] size-[42vmax] rounded-full bg-[radial-gradient(circle,#2b7fb8,transparent_65%)] opacity-25 blur-[90px]" />
-        <span className="absolute -bottom-[20vmax] left-[25vw] size-[36vmax] rounded-full bg-[radial-gradient(circle,#b5527b,transparent_65%)] opacity-20 blur-[90px]" />
+        <span className="absolute top-[35vh] -right-[18vmax] size-[46vmax] rounded-full bg-[radial-gradient(circle,#dcecee,transparent_62%)]" />
+        <span className="absolute -bottom-[22vmax] -left-[14vmax] size-[44vmax] rounded-full bg-[radial-gradient(circle,#d5ebe8,transparent_62%)]" />
       </div>
       <Nav />
       <main>

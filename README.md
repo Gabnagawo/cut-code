@@ -36,9 +36,15 @@ esses componentes funcionarem sem ajustar imports.
 
 ## Identidade visual
 
-- **Referências:** liquid glass (glassmorphism) + mercury.com
-- **Cores:** `ink #08080a` · `bone #f3f1ec` · `mist #a7a7b3` · reflexos `pearl #c9c3ff`, `ice #9fd8ff`, `blush #f5c9d8`
-- **Tipografia:** Instrument Serif (títulos) + Inter (textos)
+Baseada na apresentação "White 3D Glass" + liquid glass + mercury.com.
+
+- **Fundo:** `canvas #f1f1f1`, superfícies `paper #f8f8f7`
+- **Texto e botões:** `graphite #303030`, secundário `mist #6c6c70`
+- **Luz ambiente:** `mint #d9eeed`, `aqua #e3eef1` (manchas desfocadas no fundo)
+- **Iridescente** (só em brilhos, bordas e destaques de texto): lilás `#c9b8ff`, água `#9fe3da`, rosa `#f4b8d8`
+- **Tipografia:** Inter Tight 600 com espaçamento apertado nos títulos e Inter nos textos (fontes embutidas via `@fontsource`)
+- **Detalhes:** fio fino grafite sob os títulos, vidro fosco branco nos cartões, objetos 3D de vidro cromado
+  renderizados em WebGL (`src/components/ui/glass-blob.tsx`, formas `blob` e `ring`)
 
 ## Pendências (em `src/data/content.ts`)
 

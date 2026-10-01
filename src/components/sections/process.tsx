@@ -1,7 +1,14 @@
+import { Clapperboard, ClipboardList, Eye, Rocket } from "lucide-react";
+
 import { GlowCard } from "@/components/ui/glow-card";
 import { Reveal } from "@/components/reveal";
 import { SectionHead } from "@/components/sections/section-head";
 import { STEPS } from "@/data/content";
+import { cn } from "@/lib/utils";
+
+const ICONS = [ClipboardList, Eye, Clapperboard, Rocket];
+// degraus, como os blocos escalonados das apresentações
+const OFFSETS = ["lg:mt-0", "lg:mt-16", "lg:mt-8", "lg:mt-24"];
 
 export function Process() {
   return (
@@ -10,35 +17,41 @@ export function Process() {
         eyebrow="Como funciona"
         title={
           <>
-            Simples, rápido e <em className="text-sheen">sem enrolação</em>.
+            Simples, rápido e <span className="text-iris">sem enrolação</span>.
           </>
         }
       />
 
-      <ol className="relative grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {/* linha que conecta os passos */}
-        <span aria-hidden className="absolute top-[3.4rem] right-[12%] left-[12%] hidden h-px bg-gradient-to-r from-transparent via-white/20 to-transparent lg:block" />
-        {STEPS.map((step, i) => (
-          <Reveal as="li" key={step.title} delay={i * 90} className="h-full">
-            <GlowCard className="h-full">
-              <div className="p-7 sm:p-8">
-                <span className="relative grid size-12 place-items-center rounded-full border border-white/25 bg-[radial-gradient(circle_at_30%_25%,rgb(255_255_255/0.3),rgb(201_195_255/0.1))] font-serif text-xl shadow-[inset_0_1px_1px_rgb(255_255_255/0.4)] transition-all duration-500 ease-glass group-hover/card:scale-110 group-hover/card:bg-bone group-hover/card:text-ink group-hover/card:shadow-[0_0_40px_-4px_rgb(201_195_255/0.9)]">
-                  {i + 1}
-                </span>
-                <h3 className="mt-10 font-serif text-[1.7rem] leading-tight">{step.title}</h3>
-                <p className="mt-2 text-[0.95rem] text-mist">
-                  {step.highlight
-                    ? step.text.split(step.highlight).flatMap((part, j, arr) =>
-                        j < arr.length - 1
-                          ? [part, <b key={j} className="font-medium text-bone">{step.highlight}</b>]
-                          : [part],
-                      )
-                    : step.text}
-                </p>
-              </div>
-            </GlowCard>
-          </Reveal>
-        ))}
+      <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {STEPS.map((step, i) => {
+          const Icon = ICONS[i];
+          return (
+            <Reveal as="li" key={step.title} delay={i * 90} className={cn("h-full", OFFSETS[i])}>
+              <GlowCard className="h-full">
+                <div className="p-7 sm:p-8">
+                  <div className="flex items-center justify-between">
+                    <span className="grid size-12 place-items-center rounded-full border border-hairline bg-white/70 text-graphite transition-all duration-500 ease-glass group-hover/card:scale-110 group-hover/card:bg-graphite group-hover/card:text-paper">
+                      <Icon className="size-5" strokeWidth={1.5} />
+                    </span>
+                    <span className="font-heading text-5xl text-graphite/10 transition-colors duration-500 group-hover/card:text-graphite/50">
+                      {i + 1}
+                    </span>
+                  </div>
+                  <h3 className="font-heading mt-10 text-[1.6rem] leading-tight text-graphite">{step.title}</h3>
+                  <p className="mt-2 text-[0.95rem] text-mist">
+                    {step.highlight
+                      ? step.text.split(step.highlight).flatMap((part, j, arr) =>
+                          j < arr.length - 1
+                            ? [part, <b key={j} className="font-semibold text-graphite">{step.highlight}</b>]
+                            : [part],
+                        )
+                      : step.text}
+                  </p>
+                </div>
+              </GlowCard>
+            </Reveal>
+          );
+        })}
       </ol>
     </section>
   );
