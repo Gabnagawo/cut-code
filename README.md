@@ -50,7 +50,7 @@ Baseada na apresentação "White 3D Glass" + liquid glass + mercury.com.
 
 - [ ] WhatsApp (`CONTACT.whatsapp`, ex.: `https://wa.me/55...`)
 - [ ] Instagram (`CONTACT.instagram`)
-- [ ] Links dos sites da Clínica Santa Lourdes e da Dra. Vanine (`CASES[].url`)
+- [ ] Material de clientes (`CLIENTS`): fotos/vídeos reais em `public/clientes/<slug>/` e links dos sites. Hoje são fotos provisórias do Unsplash
 - [ ] Fotos/vídeos reais no slider do hero (`SHOWCASE`) e nos reels (`REELS`). Hoje são fotos do Unsplash
 - [ ] Preços (hoje "Sob consulta")
 - [ ] Descrição final do StoryMaker

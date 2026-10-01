@@ -1,10 +1,11 @@
-import { ArrowUpRight, Play } from "lucide-react";
+import { Play } from "lucide-react";
 
 import { GlowCard } from "@/components/ui/glow-card";
 import { Reveal } from "@/components/reveal";
 import { SafeImage } from "@/components/safe-image";
+import { ClientShowcase } from "@/components/sections/client-showcase";
 import { SectionHead } from "@/components/sections/section-head";
-import { CASES, CONTACT, REELS } from "@/data/content";
+import { CONTACT, REELS } from "@/data/content";
 import { cn } from "@/lib/utils";
 
 export function Portfolio() {
@@ -19,40 +20,9 @@ export function Portfolio() {
         }
       />
 
-      <div className="grid gap-5 md:grid-cols-2">
-        {CASES.map((c, i) => (
-          <Reveal key={c.name} delay={i * 100}>
-            <GlowCard as="a" href={c.url} tilt={4} className="block p-3.5">
-              <div className="overflow-hidden rounded-[18px] border border-hairline bg-paper">
-                <div className="flex items-center gap-1.5 border-b border-hairline bg-white/70 px-3.5 py-3">
-                  {["group-hover/card:bg-[#ff5f57]", "group-hover/card:bg-[#febc2e]", "group-hover/card:bg-[#28c840]"].map((hover) => (
-                    <span key={hover} className={cn("size-2.5 rounded-full bg-graphite/15 transition-colors duration-500", hover)} />
-                  ))}
-                  <em className="ml-2.5 rounded-full bg-graphite/5 px-3 py-0.5 text-xs text-mist not-italic">{c.domain}</em>
-                </div>
-                <div className={cn("relative aspect-[16/10] overflow-hidden", c.tone)}>
-                  <div className="absolute inset-0 flex flex-col justify-end gap-2 p-7 text-graphite transition-transform duration-[1.2s] ease-glass group-hover/card:scale-[1.04] sm:p-10">
-                    <span className="absolute top-7 left-7 h-8 w-28 rounded-full bg-graphite sm:top-10 sm:left-10" />
-                    <b className="font-heading text-[clamp(1.7rem,3vw,2.4rem)] leading-[1.02]">{c.name}</b>
-                    <small className="max-w-xs text-mist">{c.headline}</small>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center justify-between px-3 pt-5 pb-2.5">
-                <div>
-                  <h3 className="font-heading text-[1.6rem] text-graphite">{c.name}</h3>
-                  <p className="text-sm text-mist">{c.kind}</p>
-                </div>
-                <span className="grid size-12 shrink-0 place-items-center rounded-full border border-graphite/15 text-graphite transition-all duration-500 ease-glass group-hover/card:rotate-45 group-hover/card:bg-graphite group-hover/card:text-paper">
-                  <ArrowUpRight className="size-5" />
-                </span>
-              </div>
-            </GlowCard>
-          </Reveal>
-        ))}
-      </div>
+      <ClientShowcase />
 
-      <Reveal className="mt-20 mb-7 flex flex-wrap items-baseline justify-between gap-4">
+      <Reveal className="mt-24 mb-7 flex flex-wrap items-baseline justify-between gap-4">
         <h3 className="font-heading text-[clamp(2rem,3vw,2.8rem)] text-graphite">Reels</h3>
         <a
           href={CONTACT.instagram}
