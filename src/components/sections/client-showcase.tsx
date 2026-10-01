@@ -11,6 +11,7 @@ import {
 import { Reveal } from "@/components/reveal";
 import { SafeImage } from "@/components/safe-image";
 import { CLIENTS, type Client, type ClientMaterial } from "@/data/content";
+import { linkProps } from "@/lib/link-props";
 import { cn } from "@/lib/utils";
 
 /**
@@ -20,22 +21,43 @@ import { cn } from "@/lib/utils";
 export function ClientShowcase() {
   const [active, setActive] = React.useState(0);
   const client = CLIENTS[active];
+  const tabsRef = React.useRef<(HTMLButtonElement | null)[]>([]);
+
+  // padrão de abas acessível: setas trocam de aba, Home/End vão às pontas
+  const onTabKey = (e: React.KeyboardEvent) => {
+    const last = CLIENTS.length - 1;
+    const next =
+      e.key === "ArrowRight" ? (active === last ? 0 : active + 1)
+      : e.key === "ArrowLeft" ? (active === 0 ? last : active - 1)
+      : e.key === "Home" ? 0
+      : e.key === "End" ? last
+      : null;
+    if (next === null) return;
+    e.preventDefault();
+    setActive(next);
+    tabsRef.current[next]?.focus();
+  };
 
   return (
     <div className="grid items-center gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
       <Reveal>
         {/* abas de cliente */}
-        <div role="tablist" aria-label="Clientes" className="glass-pill inline-flex flex-wrap gap-1 rounded-full p-1">
+        <div role="tablist" aria-label="Clientes" onKeyDown={onTabKey} className="glass-pill inline-flex flex-wrap gap-1 rounded-full p-1">
           {CLIENTS.map((c, i) => (
             <button
               key={c.slug}
+              ref={(el) => {
+                tabsRef.current[i] = el;
+              }}
+              id={`tab-${c.slug}`}
               role="tab"
               type="button"
+              tabIndex={i === active ? 0 : -1}
               aria-selected={i === active}
               aria-controls={`material-${c.slug}`}
               onClick={() => setActive(i)}
               className={cn(
-                "rounded-full px-4 py-2 text-sm font-medium transition-all duration-300",
+                "min-h-11 rounded-full px-4 text-sm font-medium transition-all duration-300",
                 i === active ? "bg-graphite text-paper shadow-[0_8px_20px_-10px_rgb(30_30_30/0.7)]" : "text-mist hover:text-graphite",
               )}
             >
@@ -50,9 +72,9 @@ export function ClientShowcase() {
       <Reveal delay={120} className="relative">
         <div
           aria-hidden
-          className="absolute -inset-y-10 -inset-x-2 -z-10 rounded-full bg-[radial-gradient(closest-side,#d3ebe9,transparent)] blur-2xl sm:-inset-x-10"
+          className="absolute -inset-x-3 -inset-y-10 -z-10 rounded-full bg-[radial-gradient(closest-side,#d3ebe9,transparent)] blur-2xl"
         />
-        <div id={`material-${client.slug}`} role="tabpanel" className="glass rounded-[34px] p-2.5 sm:p-3">
+        <div id={`material-${client.slug}`} role="tabpanel" aria-labelledby={`tab-${client.slug}`} className="glass rounded-[34px] p-2.5 sm:p-3">
           {/* key: remonta o carrossel ao trocar de cliente (volta ao 1º slide) */}
           <Carousel
             key={client.slug}
@@ -62,6 +84,7 @@ export function ClientShowcase() {
               duration: 30,
               breakpoints: { "(hover: none)": { watchDrag: false } },
             }}
+            label={`Material entregue para ${client.name}`}
             className="flex gap-2.5 sm:gap-3"
           >
             <SliderContainer className="h-[460px] gap-3 sm:h-[560px]">
@@ -95,21 +118,24 @@ function ClientInfo({ client }: { client: Client }) {
       <ul className="mt-7 flex flex-wrap gap-2">
         {client.delivered.map((d) => (
           <li key={d} className="glass-pill flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm text-graphite">
-            <Check className="size-3.5" strokeWidth={2.5} />
+            <Check aria-hidden className="size-3.5" strokeWidth={2.5} />
             {d}
           </li>
         ))}
       </ul>
 
-      <a
-        href={client.url}
-        className="group mt-9 inline-flex items-center gap-3 text-sm font-medium text-graphite"
-      >
-        <span className="grid size-11 place-items-center rounded-full bg-graphite text-paper transition-transform duration-500 group-hover:rotate-45">
-          <ArrowUpRight className="size-5" />
-        </span>
-        Ver site no ar
-      </a>
+      {/* só aparece com o link real preenchido em CLIENTS */}
+      {client.url && (
+        <a
+          {...linkProps(client.url)}
+          className="group mt-9 inline-flex items-center gap-3 text-sm font-medium text-graphite"
+        >
+          <span className="grid size-11 place-items-center rounded-full bg-graphite text-paper transition-transform duration-500 group-hover:rotate-45">
+            <ArrowUpRight aria-hidden className="size-5" />
+          </span>
+          Ver site no ar
+        </a>
+      )}
     </div>
   );
 }

@@ -16,7 +16,7 @@
   --color-paper: #f8f8f7;       /* superfícies claras */
   --color-graphite: #303030;    /* texto e botões */
   --color-graphite-2: #1f1f1f;
-  --color-mist: #6c6c70;        /* texto secundário */
+  --color-mist: #616165;        /* texto secundário (≥4,9:1 no fundo e sobre a luz menta) */
   --color-hairline: rgb(48 48 48 / 0.12);
   --color-mint: #d9eeed;        /* luz ambiente */
   --color-aqua: #e3eef1;
@@ -35,7 +35,7 @@
   --color-secondary: rgb(255 255 255 / 0.7);
   --color-secondary-foreground: #303030;
   --color-muted: rgb(48 48 48 / 0.05);
-  --color-muted-foreground: #6c6c70;
+  --color-muted-foreground: #616165;
   --color-accent: rgb(255 255 255 / 0.85);
   --color-accent-foreground: #303030;
   --color-destructive: #d14343;

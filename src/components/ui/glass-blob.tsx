@@ -214,11 +214,17 @@ export function GlassBlob({ className, shape = "blob", speed = 1, seed = 0, inte
     let time = seed * 3;
     let last = performance.now();
 
+    // O vidro é liso e desfocado: renderizar abaixo da resolução da tela não aparece,
+    // e reduz bastante o custo do raymarching. No toque, também limita a 30 fps.
+    const touch = window.matchMedia("(hover: none)").matches;
+    const renderScale = touch ? 0.5 : 0.65;
+    const minFrameMs = touch ? 1000 / 30 : 0;
+    let size = { width: canvas.clientWidth, height: canvas.clientHeight };
+
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-      const { width, height } = canvas.getBoundingClientRect();
-      canvas.width = Math.max(1, Math.round(width * dpr));
-      canvas.height = Math.max(1, Math.round(height * dpr));
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5) * renderScale;
+      canvas.width = Math.max(1, Math.round(size.width * dpr));
+      canvas.height = Math.max(1, Math.round(size.height * dpr));
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.uniform2f(uRes, canvas.width, canvas.height);
     };
@@ -233,14 +239,18 @@ export function GlassBlob({ className, shape = "blob", speed = 1, seed = 0, inte
     };
 
     const loop = (now: number) => {
-      const dt = Math.min((now - last) / 1000, 0.05);
-      last = now;
-      time += dt * speed;
-      draw();
+      if (now - last >= minFrameMs) {
+        const dt = Math.min((now - last) / 1000, 0.05);
+        last = now;
+        time += dt * speed;
+        draw();
+      }
       if (visible) raf = requestAnimationFrame(loop);
     };
 
-    const ro = new ResizeObserver(() => {
+    // usa o tamanho que o ResizeObserver já mediu (evita forçar layout)
+    const ro = new ResizeObserver(([entry]) => {
+      size = { width: entry.contentRect.width, height: entry.contentRect.height };
       resize();
       if (reduce || !visible) draw();
     });

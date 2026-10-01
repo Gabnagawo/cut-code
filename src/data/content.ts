@@ -8,11 +8,22 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-// TODO: trocar pelos dados reais
+// TODO: preencher com os dados reais. Enquanto estiverem vazios, os botões
+// levam para a seção de contato em vez de um link quebrado.
 export const CONTACT = {
-  whatsapp: "#", // ex: https://wa.me/5511999999999
-  instagram: "#", // ex: https://instagram.com/cutandcode
+  /** só números, com DDI e DDD. ex.: "5511999999999" */
+  whatsappNumber: "",
+  /** ex.: "https://instagram.com/cutandcode" */
+  instagram: "",
 };
+
+/** Link do WhatsApp com mensagem pronta; sem número configurado, cai na seção de contato. */
+export function whatsappHref(message = "Olá! Vim pelo site da Cut & Code e quero um orçamento.") {
+  if (!CONTACT.whatsappNumber) return "#contato";
+  return `https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent(message)}`;
+}
+
+export const instagramHref = () => CONTACT.instagram || "#contato";
 
 const unsplash = (id: string, w = 900) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=75`;
@@ -121,7 +132,8 @@ export const SERVICES: Service[] = [
   },
 ];
 
-export const REELS = [
+/** `href`: link do reel no Instagram (opcional; sem ele, usa o perfil em CONTACT.instagram) */
+export const REELS: { label: string; duration: string; image: string; tone: string; href?: string }[] = [
   { label: "Clínica", duration: "0:30", image: unsplash("1519494026892-80bbd2d6fd0d", 500), tone: "from-[#8fa3a4] to-[#3a4245]" },
   { label: "Restaurante", duration: "0:22", image: unsplash("1517248135467-4c7edcad34c4", 500), tone: "from-[#a39a92] to-[#45403b]" },
   { label: "Loja", duration: "0:18", image: unsplash("1441986300917-64674bd600d8", 500), tone: "from-[#9c98ad] to-[#3f3d4a]" },
@@ -177,7 +189,7 @@ export const CLIENTS: Client[] = [
     summary:
       "Landing page guiada que leva o paciente da escolha da especialidade até o agendamento, com vídeos curtos apresentando a estrutura e a equipe.",
     delivered: ["Landing page guiada", "Agendamento online", "Reels de divulgação"],
-    url: "#", // TODO: link real
+    url: "", // TODO: link real (o botão "Ver site no ar" só aparece quando preenchido)
     materials: [
       { kind: "Site", title: "Página inicial", ...ph("1519494026892-80bbd2d6fd0d"), tone: "from-[#8fa3a4] to-[#3a4245]" },
       { kind: "Site", title: "Escolha da especialidade", ...ph("1576091160550-2173dba999ef"), tone: "from-[#93a0a8] to-[#3b4349]" },
@@ -192,7 +204,7 @@ export const CLIENTS: Client[] = [
     summary:
       "Site com atendimento humanizado do primeiro contato à consulta, mais conteúdo em vídeo para manter o Instagram ativo.",
     delivered: ["Landing page guiada", "StoryMaker", "Edição continuada"],
-    url: "#", // TODO: link real
+    url: "", // TODO: link real (o botão "Ver site no ar" só aparece quando preenchido)
     materials: [
       { kind: "Site", title: "Apresentação", ...ph("1579684385127-1ef15d508118"), tone: "from-[#a7979f] to-[#4a3f45]" },
       { kind: "Site", title: "Agende sua consulta", ...ph("1460925895917-afdab827c52f"), tone: "from-[#9c98ad] to-[#3f3d4a]" },

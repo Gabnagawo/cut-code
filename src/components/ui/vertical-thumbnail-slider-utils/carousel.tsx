@@ -43,6 +43,8 @@ type CarouselProps = {
   /** Avança sozinho a cada N ms (pausa no hover e com reduced motion). */
   autoplay?: number;
   onSelect?: (index: number) => void;
+  /** nome acessível do carrossel (leitores de tela) */
+  label?: string;
 };
 
 type SliderProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -69,7 +71,7 @@ function collectThumbnails(children: React.ReactNode): string[] {
   return thumbs;
 }
 
-export function Carousel({ options, className, children, autoplay, onSelect }: CarouselProps) {
+export function Carousel({ options, className, children, autoplay, onSelect, label }: CarouselProps) {
   const axis = options?.axis ?? "x";
   const [mainRef, mainApi] = useEmblaCarousel(options);
   const [thumbsRef, thumbsApi] = useEmblaCarousel({
@@ -139,6 +141,7 @@ export function Carousel({ options, className, children, autoplay, onSelect }: C
         className={cn("relative", className)}
         role="region"
         aria-roledescription="carousel"
+        aria-label={label}
         tabIndex={0}
         onKeyDown={onKeyDown}
         onPointerEnter={() => setPaused(true)}

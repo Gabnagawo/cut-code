@@ -39,18 +39,31 @@ esses componentes funcionarem sem ajustar imports.
 Baseada na apresentação "White 3D Glass" + liquid glass + mercury.com.
 
 - **Fundo:** `canvas #f1f1f1`, superfícies `paper #f8f8f7`
-- **Texto e botões:** `graphite #303030`, secundário `mist #6c6c70`
+- **Texto e botões:** `graphite #303030`, secundário `mist #616165` (contraste ≥ 4,9:1 em todos os fundos do site)
 - **Luz ambiente:** `mint #d9eeed`, `aqua #e3eef1` (manchas desfocadas no fundo)
 - **Iridescente** (só em brilhos, bordas e destaques de texto): lilás `#c9b8ff`, água `#9fe3da`, rosa `#f4b8d8`
-- **Tipografia:** Inter Tight 600 com espaçamento apertado nos títulos e Inter nos textos (fontes embutidas via `@fontsource`)
+- **Tipografia:** Inter Tight 600 com espaçamento apertado nos títulos e Inter nos textos (subconjunto latino em `public/fonts/`, pré-carregado no `index.html`)
 - **Detalhes:** fio fino grafite sob os títulos, vidro fosco branco nos cartões, objetos 3D de vidro cromado
   renderizados em WebGL (`src/components/ui/glass-blob.tsx`, formas `blob` e `ring`)
 
+## Qualidade (revisão de design)
+
+Medido com Lighthouse e axe-core no build de produção:
+
+| | Mobile | Desktop |
+|---|---|---|
+| Performance | 94 | 98 |
+| Acessibilidade | 100 | 100 |
+| SEO | 100 | 100 |
+
+Sem estouro horizontal de 320 px a 1920 px. Ao mexer no layout, vale repetir essas verificações.
+
 ## Pendências (em `src/data/content.ts`)
 
-- [ ] WhatsApp (`CONTACT.whatsapp`, ex.: `https://wa.me/55...`)
-- [ ] Instagram (`CONTACT.instagram`)
-- [ ] Material de clientes (`CLIENTS`): fotos/vídeos reais em `public/clientes/<slug>/` e links dos sites. Hoje são fotos provisórias do Unsplash
+- [ ] WhatsApp (`CONTACT.whatsappNumber`, só números com DDI e DDD, ex.: `5511999999999`). Todos os botões de orçamento passam a abrir o WhatsApp com mensagem pronta (cada serviço com a sua). Enquanto estiver vazio, levam à seção de contato
+- [ ] Instagram (`CONTACT.instagram`). Os reels podem ter link próprio (`REELS[].href`)
+- [ ] Material de clientes (`CLIENTS`): fotos/vídeos reais em `public/clientes/<slug>/` e links dos sites (o botão "Ver site no ar" só aparece com o link preenchido). Hoje são fotos provisórias do Unsplash
 - [ ] Fotos/vídeos reais no slider do hero (`SHOWCASE`) e nos reels (`REELS`). Hoje são fotos do Unsplash
 - [ ] Preços (hoje "Sob consulta")
 - [ ] Descrição final do StoryMaker
+- [ ] Domínio do site: com ele, trocar `og:image` no `index.html` por URL absoluta (para a prévia do link no WhatsApp) e adicionar `sitemap.xml`

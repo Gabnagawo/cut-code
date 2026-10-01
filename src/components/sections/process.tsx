@@ -33,7 +33,7 @@ export function Process() {
                     <span className="grid size-12 place-items-center rounded-full border border-hairline bg-white/70 text-graphite transition-all duration-500 ease-glass group-hover/card:scale-110 group-hover/card:bg-graphite group-hover/card:text-paper">
                       <Icon className="size-5" strokeWidth={1.5} />
                     </span>
-                    <span className="font-heading text-5xl text-graphite/10 transition-colors duration-500 group-hover/card:text-graphite/50">
+                    <span aria-hidden className="font-heading text-5xl text-graphite/10 transition-colors duration-500 group-hover/card:text-graphite/50">
                       {i + 1}
                     </span>
                   </div>

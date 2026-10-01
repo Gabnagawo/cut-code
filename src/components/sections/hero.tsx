@@ -11,7 +11,8 @@ import {
 } from "@/components/ui/vertical-thumbnail-slider-utils/carousel";
 import { RotatingWords } from "@/components/rotating-words";
 import { SafeImage } from "@/components/safe-image";
-import { SHOWCASE, type Showcase } from "@/data/content";
+import { SHOWCASE, whatsappHref, type Showcase } from "@/data/content";
+import { linkProps } from "@/lib/link-props";
 import { cn } from "@/lib/utils";
 
 const HEADLINE: { text: string; iris?: boolean; br?: boolean }[] = [
@@ -33,7 +34,7 @@ export function Hero() {
         {/* Texto */}
         <div className="relative">
           <a
-            href="#portfolio"
+            href="#contato"
             className="glass-pill group inline-flex items-center gap-2.5 rounded-full py-1.5 pr-3 pl-1.5 text-[0.8rem] text-graphite animate-blur-in"
           >
             <span className="flex items-center gap-1.5 rounded-full bg-graphite px-2.5 py-0.5 text-paper">
@@ -42,7 +43,7 @@ export function Hero() {
             </span>
             <span className="hidden sm:inline">Novos projetos para este mês</span>
             <span className="sm:hidden">Novos projetos</span>
-            <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+            <ArrowRight aria-hidden className="size-3.5 transition-transform group-hover:translate-x-0.5" />
           </a>
 
           <h1 className="font-heading mt-8 text-[clamp(3.4rem,8vw,7.2rem)] leading-[0.9] text-graphite">
@@ -78,7 +79,7 @@ export function Hero() {
               size="lg"
               className="group h-14 rounded-full bg-graphite px-7 text-base text-paper shadow-[0_14px_34px_-14px_rgb(30_30_30/0.7)] transition-all hover:-translate-y-0.5 hover:bg-graphite-2 hover:shadow-[0_20px_40px_-14px_rgb(30_30_30/0.8)]"
             >
-              <a href="#contato">
+              <a {...linkProps(whatsappHref())}>
                 Quero meu orçamento
                 <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" />
               </a>
@@ -155,6 +156,7 @@ function HeroShowcase() {
             breakpoints: { "(hover: none)": { watchDrag: false } },
           }}
           autoplay={4200}
+          label="Vitrine de projetos por nicho"
           className="flex gap-2.5 sm:gap-3"
         >
           <SliderContainer className="h-[440px] gap-3 sm:h-[540px]">

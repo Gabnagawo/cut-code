@@ -5,7 +5,8 @@ import { GlassBlob } from "@/components/ui/glass-blob";
 import { GlowCard } from "@/components/ui/glow-card";
 import { Reveal } from "@/components/reveal";
 import { SectionHead } from "@/components/sections/section-head";
-import { SERVICES } from "@/data/content";
+import { SERVICES, whatsappHref } from "@/data/content";
+import { linkProps } from "@/lib/link-props";
 
 export function Services() {
   return (
@@ -27,13 +28,18 @@ export function Services() {
       <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {SERVICES.map((s, i) => (
           <Reveal key={s.title} delay={(i % 3) * 90} className="h-full">
-            <GlowCard as="a" href="#contato" className="block h-full" aria-label={`${s.title}: pedir orçamento`}>
+            <GlowCard
+              as="a"
+              {...linkProps(whatsappHref(`Olá! Vim pelo site e quero um orçamento de: ${s.title}.`))}
+              className="block h-full"
+              aria-label={`${s.title}: pedir orçamento`}
+            >
               <div className="flex h-full min-h-[320px] flex-col p-7 sm:p-8">
                 <div className="mb-10 flex items-start justify-between">
                   <span className="grid size-14 place-items-center rounded-2xl border border-hairline bg-white/70 text-graphite shadow-[0_1px_0_#fff_inset] transition-all duration-500 ease-glass group-hover/card:-rotate-6 group-hover/card:scale-110 group-hover/card:border-transparent group-hover/card:bg-graphite group-hover/card:text-paper group-hover/card:shadow-[0_14px_30px_-10px_rgb(30_30_30/0.6)]">
                     <s.icon className="size-6" strokeWidth={1.5} />
                   </span>
-                  <span className="font-heading text-4xl text-graphite/10 transition-colors duration-500 group-hover/card:text-graphite/60">
+                  <span aria-hidden className="font-heading text-4xl text-graphite/10 transition-colors duration-500 group-hover/card:text-graphite/60">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
@@ -54,7 +60,7 @@ export function Services() {
                       Pedir orçamento
                     </span>
                     <span className="grid size-10 place-items-center rounded-full border border-graphite/15 transition-all duration-500 ease-glass group-hover/card:rotate-45 group-hover/card:border-transparent group-hover/card:bg-graphite group-hover/card:text-paper">
-                      <ArrowUpRight className="size-4" />
+                      <ArrowUpRight aria-hidden className="size-4" />
                     </span>
                   </span>
                 </div>
@@ -98,7 +104,7 @@ function PackageCard() {
             size="lg"
             className="group/btn mt-9 h-13 rounded-full bg-graphite px-7 text-paper shadow-[0_14px_34px_-14px_rgb(30_30_30/0.7)] hover:bg-graphite-2"
           >
-            <a href="#contato">
+            <a {...linkProps(whatsappHref("Olá! Vim pelo site e quero um orçamento do pacote completo (site + vídeos)."))}>
               Quero o pacote
               <ArrowRight className="ml-2 size-4 transition-transform group-hover/btn:translate-x-1" />
             </a>
