@@ -8,13 +8,12 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-// TODO: preencher com os dados reais. Enquanto estiverem vazios, os botões
-// levam para a seção de contato em vez de um link quebrado.
+// Canais da Cut Code. Se algum ficar vazio, o card dele some e os botões levam ao formulário.
 export const CONTACT = {
   /** só números, com DDI e DDD. ex.: "5511999999999" */
-  whatsappNumber: "",
+  whatsappNumber: "559294215789",
   /** ex.: "https://instagram.com/cutandcode" */
-  instagram: "",
+  instagram: "https://instagram.com/cut_code",
   email: "cutcode.contato@gmail.com",
 };
 

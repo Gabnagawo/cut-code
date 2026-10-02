@@ -78,8 +78,8 @@ Sem estouro horizontal de 320 px a 1920 px. Ao mexer no layout, vale repetir ess
 
 ## Pendências (em `src/data/content.ts`)
 
-- [ ] WhatsApp (`CONTACT.whatsappNumber`, só números com DDI e DDD, ex.: `5511999999999`). Todos os botões de orçamento passam a abrir o WhatsApp com mensagem pronta (cada serviço com a sua). Enquanto estiver vazio, levam à seção de contato
-- [ ] Instagram (`CONTACT.instagram`). Enquanto WhatsApp e Instagram estiverem vazios, os cards deles não aparecem
+- [x] WhatsApp (`CONTACT.whatsappNumber`, só números com DDI e DDD, ex.: `5511999999999`). Todos os botões de orçamento passam a abrir o WhatsApp com mensagem pronta (cada serviço com a sua). Enquanto estiver vazio, levam à seção de contato
+- [x] Instagram (`CONTACT.instagram`). Enquanto WhatsApp e Instagram estiverem vazios, os cards deles não aparecem
 - [ ] Material de clientes (`CLIENTS`): fotos/vídeos reais em `public/clientes/<slug>/`, links dos sites e **autorização do cliente**. Só então marque `ready: true`; sem nenhum cliente pronto, a seção Portfólio fica fora do site e do menu
 - [ ] Fotos/vídeos reais no slider do hero (`SHOWCASE`). Hoje são fotos do Unsplash, com o aviso "Imagens ilustrativas"
 - [ ] Formulário: fazer um envio de teste no site publicado e clicar no link de ativação que o FormSubmit manda para `CONTACT.email`. Depois, trocar o e-mail do endpoint em `contact-form.tsx` pelo código aleatório que o FormSubmit fornece
