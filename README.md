@@ -28,12 +28,9 @@ src/
   index.css               tokens da marca + utilitários (glass, text-sheen, bg-grid…)
   data/content.ts         todo o texto, links e imagens do site
   components/
-    ui/                   componentes shadcn (button, card, carousel)
-      vertical-thumbnail-slider.tsx
+    ui/                   componentes (button, glass-blob, glow-card)
       vertical-thumbnail-slider-utils/carousel.tsx   slider + miniaturas (Embla)
-      glow-card.tsx       cartão com hover (spotlight, borda acesa, tilt 3D, brilho)
     sections/             hero, serviços, portfólio, processo, dúvidas (FAQ), contato + formulário
-  demos/                  demo do vertical-thumbnail-slider
 ```
 
 ### Por que `src/components/ui`?

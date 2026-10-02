@@ -12,7 +12,7 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "allowImportingTsExtensions": true,
-    "noUnusedLocals": false,
+    "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "types": ["vite/client"],

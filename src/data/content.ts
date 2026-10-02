@@ -1,10 +1,13 @@
 import {
   Aperture,
   Clapperboard,
+  ClipboardList,
+  Eye,
   LayoutTemplate,
   PanelsTopLeft,
   PartyPopper,
   Repeat,
+  Rocket,
   type LucideIcon,
 } from "lucide-react";
 
@@ -188,11 +191,18 @@ export const FORM_NICHES = [
   "Outro",
 ];
 
-export const STEPS = [
-  { title: "Questionário", text: "Você responde algumas perguntas sobre o seu negócio, público e objetivo." },
-  { title: "Prévia do site", text: "Em até 1 semana você recebe a prévia para aprovar e ajustar.", highlight: "1 semana" },
-  { title: "Gravação e edição", text: "Gravamos e editamos seus vídeos, entregues em até 2 dias úteis.", highlight: "2 dias úteis" },
-  { title: "No ar", text: "Site publicado, vídeos prontos para postar e sua marca trabalhando por você." },
+export type Step = {
+  title: string;
+  text: string;
+  highlight?: string;
+  icon?: LucideIcon;
+};
+
+export const STEPS: Step[] = [
+  { icon: ClipboardList, title: "Questionário", text: "Você responde algumas perguntas sobre o seu negócio, público e objetivo." },
+  { icon: Eye, title: "Prévia do site", text: "Em até 1 semana você recebe a prévia para aprovar e ajustar.", highlight: "1 semana" },
+  { icon: Clapperboard, title: "Gravação e edição", text: "Gravamos e editamos seus vídeos, entregues em até 2 dias úteis.", highlight: "2 dias úteis" },
+  { icon: Rocket, title: "No ar", text: "Site publicado, vídeos prontos para postar e sua marca trabalhando por você." },
 ];
 
 /* ------------------------------------------------------------------

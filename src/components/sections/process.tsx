@@ -1,11 +1,9 @@
-import { Clapperboard, ClipboardList, Eye, Rocket } from "lucide-react";
+import { Rocket } from "lucide-react";
 
 import { GlowCard } from "@/components/ui/glow-card";
 import { Reveal } from "@/components/reveal";
 import { SectionHead } from "@/components/sections/section-head";
 import { STEPS } from "@/data/content";
-
-const ICONS = [ClipboardList, Eye, Clapperboard, Rocket];
 
 export function Process() {
   return (
@@ -21,7 +19,7 @@ export function Process() {
 
       <ol className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
         {STEPS.map((step, i) => {
-          const Icon = ICONS[i];
+          const Icon = step.icon ?? Rocket;
           return (
             <Reveal as="li" key={step.title} delay={i * 90} className="h-full">
               <GlowCard className="h-full">
