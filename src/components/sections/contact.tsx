@@ -22,7 +22,8 @@ export function Contact() {
       <div aria-hidden className="pointer-events-none absolute -bottom-20 -left-40 -z-10 size-[40rem] rounded-full bg-[radial-gradient(circle,#d3ebe9,transparent_62%)]" />
 
       <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_1fr] lg:gap-16">
-        <div>
+        <div className="relative">
+          <GlassBlob seed={5.1} interactive={false} className="pointer-events-none absolute -top-16 -left-20 -z-10 size-[130%] opacity-70" />
           <Reveal>
             <p className="mb-5 text-xs font-medium tracking-[0.28em] text-mist uppercase">Vamos começar?</p>
             <h2 className="font-heading text-[clamp(3.2rem,7vw,6.2rem)] leading-[0.9] text-graphite">
@@ -36,7 +37,7 @@ export function Contact() {
           </Reveal>
 
           <Reveal delay={120} className="mt-10">
-            <h3 className="font-heading text-2xl tracking-[-0.03em]! text-graphite">Contato</h3>
+            <h3 className="font-heading text-2xl text-graphite">Contato</h3>
             <span className="rule mt-4 w-24" />
             <ul className="mt-6 max-w-md space-y-3">
               {CHANNELS.map(({ label, detail, href, icon: Icon }) => (
@@ -61,7 +62,6 @@ export function Contact() {
         </div>
 
         <Reveal delay={200} className="relative self-start">
-          <GlassBlob seed={5.1} interactive={false} className="absolute -inset-[18%] -z-10" />
           <div id="orcamento">
             <ContactForm />
           </div>

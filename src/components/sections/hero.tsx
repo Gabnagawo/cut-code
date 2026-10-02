@@ -74,8 +74,8 @@ export function Hero() {
           <div className="mt-10 flex flex-col gap-3 animate-blur-in min-[480px]:flex-row min-[480px]:flex-wrap" style={{ animationDelay: "520ms" }}>
             <Button
               asChild
-              size="lg"
-              className="group h-14 rounded-full bg-graphite px-7 text-base text-paper shadow-[0_14px_34px_-14px_rgb(30_30_30/0.7)] transition-all hover:-translate-y-0.5 hover:bg-graphite-2 hover:shadow-[0_20px_40px_-14px_rgb(30_30_30/0.8)]"
+              variant="cta"
+              className="group"
             >
               <a {...linkProps(whatsappHref())}>
                 Pedir orçamento
@@ -84,9 +84,8 @@ export function Hero() {
             </Button>
             <Button
               asChild
-              variant="outline"
-              size="lg"
-              className="glass-pill group h-14 rounded-full pr-7 pl-2 text-base text-graphite hover:-translate-y-0.5 hover:bg-white hover:text-graphite"
+              variant="cta-glass"
+              className="group pr-7 pl-2"
             >
               <a href={HAS_PORTFOLIO ? "#portfolio" : "#servicos"}>
                 <span className="mr-3 grid size-10 place-items-center rounded-full bg-graphite text-paper transition-transform duration-150 group-hover:scale-110">

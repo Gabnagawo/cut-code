@@ -32,7 +32,7 @@ export function Faq() {
             <li key={q}>
               <details className="group/faq">
                 <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 text-left [&::-webkit-details-marker]:hidden">
-                  <span className="font-heading text-xl leading-snug tracking-[-0.02em]! text-graphite sm:text-[1.375rem]">{q}</span>
+                  <span className="font-heading text-xl leading-snug text-graphite sm:text-[1.375rem]">{q}</span>
                   <span className="grid size-8 shrink-0 place-items-center rounded-full border border-graphite/15 text-graphite transition-transform duration-300 ease-[var(--ease-standard)] group-open/faq:rotate-45">
                     <Plus aria-hidden className="size-4" />
                   </span>
@@ -60,8 +60,8 @@ function FaqCta({ className }: { className?: string }) {
   return (
     <Button
       asChild
-      size="lg"
-      className={cn("group/btn h-12 rounded-full bg-graphite px-6 text-base text-paper hover:bg-graphite-2", className)}
+      variant="cta"
+      className={cn("group/btn", className)}
     >
       <a {...linkProps(whatsappHref("Olá! Vim pelo site da Cut Code e tenho uma dúvida."))}>
         {hasWhatsapp() ? "Tirar dúvida no WhatsApp" : "Enviar minha dúvida"}

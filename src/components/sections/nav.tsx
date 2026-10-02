@@ -14,7 +14,7 @@ export const NAV_LINKS = [
 
 export function Brand({ className }: { className?: string }) {
   return (
-    <a href="#top" className={cn("font-heading inline-flex shrink-0 items-center gap-2.5 text-[1.2rem] tracking-[-0.03em]! whitespace-nowrap text-graphite", className)}>
+    <a href="#top" className={cn("font-heading inline-flex shrink-0 items-center gap-2.5 text-[1.2rem] whitespace-nowrap text-graphite", className)}>
       <img src="assets/logo-mark-dark.png" alt="" width={20} height={25} className="h-auto w-5" />
       Cut Code
     </a>
@@ -116,7 +116,7 @@ export function Nav() {
                 href={l.href}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  "font-heading flex items-center justify-between rounded-2xl px-4 py-3.5 text-xl tracking-[-0.02em]! text-graphite transition-colors hover:bg-white/70",
+                  "font-heading flex items-center justify-between rounded-2xl px-4 py-3.5 text-xl text-graphite transition-colors hover:bg-white/70",
                   active === l.href.slice(1) && "bg-white/70",
                 )}
               >

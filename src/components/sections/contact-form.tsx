@@ -151,7 +151,7 @@ export function ContactForm({ className }: { className?: string }) {
 
   return (
     <form ref={formRef} noValidate onSubmit={onSubmit} className={cn("glass rounded-[28px] p-6 sm:p-8", className)}>
-      <h3 className="font-heading text-2xl tracking-[-0.03em]! text-graphite">Pedir orçamento</h3>
+      <h3 className="font-heading text-2xl text-graphite">Pedir orçamento</h3>
       <p className="mt-2 text-sm text-mist">Todos os campos são obrigatórios, menos a mensagem.</p>
 
       <div className="mt-6 grid gap-5">
@@ -235,10 +235,10 @@ export function ContactForm({ className }: { className?: string }) {
 
       <Button
         type="submit"
-        size="lg"
+        variant="cta"
         disabled={status === "sending"}
         aria-busy={status === "sending"}
-        className="group/btn mt-4 h-13 w-full rounded-full bg-graphite px-7 text-base text-paper shadow-[0_14px_34px_-14px_rgb(30_30_30/0.7)] hover:bg-graphite-2"
+        className="group/btn mt-4 w-full"
       >
         {status === "sending" ? (
           <>
