@@ -59,7 +59,7 @@ function FaqCta({ className }: { className?: string }) {
       size="lg"
       className={cn("group/btn h-12 rounded-full bg-graphite px-6 text-base text-paper hover:bg-graphite-2", className)}
     >
-      <a {...linkProps(whatsappHref("Olá! Vim pelo site da Cut & Code e tenho uma dúvida."))}>
+      <a {...linkProps(whatsappHref("Olá! Vim pelo site da Cut Code e tenho uma dúvida."))}>
         Tirar dúvida no WhatsApp
         <ArrowRight aria-hidden className="ml-2 size-4 transition-transform duration-150 group-hover/btn:translate-x-1" />
       </a>

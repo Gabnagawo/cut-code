@@ -1,4 +1,4 @@
-# Cut & Code — site-portfólio
+# Cut Code — site-portfólio
 
 Vite + React + TypeScript + Tailwind CSS v4, com estrutura do shadcn/ui.
 

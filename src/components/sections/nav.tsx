@@ -1,9 +1,6 @@
 import * as React from "react";
 import { Menu, X } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { whatsappHref } from "@/data/content";
-import { linkProps } from "@/lib/link-props";
 import { cn } from "@/lib/utils";
 
 export const NAV_LINKS = [
@@ -18,7 +15,7 @@ export function Brand({ className }: { className?: string }) {
   return (
     <a href="#top" className={cn("font-heading inline-flex shrink-0 items-center gap-2.5 text-[1.2rem] tracking-[-0.03em]! whitespace-nowrap text-graphite", className)}>
       <img src="assets/logo-mark-dark.png" alt="" width={20} height={25} className="h-auto w-5" />
-      Cut & Code
+      Cut Code
     </a>
   );
 }
@@ -47,7 +44,6 @@ export function Nav() {
   const [scrolled, setScrolled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const active = useActiveSection(SECTION_IDS);
-  const cta = whatsappHref();
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -69,13 +65,13 @@ export function Nav() {
       <nav
         aria-label="Principal"
         className={cn(
-          "glass mx-auto flex h-[60px] max-w-[920px] items-center justify-between gap-1 rounded-full pr-2 pl-4 min-[360px]:gap-2 transition-all duration-300 ease-[var(--ease-standard)] sm:gap-4 sm:pr-2.5 sm:pl-5",
+          "glass mx-auto flex h-[60px] max-w-[920px] items-center justify-between gap-1 rounded-full pr-2 pl-4 min-[360px]:gap-2 transition-all duration-300 ease-[var(--ease-standard)] sm:gap-4 sm:pr-2.5 sm:pl-5 md:pr-7",
           scrolled && "h-[54px] max-w-[860px]",
         )}
       >
         <Brand />
         <ul className="hidden gap-6 text-sm text-mist md:flex lg:gap-8">
-          {NAV_LINKS.slice(0, -1).map((l) => {
+          {NAV_LINKS.map((l) => {
             const isActive = active === l.href.slice(1);
             return (
               <li key={l.href}>
@@ -93,25 +89,17 @@ export function Nav() {
             );
           })}
         </ul>
-        <div className="flex items-center gap-1 min-[360px]:gap-1.5">
-          <Button asChild size="sm" className="h-11 rounded-full bg-graphite px-3 text-paper hover:bg-graphite-2 min-[400px]:px-4 md:h-10">
-            <a {...linkProps(cta)}>
-              <span className="hidden min-[400px]:inline">Pedir orçamento</span>
-              <span className="min-[400px]:hidden">Orçamento</span>
-            </a>
-          </Button>
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-expanded={open}
-            aria-controls="menu-mobile"
-            className="flex h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-2.5 text-sm font-medium text-graphite transition-colors duration-150 hover:bg-graphite/5 md:hidden"
-          >
-            {open ? <X aria-hidden className="size-5" /> : <Menu aria-hidden className="size-5" />}
-            {/* rótulo visível ao lado do ícone; em telas muito estreitas fica só para leitor de tela */}
-            <span className="max-[359px]:sr-only">{open ? "Fechar" : "Menu"}</span>
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          aria-controls="menu-mobile"
+          className="flex h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-2.5 text-sm font-medium text-graphite transition-colors duration-150 hover:bg-graphite/5 md:hidden"
+        >
+          {open ? <X aria-hidden className="size-5" /> : <Menu aria-hidden className="size-5" />}
+          {/* rótulo visível ao lado do ícone; em telas muito estreitas fica só para leitor de tela */}
+          <span className="max-[359px]:sr-only">{open ? "Fechar" : "Menu"}</span>
+        </button>
       </nav>
 
       {/* menu mobile */}

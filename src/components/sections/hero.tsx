@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ArrowRight, CalendarCheck, Clock, Gift, Play, Zap } from "lucide-react";
+import { ArrowRight, Clock, Gift, Play, Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { GlassBlob } from "@/components/ui/glass-blob";
@@ -35,14 +35,12 @@ export function Hero() {
         <div className="relative">
           <a
             href="#contato"
-            className="glass-pill group inline-flex items-center gap-2.5 rounded-full py-1.5 pr-3 pl-1.5 text-[0.8rem] text-graphite animate-blur-in"
+            className="glass-pill group inline-flex min-h-11 items-center gap-2 rounded-full py-1.5 pr-3.5 pl-1.5 text-[0.8rem] text-graphite animate-blur-in"
           >
             <span className="flex items-center gap-1.5 rounded-full bg-graphite px-2.5 py-0.5 text-paper">
               <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse-ring" />
               Agenda aberta
             </span>
-            <span className="hidden sm:inline">Novos projetos para este mês</span>
-            <span className="sm:hidden">Novos projetos</span>
             <ArrowRight aria-hidden className="size-3.5 transition-transform duration-150 group-hover:translate-x-0.5" />
           </a>
 
@@ -173,33 +171,6 @@ function HeroShowcase() {
             thumbsSliderClassName="border-graphite"
           />
         </Carousel>
-      </div>
-
-      {/* cartões flutuantes */}
-      <div
-        className="glass absolute top-[30%] -left-4 hidden items-center gap-3 rounded-2xl px-4 py-3 text-sm animate-float sm:flex lg:-left-16"
-        style={{ animationDelay: "-2s" }}
-      >
-        <span className="grid size-9 place-items-center rounded-full border border-hairline bg-white/70 text-graphite">
-          <CalendarCheck className="size-4" />
-        </span>
-        <span className="leading-tight">
-          <b className="block font-medium text-graphite">Agendamento confirmado</b>
-          <small className="text-xs text-mist">via landing page guiada</small>
-        </span>
-      </div>
-
-      <div
-        className="glass absolute -bottom-7 left-4 hidden items-center gap-3 rounded-2xl px-4 py-3 text-sm animate-float sm:left-10 sm:flex"
-        style={{ animationDelay: "-5s" }}
-      >
-        <span className="grid size-9 place-items-center rounded-full border border-hairline bg-white/70 text-graphite">
-          <Play className="size-3.5 translate-x-px fill-current" />
-        </span>
-        <span className="leading-tight">
-          <b className="block font-medium text-graphite">Reel entregue</b>
-          <small className="text-xs text-mist">editado em 48h</small>
-        </span>
       </div>
     </div>
   );

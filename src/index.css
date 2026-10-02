@@ -3,7 +3,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ==========================================================
-   Cut & Code — tokens
+   Cut Code — tokens
    Base: off-white + grafite, luz ambiente menta/água,
    vidro cromado iridescente como acento.
    Os tokens do shadcn (background, primary, ring…) apontam para a marca.

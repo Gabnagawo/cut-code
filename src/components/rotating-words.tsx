@@ -22,7 +22,7 @@ export function RotatingWords({
   }, [words.length, interval]);
 
   return (
-    <span className={cn("relative inline-block h-[1.2em] overflow-hidden align-bottom leading-[1.2]", className)}>
+    <span className={cn("relative inline-block h-[1.2em] overflow-hidden align-[-0.3em] leading-[1.2]", className)}>
       <span className="sr-only">{words.join(", ")}</span>
       <span aria-hidden className="invisible">
         {longest}

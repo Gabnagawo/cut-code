@@ -4,11 +4,8 @@ import { GlowCard } from "@/components/ui/glow-card";
 import { Reveal } from "@/components/reveal";
 import { SectionHead } from "@/components/sections/section-head";
 import { STEPS } from "@/data/content";
-import { cn } from "@/lib/utils";
 
 const ICONS = [ClipboardList, Eye, Clapperboard, Rocket];
-// degraus, como os blocos escalonados das apresentações
-const OFFSETS = ["lg:mt-0", "lg:mt-16", "lg:mt-8", "lg:mt-24"];
 
 export function Process() {
   return (
@@ -26,17 +23,12 @@ export function Process() {
         {STEPS.map((step, i) => {
           const Icon = ICONS[i];
           return (
-            <Reveal as="li" key={step.title} delay={i * 90} className={cn("h-full", OFFSETS[i])}>
+            <Reveal as="li" key={step.title} delay={i * 90} className="h-full">
               <GlowCard className="h-full">
                 <div className="p-6 sm:p-8">
-                  <div className="flex items-center justify-between">
-                    <span className="grid size-12 place-items-center rounded-full border border-hairline bg-white/70 text-graphite transition-all duration-300 ease-glass group-hover/card:scale-110 group-hover/card:bg-graphite group-hover/card:text-paper">
-                      <Icon aria-hidden className="size-5" strokeWidth={1.5} />
-                    </span>
-                    <span aria-hidden className="font-heading text-5xl text-graphite/10 transition-colors duration-300 group-hover/card:text-graphite/50">
-                      {i + 1}
-                    </span>
-                  </div>
+                  <span className="grid size-12 place-items-center rounded-full border border-hairline bg-white/70 text-graphite transition-all duration-300 ease-glass group-hover/card:scale-110 group-hover/card:bg-graphite group-hover/card:text-paper">
+                    <Icon aria-hidden className="size-5" strokeWidth={1.5} />
+                  </span>
                   <h3 className="font-heading mt-8 text-[1.6rem] leading-tight text-graphite">{step.title}</h3>
                   <p className="mt-2 text-base text-mist">
                     {step.highlight

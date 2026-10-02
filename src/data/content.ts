@@ -15,15 +15,18 @@ export const CONTACT = {
   whatsappNumber: "",
   /** ex.: "https://instagram.com/cutandcode" */
   instagram: "",
+  email: "cutcode.contato@gmail.com",
 };
 
 /** Link do WhatsApp com mensagem pronta; sem número configurado, cai na seção de contato. */
-export function whatsappHref(message = "Olá! Vim pelo site da Cut & Code e quero um orçamento.") {
+export function whatsappHref(message = "Olá! Vim pelo site da Cut Code e quero um orçamento.") {
   if (!CONTACT.whatsappNumber) return "#contato";
   return `https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 
 export const instagramHref = () => CONTACT.instagram || "#contato";
+
+export const emailHref = () => `mailto:${CONTACT.email}`;
 
 const unsplash = (id: string, w = 900) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=75`;
@@ -75,7 +78,7 @@ export const SHOWCASE: Showcase[] = [
   {
     niche: "Eventos",
     title: "Convites que viram assunto",
-    meta: "Convite interativo + aftermovie",
+    meta: "Cobertura e convites interativos",
     image: unsplash("1511578314322-379afb476865"),
     thumb: unsplash("1511578314322-379afb476865", 200),
     tone: "from-[#a7979f] to-[#4a3f45]",
@@ -132,18 +135,59 @@ export const SERVICES: Service[] = [
   },
 ];
 
-/** `href`: link do reel no Instagram (opcional; sem ele, usa o perfil em CONTACT.instagram) */
-export const REELS: { label: string; duration: string; image: string; tone: string; href?: string }[] = [
-  { label: "Clínica", duration: "0:30", image: unsplash("1519494026892-80bbd2d6fd0d", 500), tone: "from-[#8fa3a4] to-[#3a4245]" },
-  { label: "Restaurante", duration: "0:22", image: unsplash("1517248135467-4c7edcad34c4", 500), tone: "from-[#a39a92] to-[#45403b]" },
-  { label: "Loja", duration: "0:18", image: unsplash("1441986300917-64674bd600d8", 500), tone: "from-[#9c98ad] to-[#3f3d4a]" },
-  { label: "Evento", duration: "0:25", image: unsplash("1511578314322-379afb476865", 500), tone: "from-[#a7979f] to-[#4a3f45]" },
+export type Package = {
+  badge: string;
+  title: string;
+  description: string;
+  items: string[];
+  whatsapp: string;
+  /** destaque no círculo de vidro */
+  highlight: { big: string; small: string };
+};
+
+export const PACKAGES: Package[] = [
+  {
+    badge: "Mais escolhido",
+    title: "Pacote digital completo",
+    description:
+      "Site + 4 vídeos curtos de divulgação. Sua presença digital inteira, pronta em poucos dias, com o mesmo cuidado estético do começo ao fim.",
+    items: ["Landing page guiada ou site completo", "4 vídeos curtos editados", "Prévia do site em até 1 semana", "Vídeos em até 2 dias úteis"],
+    whatsapp: "Olá! Vim pelo site e quero um orçamento do pacote digital completo (site + vídeos).",
+    highlight: { big: "+2", small: "vídeos grátis" },
+  },
+  {
+    badge: "Para eventos",
+    title: "Pacote de eventos",
+    description:
+      "Convite interativo + cobertura do evento. Do convite que chega no celular dos convidados ao vídeo que guarda o dia.",
+    items: ["Convite digital interativo", "Confirmação de presença", "Cobertura do evento em vídeo", "Identidade visual do seu evento"],
+    whatsapp: "Olá! Vim pelo site e quero um orçamento do pacote de eventos (convite + cobertura).",
+    highlight: { big: "2 em 1", small: "convite + cobertura" },
+  },
+];
+
+/** Opções do formulário de contato */
+export const FORM_SERVICES = [
+  ...PACKAGES.map((p) => p.title),
+  ...SERVICES.map((s) => s.title),
+  "Cobertura de evento",
+  "Ainda não sei",
+];
+
+export const FORM_NICHES = [
+  "Clínica particular",
+  "Clínica multiprofissional",
+  "Restaurante",
+  "Loja",
+  "Empresa",
+  "Evento",
+  "Outro",
 ];
 
 export const STEPS = [
   { title: "Questionário", text: "Você responde algumas perguntas sobre o seu negócio, público e objetivo." },
   { title: "Prévia do site", text: "Em até 1 semana você recebe a prévia para aprovar e ajustar.", highlight: "1 semana" },
-  { title: "Gravação & edição", text: "Gravamos e editamos seus vídeos, entregues em até 2 dias úteis.", highlight: "2 dias úteis" },
+  { title: "Gravação e edição", text: "Gravamos e editamos seus vídeos, entregues em até 2 dias úteis.", highlight: "2 dias úteis" },
   { title: "No ar", text: "Site publicado, vídeos prontos para postar e sua marca trabalhando por você." },
 ];
 
@@ -220,23 +264,15 @@ export const CLIENTS: Client[] = [
    ------------------------------------------------------------------ */
 export const FAQ: { q: string; a: string }[] = [
   {
-    q: "Quanto custa?",
-    a: "Depende do que o seu negócio precisa. Você conta o objetivo pelo WhatsApp e recebe um orçamento sem compromisso, para cada serviço separado ou para o pacote completo.",
-  },
-  {
     q: "Em quanto tempo fica pronto?",
     a: "A prévia do site chega em até 1 semana depois do questionário. Os vídeos são entregues em até 2 dias úteis depois da gravação.",
   },
   {
     q: "Qual a diferença entre landing page guiada e site completo?",
-    a: "A landing page guiada é uma página só, que conduz o visitante até uma ação, como agendar uma consulta. O site completo tem mais páginas e mais conteúdo, para quem precisa apresentar mais serviços.",
-  },
-  {
-    q: "Quem grava os vídeos?",
-    a: "No pacote, a gente grava e edita os 4 vídeos, gravados no celular. Na edição continuada, você grava e a gente edita todo mês.",
+    a: "A landing page guiada é uma página única com um objetivo só: levar o visitante a agir, como agendar uma consulta ou chamar no WhatsApp. É ideal para quem quer resultado rápido e tem um serviço principal. O site completo tem várias páginas (serviços, equipe, sobre, contato) e serve para quem precisa apresentar mais coisas e passar mais credibilidade. Na dúvida, a gente indica o melhor formato no orçamento.",
   },
   {
     q: "Posso contratar só um serviço?",
-    a: "Pode. Cada serviço pode ser contratado separado. O pacote completo junta site e 4 vídeos e ainda vem com 2 vídeos grátis.",
+    a: "Pode. Cada serviço pode ser contratado separado. O pacote digital completo junta site e 4 vídeos e ainda vem com 2 vídeos grátis. O pacote de eventos junta o convite interativo e a cobertura do evento.",
   },
 ];
