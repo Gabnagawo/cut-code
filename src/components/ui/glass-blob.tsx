@@ -170,7 +170,7 @@ export function GlassBlob({ className, shape = "blob", speed = 1, seed = 0, inte
     const canvas = canvasRef.current;
     if (!canvas) return;
     const gl = canvas.getContext("webgl", { premultipliedAlpha: true, alpha: true, antialias: false });
-    if (!gl) {
+    if (!gl || gl.isContextLost()) {
       setFailed(true);
       return;
     }
@@ -178,20 +178,39 @@ export function GlassBlob({ className, shape = "blob", speed = 1, seed = 0, inte
     const vs = compile(gl, gl.VERTEX_SHADER, VERT);
     const fs = compile(gl, gl.FRAGMENT_SHADER, FRAG);
     if (!vs || !fs) {
+      if (vs) gl.deleteShader(vs);
+      if (fs) gl.deleteShader(fs);
       setFailed(true);
       return;
     }
-    const prog = gl.createProgram()!;
+    const prog = gl.createProgram();
+    if (!prog) {
+      gl.deleteShader(vs);
+      gl.deleteShader(fs);
+      setFailed(true);
+      return;
+    }
     gl.attachShader(prog, vs);
     gl.attachShader(prog, fs);
     gl.linkProgram(prog);
     if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+      console.warn(gl.getProgramInfoLog(prog));
+      gl.deleteProgram(prog);
+      gl.deleteShader(vs);
+      gl.deleteShader(fs);
       setFailed(true);
       return;
     }
     gl.useProgram(prog);
 
     const buf = gl.createBuffer();
+    if (!buf) {
+      gl.deleteProgram(prog);
+      gl.deleteShader(vs);
+      gl.deleteShader(fs);
+      setFailed(true);
+      return;
+    }
     gl.bindBuffer(gl.ARRAY_BUFFER, buf);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
     const loc = gl.getAttribLocation(prog, "p");
@@ -281,7 +300,10 @@ export function GlassBlob({ className, shape = "blob", speed = 1, seed = 0, inte
       ro.disconnect();
       io.disconnect();
       window.removeEventListener("pointermove", onMove);
-      gl.getExtension("WEBGL_lose_context")?.loseContext();
+      gl.deleteBuffer(buf);
+      gl.deleteProgram(prog);
+      gl.deleteShader(vs);
+      gl.deleteShader(fs);
     };
   }, [shape, speed, seed, interactive]);
 
