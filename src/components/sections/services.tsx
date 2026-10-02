@@ -5,8 +5,8 @@ import { GlassBlob } from "@/components/ui/glass-blob";
 import { GlowCard } from "@/components/ui/glow-card";
 import { Reveal } from "@/components/reveal";
 import { SectionHead } from "@/components/sections/section-head";
-import { PACKAGES, SERVICES, whatsappHref, type Package } from "@/data/content";
-import { linkProps } from "@/lib/link-props";
+import { PACKAGES, SERVICES, type Package } from "@/data/content";
+import { quoteLinkProps } from "@/lib/link-props";
 
 export function Services() {
   return (
@@ -34,7 +34,7 @@ export function Services() {
           <Reveal key={s.title} delay={(i % 3) * 90} className="h-full">
             <GlowCard
               as="a"
-              {...linkProps(whatsappHref(`Olá! Vim pelo site e quero um orçamento de: ${s.title}.`))}
+              {...quoteLinkProps(s.title, `Olá! Vim pelo site e quero um orçamento de: ${s.title}.`)}
               className="block h-full"
               aria-label={`${s.title}: pedir orçamento`}
             >
@@ -101,7 +101,7 @@ function PackageCard({ pkg }: { pkg: Package }) {
             size="lg"
             className="group/btn mt-8 h-13 w-full rounded-full bg-graphite px-7 text-base text-paper sm:w-auto shadow-[0_14px_34px_-14px_rgb(30_30_30/0.7)] hover:bg-graphite-2"
           >
-            <a {...linkProps(whatsappHref(pkg.whatsapp))}>
+            <a {...quoteLinkProps(pkg.title, pkg.whatsapp)}>
               Pedir orçamento do pacote
               <ArrowRight aria-hidden className="ml-2 size-4 transition-transform duration-150 group-hover/btn:translate-x-1" />
             </a>

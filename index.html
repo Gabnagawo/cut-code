@@ -4,11 +4,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Cut Code — Sites e vídeos que vendem</title>
-    <meta name="description" content="Cut Code cria landing pages guiadas, sites completos e vídeos curtos de divulgação para clínicas, restaurantes, lojas e empresas." />
+    <meta name="description" content="Cut Code cria landing pages guiadas, sites completos, vídeos curtos de divulgação e convites interativos para clínicas, restaurantes, lojas, empresas e eventos." />
+    <!-- URL pública do site: troque aqui (canonical e og) quando tiver domínio próprio -->
+    <link rel="canonical" href="https://cut-code.pages.dev/" />
     <meta name="theme-color" content="#f1f1f1" />
     <meta property="og:title" content="Cut Code — Sites e vídeos que vendem" />
-    <meta property="og:description" content="Landing pages guiadas e vídeos de divulgação para clínicas, restaurantes, lojas e empresas." />
-    <meta property="og:image" content="assets/og.png" />
+    <meta property="og:description" content="Landing pages guiadas, vídeos de divulgação e convites interativos para clínicas, restaurantes, lojas, empresas e eventos." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Cut Code" />
+    <meta property="og:url" content="https://cut-code.pages.dev/" />
+    <!-- precisa ser URL absoluta para a prévia aparecer no WhatsApp/Instagram -->
+    <meta property="og:image" content="https://cut-code.pages.dev/assets/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Cut Code — Sites e vídeos que vendem" />
     <link rel="icon" href="assets/favicon.png" />
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -24,6 +34,13 @@
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <main style="max-width:40rem;margin:4rem auto;padding:0 1rem;font-family:system-ui,sans-serif;color:#303030;line-height:1.6">
+        <h1>Cut Code — Sites e vídeos que vendem</h1>
+        <p>Landing pages guiadas, sites completos, vídeos curtos de divulgação e convites interativos para clínicas, restaurantes, lojas, empresas e eventos.</p>
+        <p>Peça seu orçamento pelo e-mail <a href="mailto:cutcode.contato@gmail.com">cutcode.contato@gmail.com</a>.</p>
+      </main>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

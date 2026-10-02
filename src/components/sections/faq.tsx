@@ -3,7 +3,7 @@ import { ArrowRight, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
 import { SectionHead } from "@/components/sections/section-head";
-import { FAQ, whatsappHref } from "@/data/content";
+import { FAQ, hasWhatsapp, whatsappHref } from "@/data/content";
 import { linkProps } from "@/lib/link-props";
 import { cn } from "@/lib/utils";
 
@@ -22,7 +22,7 @@ export function Faq() {
             }
           />
           <Reveal delay={200} className="hidden lg:block">
-            <p className="max-w-sm text-mist">Não achou sua pergunta? Mande no WhatsApp e a gente responde rápido.</p>
+            <p className="max-w-sm text-mist">{HELP_TEXT}</p>
             <FaqCta className="mt-6" />
           </Reveal>
         </div>
@@ -44,13 +44,17 @@ export function Faq() {
         </Reveal>
 
         <div className="lg:hidden">
-          <p className="text-mist">Não achou sua pergunta? Mande no WhatsApp e a gente responde rápido.</p>
+          <p className="text-mist">{HELP_TEXT}</p>
           <FaqCta className="mt-4 w-full sm:w-auto" />
         </div>
       </div>
     </section>
   );
 }
+
+const HELP_TEXT = hasWhatsapp()
+  ? "Não achou sua pergunta? Mande no WhatsApp e a gente responde rápido."
+  : "Não achou sua pergunta? Mande pelo formulário de contato e a gente responde rápido.";
 
 function FaqCta({ className }: { className?: string }) {
   return (
@@ -60,7 +64,7 @@ function FaqCta({ className }: { className?: string }) {
       className={cn("group/btn h-12 rounded-full bg-graphite px-6 text-base text-paper hover:bg-graphite-2", className)}
     >
       <a {...linkProps(whatsappHref("Olá! Vim pelo site da Cut Code e tenho uma dúvida."))}>
-        Tirar dúvida no WhatsApp
+        {hasWhatsapp() ? "Tirar dúvida no WhatsApp" : "Enviar minha dúvida"}
         <ArrowRight aria-hidden className="ml-2 size-4 transition-transform duration-150 group-hover/btn:translate-x-1" />
       </a>
     </Button>

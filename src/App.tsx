@@ -6,6 +6,7 @@ import { Niches } from "@/components/sections/niches";
 import { Portfolio } from "@/components/sections/portfolio";
 import { Process } from "@/components/sections/process";
 import { Services } from "@/components/sections/services";
+import { HAS_PORTFOLIO } from "@/data/content";
 
 export default function App() {
   return (
@@ -23,7 +24,8 @@ export default function App() {
         <Hero />
         <Niches />
         <Services />
-        <Portfolio />
+        {/* só com material real de cliente (ver CLIENTS em content.ts) */}
+        {HAS_PORTFOLIO && <Portfolio />}
         <Process />
         <Faq />
         <Contact />

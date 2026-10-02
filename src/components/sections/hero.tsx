@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ArrowRight, Clock, Gift, Play, Zap } from "lucide-react";
+import { ArrowDown, ArrowRight, Clock, Gift, Pause, Play, Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { GlassBlob } from "@/components/ui/glass-blob";
@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/vertical-thumbnail-slider-utils/carousel";
 import { RotatingWords } from "@/components/rotating-words";
 import { SafeImage } from "@/components/safe-image";
-import { SHOWCASE, whatsappHref, type Showcase } from "@/data/content";
+import { HAS_PORTFOLIO, SHOWCASE, whatsappHref, type Showcase } from "@/data/content";
 import { linkProps } from "@/lib/link-props";
 import { cn } from "@/lib/utils";
 
@@ -27,7 +27,7 @@ const HEADLINE: { text: string; iris?: boolean; br?: boolean }[] = [
 
 export function Hero() {
   return (
-    <section id="top" className="relative isolate overflow-hidden pt-28 pb-24 sm:pt-36 lg:min-h-svh">
+    <section id="top" className="relative isolate overflow-hidden pt-28 pb-24 sm:pt-36 lg:min-h-svh [@media(max-height:820px)]:sm:pt-28">
       <HeroBackground />
 
       <div className="mx-auto grid max-w-7xl items-center gap-16 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
@@ -44,7 +44,7 @@ export function Hero() {
             <ArrowRight aria-hidden className="size-3.5 transition-transform duration-150 group-hover:translate-x-0.5" />
           </a>
 
-          <h1 className="font-heading mt-8 text-[clamp(3.4rem,8vw,7.2rem)] leading-[0.9] text-graphite">
+          <h1 className="font-heading mt-8 text-[clamp(3.4rem,min(8vw,11.5svh),7.2rem)] leading-[0.9] text-graphite">
             {HEADLINE.map((w, i) => (
               <React.Fragment key={i}>
                 <span
@@ -88,11 +88,15 @@ export function Hero() {
               size="lg"
               className="glass-pill group h-14 rounded-full pr-7 pl-2 text-base text-graphite hover:-translate-y-0.5 hover:bg-white hover:text-graphite"
             >
-              <a href="#portfolio">
+              <a href={HAS_PORTFOLIO ? "#portfolio" : "#servicos"}>
                 <span className="mr-3 grid size-10 place-items-center rounded-full bg-graphite text-paper transition-transform duration-150 group-hover:scale-110">
-                  <Play aria-hidden className="size-4 translate-x-px fill-current" />
+                  {HAS_PORTFOLIO ? (
+                    <Play aria-hidden className="size-4 translate-x-px fill-current" />
+                  ) : (
+                    <ArrowDown aria-hidden className="size-4" />
+                  )}
                 </span>
-                Ver portfólio
+                {HAS_PORTFOLIO ? "Ver portfólio" : "Ver serviços"}
               </a>
             </Button>
           </div>
@@ -102,8 +106,8 @@ export function Hero() {
             style={{ animationDelay: "580ms" }}
           >
             {[
-              { icon: Clock, strong: "1 semana", text: "prévia do site" },
-              { icon: Zap, strong: "2 dias úteis", text: "entrega dos vídeos" },
+              { icon: Clock, strong: "1 semana", text: "prévia após o questionário" },
+              { icon: Zap, strong: "2 dias úteis", text: "vídeos após a gravação" },
               { icon: Gift, strong: "+2 vídeos", text: "grátis no pacote" },
             ].map(({ icon: Icon, strong, text }) => (
               <li key={strong} className="flex items-center gap-3">
@@ -139,6 +143,8 @@ function HeroBackground() {
 }
 
 function HeroShowcase() {
+  // WCAG 2.2.2: o que se move sozinho precisa de um jeito de pausar
+  const [playing, setPlaying] = React.useState(true);
   return (
     <div className="relative mx-auto w-full max-w-[540px] animate-blur-in" style={{ animationDelay: "200ms" }}>
       {/* objeto de vidro atrás da vitrine, vazando para fora */}
@@ -153,7 +159,7 @@ function HeroShowcase() {
             // no toque, o arrasto vertical fica com a rolagem da página (navega pelas miniaturas)
             breakpoints: { "(hover: none)": { watchDrag: false } },
           }}
-          autoplay={7000}
+          autoplay={playing ? 7000 : undefined}
           label="Vitrine de projetos por nicho"
           className="flex gap-2.5 sm:gap-3"
         >
@@ -172,6 +178,18 @@ function HeroShowcase() {
           />
         </Carousel>
       </div>
+      <div className="mt-2 flex items-center justify-center gap-2 text-xs text-mist">
+        <p>Imagens ilustrativas de cada nicho</p>
+        <button
+          type="button"
+          onClick={() => setPlaying((v) => !v)}
+          className="inline-flex min-h-11 items-center gap-1.5 rounded-full px-3 font-medium text-graphite transition-colors duration-150 hover:bg-graphite/5 motion-reduce:hidden"
+        >
+          {playing ? <Pause aria-hidden className="size-3.5" /> : <Play aria-hidden className="size-3.5" />}
+          {playing ? "Pausar" : "Continuar"}
+          <span className="sr-only"> a troca automática da vitrine</span>
+        </button>
+      </div>
     </div>
   );
 }
@@ -181,7 +199,7 @@ function ShowcaseSlide({ item, index, total }: { item: Showcase; index: number; 
     <div className={cn("group/slide relative h-full overflow-hidden rounded-[24px] bg-gradient-to-br", item.tone)}>
       <SafeImage
         src={item.image}
-        alt={`Projeto para ${item.niche.toLowerCase()}`}
+        alt={`Imagem ilustrativa: ${item.niche.toLowerCase()}`}
         loading={index === 0 ? "eager" : "lazy"}
         fetchPriority={index === 0 ? "high" : "auto"}
         className="absolute inset-0 scale-[1.02] transition-transform duration-700 ease-glass group-hover/slide:scale-110"

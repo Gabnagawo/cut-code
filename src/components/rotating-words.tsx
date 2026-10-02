@@ -2,7 +2,11 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-/** Troca palavras em loop sem mudar a largura (reserva o espaço da maior palavra). */
+/**
+ * Troca as palavras sem mudar a largura (reserva o espaço da maior palavra).
+ * Dá uma volta completa e para na primeira palavra: animação que não para
+ * sozinha exigiria um botão de pausa (WCAG 2.2.2).
+ */
 export function RotatingWords({
   words,
   interval = 2200,
@@ -17,7 +21,12 @@ export function RotatingWords({
 
   React.useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = window.setInterval(() => setIndex((i) => (i + 1) % words.length), interval);
+    let steps = 0;
+    const id = window.setInterval(() => {
+      steps += 1;
+      setIndex(steps % words.length);
+      if (steps >= words.length) window.clearInterval(id);
+    }, interval);
     return () => window.clearInterval(id);
   }, [words.length, interval]);
 

@@ -5,14 +5,15 @@ import { InstagramIcon, WhatsAppIcon } from "@/components/brand-icons";
 import { Reveal } from "@/components/reveal";
 import { ContactForm } from "@/components/sections/contact-form";
 import { Brand, NAV_LINKS } from "@/components/sections/nav";
-import { CONTACT, emailHref, instagramHref, whatsappHref } from "@/data/content";
+import { CONTACT, emailHref, hasWhatsapp, whatsappHref } from "@/data/content";
 import { linkProps } from "@/lib/link-props";
 
+// canais sem link configurado em CONTACT ficam fora do site (nada de botão que não abre nada)
 const CHANNELS = [
-  { label: "WhatsApp", detail: "Resposta rápida", href: whatsappHref(), icon: WhatsAppIcon },
-  { label: "Instagram", detail: "Reels e bastidores", href: instagramHref(), icon: InstagramIcon },
-  { label: "E-mail", detail: CONTACT.email, href: emailHref(), icon: Mail },
-];
+  { label: "WhatsApp", detail: "Resposta rápida", href: whatsappHref(), icon: WhatsAppIcon, on: hasWhatsapp() },
+  { label: "Instagram", detail: "Reels e bastidores", href: CONTACT.instagram, icon: InstagramIcon, on: !!CONTACT.instagram },
+  { label: "E-mail", detail: CONTACT.email, href: emailHref(), icon: Mail, on: true },
+].filter((c) => c.on);
 
 /** Encerramento no estilo do slide final: título grande, canais de contato e formulário sobre o objeto de vidro. */
 export function Contact() {
@@ -61,7 +62,9 @@ export function Contact() {
 
         <Reveal delay={200} className="relative self-start">
           <GlassBlob seed={5.1} interactive={false} className="absolute -inset-[18%] -z-10" />
-          <ContactForm />
+          <div id="orcamento">
+            <ContactForm />
+          </div>
         </Reveal>
       </div>
     </section>
@@ -102,7 +105,12 @@ export function Footer() {
         </div>
       </div>
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 border-t border-hairline px-4 py-6 text-sm text-mist sm:px-6">
-        <p>© {new Date().getFullYear()} Cut Code</p>
+        <p className="flex flex-wrap items-center gap-x-2">
+          © {new Date().getFullYear()} Cut Code ·
+          <a href="privacidade" className="inline-flex min-h-11 items-center text-graphite underline-offset-4 hover:underline md:min-h-0">
+            Privacidade
+          </a>
+        </p>
         <a href="#top" className="group inline-flex items-center gap-2 text-graphite">
           Voltar ao topo
           <span className="grid size-8 place-items-center rounded-full border border-graphite/15 transition-transform duration-300 group-hover:-translate-y-0.5">

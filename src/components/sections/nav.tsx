@@ -1,11 +1,12 @@
 import * as React from "react";
 import { Menu, X } from "lucide-react";
 
+import { HAS_PORTFOLIO } from "@/data/content";
 import { cn } from "@/lib/utils";
 
 export const NAV_LINKS = [
   { href: "#servicos", label: "Serviços" },
-  { href: "#portfolio", label: "Portfólio" },
+  ...(HAS_PORTFOLIO ? [{ href: "#portfolio", label: "Portfólio" }] : []),
   { href: "#processo", label: "Como funciona" },
   { href: "#duvidas", label: "Dúvidas" },
   { href: "#contato", label: "Contato" },

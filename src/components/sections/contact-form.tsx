@@ -2,7 +2,7 @@ import * as React from "react";
 import { ArrowRight, ChevronDown, CircleCheck, LoaderCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { CONTACT, FORM_NICHES, FORM_SERVICES } from "@/data/content";
+import { CONTACT, FORM_NICHES, FORM_SERVICES, SELECT_SERVICE_EVENT } from "@/data/content";
 import { cn } from "@/lib/utils";
 
 /**
@@ -40,11 +40,41 @@ function validate(field: Field, value: string): string | undefined {
 
 const REQUIRED: Field[] = ["nome", "contato", "nicho", "servico"];
 
+/** Limites de tamanho: evitam envios gigantes (spam) sem atrapalhar o uso normal. */
+const MAX: Record<"nome" | "contato" | "mensagem", number> = { nome: 120, contato: 120, mensagem: 1500 };
+
 export function ContactForm({ className }: { className?: string }) {
   const [values, setValues] = React.useState<Values>(EMPTY);
   const [errors, setErrors] = React.useState<Errors>({});
   const [status, setStatus] = React.useState<"idle" | "sending" | "sent" | "error">("idle");
   const formRef = React.useRef<HTMLFormElement>(null);
+  const successRef = React.useRef<HTMLHeadingElement>(null);
+
+  // "Pedir orçamento" de um serviço/pacote já chega com o serviço escolhido
+  React.useEffect(() => {
+    const onSelect = (e: Event) => {
+      const service = (e as CustomEvent<string>).detail;
+      if (!FORM_SERVICES.includes(service)) return;
+      setStatus((s) => (s === "sent" ? "idle" : s));
+      setValues((v) => ({ ...v, servico: service }));
+      setErrors((er) => ({ ...er, servico: undefined }));
+      // espera a rolagem até #orcamento e leva o foco ao formulário
+      window.setTimeout(() => {
+        const first = formRef.current?.querySelector<HTMLElement>('[name="nome"]');
+        first?.focus({ preventScroll: true });
+      }, 400);
+    };
+    window.addEventListener(SELECT_SERVICE_EVENT, onSelect);
+    return () => window.removeEventListener(SELECT_SERVICE_EVENT, onSelect);
+  }, []);
+
+  // o formulário e a confirmação se alternam: o foco acompanha, em vez de cair no <body>
+  const prevStatus = React.useRef(status);
+  React.useEffect(() => {
+    if (status === "sent") successRef.current?.focus();
+    else if (prevStatus.current === "sent") formRef.current?.querySelector<HTMLElement>('[name="nome"]')?.focus();
+    prevStatus.current = status;
+  }, [status]);
 
   const set = (field: Field) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const value = e.target.value;
@@ -98,8 +128,16 @@ export function ContactForm({ className }: { className?: string }) {
         <span className="grid size-12 place-items-center rounded-full bg-graphite text-paper">
           <CircleCheck aria-hidden className="size-6" />
         </span>
-        <h3 className="font-heading mt-6 text-3xl leading-tight text-graphite">Pedido enviado!</h3>
-        <p className="mt-3 max-w-sm text-mist">Recebemos seus dados e vamos responder pelo contato que você informou.</p>
+        <h3 ref={successRef} tabIndex={-1} className="font-heading mt-6 text-3xl leading-tight text-graphite outline-none">
+          Pedido enviado!
+        </h3>
+        <p className="mt-3 max-w-sm text-mist">
+          Recebemos seus dados e vamos responder pelo WhatsApp ou e-mail que você informou. Se preferir, escreva para{" "}
+          <a href={`mailto:${CONTACT.email}`} className="font-medium text-graphite underline underline-offset-4">
+            {CONTACT.email}
+          </a>
+          .
+        </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
@@ -120,7 +158,8 @@ export function ContactForm({ className }: { className?: string }) {
         <TextField
           id="nome"
           label="Nome ou empresa"
-          autoComplete="organization"
+          autoComplete="name"
+          maxLength={MAX.nome}
           value={values.nome}
           error={errors.nome}
           onChange={set("nome")}
@@ -129,8 +168,8 @@ export function ContactForm({ className }: { className?: string }) {
         <TextField
           id="contato"
           label="Seu WhatsApp ou e-mail"
-          autoComplete="email"
-          inputMode="email"
+          autoComplete="off"
+          maxLength={MAX.contato}
           value={values.contato}
           error={errors.contato}
           onChange={set("contato")}
@@ -164,6 +203,7 @@ export function ContactForm({ className }: { className?: string }) {
             id="campo-mensagem"
             name="mensagem"
             rows={3}
+            maxLength={MAX.mensagem}
             value={values.mensagem}
             onChange={set("mensagem")}
             className={cn(fieldClass, "min-h-24 resize-y py-3")}
@@ -185,12 +225,20 @@ export function ContactForm({ className }: { className?: string }) {
         </p>
       )}
 
+      <p className="mt-6 text-xs leading-relaxed text-mist">
+        Usamos seus dados só para responder este pedido. O envio passa pelo serviço FormSubmit, fora do Brasil, e chega ao nosso e-mail.{" "}
+        <a href="privacidade" className="text-graphite underline underline-offset-4">
+          Política de privacidade
+        </a>
+        .
+      </p>
+
       <Button
         type="submit"
         size="lg"
         disabled={status === "sending"}
         aria-busy={status === "sending"}
-        className="group/btn mt-6 h-13 w-full rounded-full bg-graphite px-7 text-base text-paper shadow-[0_14px_34px_-14px_rgb(30_30_30/0.7)] hover:bg-graphite-2"
+        className="group/btn mt-4 h-13 w-full rounded-full bg-graphite px-7 text-base text-paper shadow-[0_14px_34px_-14px_rgb(30_30_30/0.7)] hover:bg-graphite-2"
       >
         {status === "sending" ? (
           <>
@@ -236,11 +284,11 @@ function TextField({
   onBlur,
   onChange,
   autoComplete,
-  inputMode,
+  maxLength,
 }: BaseProps & {
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   autoComplete?: string;
-  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
+  maxLength?: number;
 }) {
   return (
     <div>
@@ -253,7 +301,7 @@ function TextField({
         type="text"
         required
         autoComplete={autoComplete}
-        inputMode={inputMode}
+        maxLength={maxLength}
         value={value}
         onChange={onChange}
         onBlur={onBlur}

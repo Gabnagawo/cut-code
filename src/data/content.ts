@@ -18,13 +18,18 @@ export const CONTACT = {
   email: "cutcode.contato@gmail.com",
 };
 
-/** Link do WhatsApp com mensagem pronta; sem número configurado, cai na seção de contato. */
+export const hasWhatsapp = () => Boolean(CONTACT.whatsappNumber);
+
+/** Link do WhatsApp com mensagem pronta; sem número configurado, cai no formulário de orçamento. */
 export function whatsappHref(message = "Olá! Vim pelo site da Cut Code e quero um orçamento.") {
-  if (!CONTACT.whatsappNumber) return "#contato";
+  if (!hasWhatsapp()) return "#orcamento";
   return `https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 
-export const instagramHref = () => CONTACT.instagram || "#contato";
+export const instagramHref = () => CONTACT.instagram || "#orcamento";
+
+/** Evento que pré-seleciona o serviço no formulário de contato. */
+export const SELECT_SERVICE_EVENT = "cutcode:servico";
 
 export const emailHref = () => `mailto:${CONTACT.email}`;
 
@@ -147,11 +152,11 @@ export type Package = {
 
 export const PACKAGES: Package[] = [
   {
-    badge: "Mais escolhido",
+    badge: "Recomendado",
     title: "Pacote digital completo",
     description:
       "Site + 4 vídeos curtos de divulgação. Sua presença digital inteira, pronta em poucos dias, com o mesmo cuidado estético do começo ao fim.",
-    items: ["Landing page guiada ou site completo", "4 vídeos curtos editados", "Prévia do site em até 1 semana", "Vídeos em até 2 dias úteis"],
+    items: ["Landing page guiada ou site completo", "4 vídeos curtos editados", "Prévia do site em até 1 semana após o questionário", "Vídeos em até 2 dias úteis após a gravação"],
     whatsapp: "Olá! Vim pelo site e quero um orçamento do pacote digital completo (site + vídeos).",
     highlight: { big: "+2", small: "vídeos grátis" },
   },
@@ -211,6 +216,12 @@ export type ClientMaterial = {
 };
 
 export type Client = {
+  /**
+   * Só aparece no site com `ready: true`, ou seja, com material real do cliente
+   * (telas, vídeos) e autorização dele para divulgar. Sem nenhum cliente pronto,
+   * a seção Portfólio some do site e do menu.
+   */
+  ready: boolean;
   slug: string;
   name: string;
   niche: string;
@@ -225,8 +236,9 @@ const ph = (id: string): Pick<ClientMaterial, "image" | "thumb"> => ({
   thumb: unsplash(id, 200),
 });
 
-export const CLIENTS: Client[] = [
+const ALL_CLIENTS: Client[] = [
   {
+    ready: false, // TODO: true quando o material real e a autorização estiverem prontos
     slug: "santa-lourdes",
     name: "Clínica Santa Lourdes",
     niche: "Clínica multiprofissional",
@@ -242,6 +254,7 @@ export const CLIENTS: Client[] = [
     ],
   },
   {
+    ready: false, // TODO: true quando o material real e a autorização estiverem prontos
     slug: "dra-vanine",
     name: "Dra. Vanine",
     niche: "Consultório particular",
@@ -257,6 +270,9 @@ export const CLIENTS: Client[] = [
     ],
   },
 ];
+
+export const CLIENTS = ALL_CLIENTS.filter((c) => c.ready);
+export const HAS_PORTFOLIO = CLIENTS.length > 0;
 
 /* ------------------------------------------------------------------
    Perguntas frequentes (objeções antes do contato).
