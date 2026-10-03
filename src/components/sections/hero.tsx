@@ -44,7 +44,7 @@ export function Hero() {
             <ArrowRight aria-hidden className="size-3.5 transition-transform duration-150 group-hover:translate-x-0.5" />
           </a>
 
-          <h1 className="font-heading mt-8 text-[clamp(3.4rem,min(8vw,11.5svh),7.2rem)] leading-[0.9] text-graphite">
+          <h1 className="font-display mt-8 text-[clamp(3.4rem,min(8vw,11.5svh),7.2rem)] leading-[0.9] text-graphite">
             {HEADLINE.map((w, i) => (
               <React.Fragment key={i}>
                 <span

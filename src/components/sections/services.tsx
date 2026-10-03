@@ -35,7 +35,7 @@ export function Services() {
                   <span className="inline-block rounded-full bg-white/15 px-3.5 py-1.5 text-[0.7rem] font-medium tracking-[0.18em] text-paper uppercase backdrop-blur-xs">
                     {digitalPkg.badge}
                   </span>
-                  <h3 className="font-heading mt-6 text-[clamp(2.3rem,3.8vw,3.4rem)] leading-none text-paper">
+                  <h3 className="font-display mt-6 text-[clamp(2.3rem,3.8vw,3.4rem)] leading-none text-paper">
                     {digitalPkg.title}
                   </h3>
                   <span className="mt-6 block h-px w-24 bg-white/20" />
@@ -65,7 +65,7 @@ export function Services() {
                 <div className="flex flex-col items-center gap-4">
                   <div className="relative grid size-44 place-items-center rounded-full border border-white/20 bg-gradient-to-br from-white/15 to-white/5 p-4 text-center shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] backdrop-blur-md transition-transform duration-500 ease-glass group-hover/card:scale-105 sm:size-48">
                     <div className="text-paper">
-                      <span className="font-heading block text-5xl leading-none sm:text-6xl">{digitalPkg.highlight.big}</span>
+                      <span className="font-display block text-5xl leading-none sm:text-6xl">{digitalPkg.highlight.big}</span>
                       <span className="mt-2 block text-xs font-medium tracking-[0.2em] text-paper/80 uppercase">{digitalPkg.highlight.small}</span>
                     </div>
                   </div>
@@ -145,7 +145,7 @@ export function Services() {
                   <span className="grid size-14 place-items-center rounded-2xl border border-hairline bg-white/70 text-graphite shadow-[0_1px_0_#fff_inset] transition-all duration-300 ease-glass group-hover/card:-rotate-6 group-hover/card:scale-110 group-hover/card:border-transparent group-hover/card:bg-graphite group-hover/card:text-paper group-hover/card:shadow-[0_14px_30px_-10px_rgb(30_30_30/0.6)]">
                     <s.icon aria-hidden className="size-6" strokeWidth={1.5} />
                   </span>
-                  <span aria-hidden className="font-heading text-4xl text-graphite/10 transition-colors duration-300 group-hover/card:text-graphite/60">
+                  <span aria-hidden className="font-display text-4xl text-graphite/10 transition-colors duration-300 group-hover/card:text-graphite/60">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>

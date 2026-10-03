@@ -9,7 +9,7 @@ export function SectionHead({ eyebrow, title, lead }: { eyebrow: string; title: 
       <Reveal as="p" className="mb-5 text-xs font-medium tracking-[0.28em] text-mist uppercase">
         {eyebrow}
       </Reveal>
-      <Reveal as="h2" delay={80} className="font-heading text-[clamp(2.5rem,5.2vw,4.5rem)] leading-[1.05] text-graphite">
+      <Reveal as="h2" delay={80} className="font-display text-[clamp(2.5rem,5.2vw,4.5rem)] leading-[1.05] tracking-[-0.035em] text-graphite">
         {title}
       </Reveal>
       <Reveal delay={140}>

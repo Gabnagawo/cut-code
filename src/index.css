@@ -84,29 +84,20 @@
   ::selection { background: var(--color-graphite); color: var(--color-paper); }
   :focus-visible { outline: 2px solid var(--color-graphite); outline-offset: 3px; }
 
-  /* Títulos: tracking proporcional ao tamanho (display mais negativo, h3/corpo próximo de 0) */
-  h1.font-heading {
-    letter-spacing: -0.045em;
-  }
-  h2.font-heading {
-    letter-spacing: -0.035em;
-  }
-  h3.font-heading {
-    letter-spacing: -0.015em;
-  }
 }
 
-/* títulos: grotesca negrito, espaçamento base moderado (h3 e pequenos) */
-@utility font-heading {
-  font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.015em;
-}
-
+/* títulos display: grotesca negrito, tracking apertado para tamanhos grandes (>= 40px) */
 @utility font-display {
   font-family: var(--font-display);
   font-weight: 600;
   letter-spacing: -0.045em;
+}
+
+/* títulos estruturais: grotesca negrito, espaçamento moderado (h3, cards, corpo) */
+@utility font-heading {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.015em;
 }
 
 /* ---------- Vidro fosco claro ---------- */

@@ -26,7 +26,7 @@ export function Contact() {
           <GlassBlob seed={5.1} interactive={false} className="pointer-events-none absolute -top-16 -left-20 -z-10 size-[130%] opacity-70" />
           <Reveal>
             <p className="mb-5 text-xs font-medium tracking-[0.28em] text-mist uppercase">Vamos começar?</p>
-            <h2 className="font-heading text-[clamp(3.2rem,7vw,6.2rem)] leading-[0.9] text-graphite">
+            <h2 className="font-display text-[clamp(3.2rem,7vw,6.2rem)] leading-[0.9] text-graphite">
               Vamos
               <br />
               <span className="text-iris">conversar!</span>
