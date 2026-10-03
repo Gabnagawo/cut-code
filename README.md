@@ -9,7 +9,21 @@ npm run build     # typecheck + build estático em dist/
 npm run preview   # serve o build
 ```
 
-O `dist/` é estático. O site está no **Cloudflare Pages** (projeto `cut-code`, https://cut-code.pages.dev):
+## Deploy
+
+O `dist/` é estático e hospedado no **Cloudflare Pages** (projeto `cut-code`, https://cut-code.pages.dev).
+
+### Deploy automático (GitHub Actions)
+
+Todo `push` na branch `main` (ou disparo manual via `workflow_dispatch`) executa o workflow `.github/workflows/deploy.yml`, que roda o typecheck, o build e publica o site automaticamente.
+
+Para o workflow funcionar, configure dois secrets no GitHub (**Settings** → **Secrets and variables** → **Actions**):
+- `CLOUDFLARE_API_TOKEN`: token com permissão de edição do Cloudflare Pages
+- `CLOUDFLARE_ACCOUNT_ID`: ID da conta Cloudflare
+
+### Deploy manual (alternativa)
+
+Se precisar publicar manualmente via terminal com o Wrangler:
 
 ```bash
 npm run build && npx wrangler pages deploy dist --project-name cut-code
