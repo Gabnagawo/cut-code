@@ -10,8 +10,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "rounded-md bg-primary text-primary-foreground hover:bg-primary/90",
-        cta: "h-13 rounded-full bg-graphite px-7 text-base text-paper shadow-[0_14px_34px_-14px_rgb(30_30_30/0.7)] hover:-translate-y-0.5 hover:bg-graphite-2 hover:shadow-[0_20px_40px_-14px_rgb(30_30_30/0.8)]",
-        "cta-glass": "glass-pill h-13 rounded-full px-7 text-base text-graphite hover:-translate-y-0.5 hover:bg-white hover:text-graphite",
+        cta: "rounded-full bg-graphite text-paper shadow-[0_14px_34px_-14px_rgb(30_30_30/0.7)] hover:-translate-y-0.5 hover:bg-graphite-2 hover:shadow-[0_20px_40px_-14px_rgb(30_30_30/0.8)] active:scale-[0.97] transition-[translate,scale,background-color,box-shadow] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)]",
+        "cta-glass":
+          "glass-pill rounded-full text-graphite hover:-translate-y-0.5 hover:bg-white hover:text-graphite active:scale-[0.97] transition-[translate,scale,background-color,box-shadow] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)]",
+        "cta-inverse":
+          "rounded-full bg-paper text-graphite shadow-[0_12px_28px_-10px_rgba(255,255,255,0.3)] hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_40px_-14px_rgba(255,255,255,0.45)] focus-visible:ring-paper focus-visible:ring-offset-[#1c1c20] active:scale-[0.97] transition-[translate,scale,background-color,box-shadow] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)]",
         destructive:
           "rounded-md bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
@@ -26,8 +29,15 @@ const buttonVariants = cva(
         sm: "h-9 rounded-md px-3",
         lg: "h-11 rounded-md px-8",
         icon: "h-10 w-10",
+        cta: "h-13 px-7 py-0 text-base",
       },
     },
+    compoundVariants: [
+      {
+        variant: ["cta", "cta-glass", "cta-inverse"],
+        className: "h-13 px-7 py-0 text-base",
+      },
+    ],
     defaultVariants: {
       variant: "default",
       size: "default",

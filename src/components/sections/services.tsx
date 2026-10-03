@@ -52,8 +52,8 @@ export function Services() {
                   </ul>
                   <Button
                     asChild
-                    variant="cta"
-                    className="group/btn mt-8 w-full bg-paper text-graphite shadow-[0_14px_34px_-14px_rgba(255,255,255,0.35)] hover:bg-white hover:text-graphite hover:shadow-[0_20px_40px_-14px_rgba(255,255,255,0.5)] sm:w-auto"
+                    variant="cta-inverse"
+                    className="group/btn mt-8 w-full sm:w-auto"
                   >
                     <a {...quoteLinkProps(digitalPkg.title, digitalPkg.whatsapp)}>
                       Pedir orçamento do pacote
