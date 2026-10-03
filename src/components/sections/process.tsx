@@ -13,6 +13,7 @@ export function Process() {
             Simples, rápido e <span className="text-iris">sem enrolação</span>.
           </>
         }
+        lead="Tudo começa pelo briefing."
       />
 
       <ol className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">

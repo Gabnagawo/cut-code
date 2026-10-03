@@ -1,7 +1,7 @@
 import {
   Clapperboard,
   ClipboardList,
-  Eye,
+  Compass,
   LayoutTemplate,
   PanelsTopLeft,
   Repeat,
@@ -205,10 +205,26 @@ export type Step = {
 };
 
 export const STEPS: Step[] = [
-  { icon: ClipboardList, title: "Questionário", text: "Você responde algumas perguntas sobre o seu negócio, público e objetivo." },
-  { icon: Eye, title: "Prévia do site", text: "Em até 1 semana você recebe a prévia para aprovar e ajustar.", highlight: "1 semana" },
-  { icon: Clapperboard, title: "Gravação e edição", text: "Gravamos e editamos seus vídeos, entregues em até 2 dias úteis.", highlight: "2 dias úteis" },
-  { icon: Rocket, title: "No ar", text: "Site publicado, vídeos prontos para postar e sua marca trabalhando por você." },
+  {
+    icon: ClipboardList,
+    title: "Briefing",
+    text: "Você nos conta sobre seu negócio, público e objetivos por meio de um questionário direcionado e, quando necessário, de uma reunião de alinhamento.",
+  },
+  {
+    icon: Compass,
+    title: "Direção do projeto",
+    text: "A partir dessas informações, estruturamos o conteúdo, a experiência e a direção visual do projeto.",
+  },
+  {
+    icon: Clapperboard,
+    title: "Prévia e produção",
+    text: "No caso de sites e landing pages, a prévia é apresentada em até uma semana após a conclusão do briefing, permitindo análise e ajustes antes da publicação. Para os projetos audiovisuais, seguimos para a captação e, posteriormente, para a pós-produção, etapa em que o material é editado, tratado e preparado para publicação. A entrega dos vídeos ocorre em até dois dias úteis após a captação.",
+  },
+  {
+    icon: Rocket,
+    title: "No ar",
+    text: "Ao final, o site vai ao ar e os conteúdos ficam prontos para publicação, levando a mensagem da sua marca até o público que você deseja alcançar.",
+  },
 ];
 
 /* ------------------------------------------------------------------
