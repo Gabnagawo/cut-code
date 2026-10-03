@@ -1,8 +1,10 @@
 import * as React from "react";
 import { ArrowRight, ChevronDown, CircleCheck, LoaderCircle } from "lucide-react";
 
+import { WhatsAppIcon } from "@/components/brand-icons";
 import { Button } from "@/components/ui/button";
-import { CONTACT, FORM_NICHES, FORM_SERVICES, SELECT_SERVICE_EVENT } from "@/data/content";
+import { CONTACT, FORM_NICHES, FORM_SERVICES, SELECT_SERVICE_EVENT, hasWhatsapp } from "@/data/content";
+import { linkProps } from "@/lib/link-props";
 import { cn } from "@/lib/utils";
 
 /**
@@ -216,13 +218,45 @@ export function ContactForm({ className }: { className?: string }) {
       </div>
 
       {status === "error" && (
-        <p role="alert" className="mt-5 rounded-2xl border border-destructive/30 bg-destructive/5 px-4 py-3 text-sm text-graphite">
-          Não conseguimos enviar agora. Tente de novo ou escreva para{" "}
-          <a href={`mailto:${CONTACT.email}`} className="font-medium underline underline-offset-4">
-            {CONTACT.email}
-          </a>
-          .
-        </p>
+        <div role="alert" className="mt-5 rounded-2xl border border-destructive/30 bg-destructive/5 p-4 text-sm text-graphite">
+          <p className="font-medium text-graphite">
+            Não conseguimos enviar pelo formulário agora.
+          </p>
+          <p className="mt-1 text-mist">
+            Você pode enviar o pedido direto pelo WhatsApp com seus dados já preenchidos, ou escrever para{" "}
+            <a href={`mailto:${CONTACT.email}`} className="font-medium text-graphite underline underline-offset-4">
+              {CONTACT.email}
+            </a>
+            .
+          </p>
+          {hasWhatsapp() && (
+            <Button
+              asChild
+              type="button"
+              className="mt-3.5 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-graphite px-5 text-sm font-medium text-paper transition-colors hover:bg-graphite-2 sm:w-auto"
+            >
+              <a
+                {...linkProps(
+                  `https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent(
+                    [
+                      "Olá! Vim pelo formulário do site da Cut Code para pedir um orçamento:",
+                      values.nome.trim() ? `• Nome: ${values.nome.trim()}` : "",
+                      values.nicho ? `• Nicho: ${values.nicho}` : "",
+                      values.servico ? `• Serviço: ${values.servico}` : "",
+                      values.mensagem.trim() ? `• Mensagem: ${values.mensagem.trim()}` : "",
+                      values.contato.trim() ? `• Contato informado: ${values.contato.trim()}` : "",
+                    ]
+                      .filter(Boolean)
+                      .join("\n")
+                  )}`
+                )}
+              >
+                <WhatsAppIcon aria-hidden className="size-4 shrink-0 text-emerald-400" />
+                Continuar pedido no WhatsApp
+              </a>
+            </Button>
+          )}
+        </div>
       )}
 
       <p className="mt-6 text-xs leading-relaxed text-mist">
