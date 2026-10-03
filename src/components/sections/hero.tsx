@@ -168,7 +168,7 @@ function HeroShowcase() {
                 key={item.niche}
                 thumbnailSrc={item.thumb}
                 thumbnailAlt={`Miniatura ${item.niche}`}
-                label={`Ver projeto para ${item.niche}: ${item.title}`}
+                label={`Ver exemplo para ${item.niche}: ${item.title}`}
                 className="h-full"
               >
                 <ShowcaseSlide item={item} index={i} total={SHOWCASE.length} />
