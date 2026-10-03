@@ -153,8 +153,8 @@ export function ContactForm({ className }: { className?: string }) {
 
   return (
     <form ref={formRef} noValidate onSubmit={onSubmit} className={cn("glass rounded-[28px] p-6 sm:p-8", className)}>
-      <h3 className="font-heading text-2xl text-graphite">Pedir orçamento</h3>
-      <p className="mt-2 text-sm text-mist">Todos os campos são obrigatórios, menos a mensagem.</p>
+      <h3 className="font-heading text-2xl text-graphite">Solicitar orçamento</h3>
+      <p className="mt-2 text-sm text-mist">Todos os campos são obrigatórios, exceto mensagem.</p>
 
       <div className="mt-6 grid gap-5">
         <TextField
@@ -169,7 +169,7 @@ export function ContactForm({ className }: { className?: string }) {
         />
         <TextField
           id="contato"
-          label="Seu WhatsApp ou e-mail"
+          label="WhatsApp ou e-mail"
           autoComplete="off"
           maxLength={MAX.contato}
           value={values.contato}
@@ -189,7 +189,7 @@ export function ContactForm({ className }: { className?: string }) {
         />
         <SelectField
           id="servico"
-          label="Serviço que você precisa"
+          label="Serviço de interesse"
           placeholder="Selecione um serviço"
           options={FORM_SERVICES}
           value={values.servico}
@@ -199,7 +199,7 @@ export function ContactForm({ className }: { className?: string }) {
         />
         <div>
           <label htmlFor="campo-mensagem" className="mb-2 block text-sm font-medium text-graphite">
-            Mensagem <span className="font-normal text-mist">(opcional)</span>
+            Mensagem
           </label>
           <textarea
             id="campo-mensagem"
@@ -239,7 +239,7 @@ export function ContactForm({ className }: { className?: string }) {
                 {...linkProps(
                   `https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent(
                     [
-                      "Olá! Vim pelo formulário do site da Cut Code para pedir um orçamento:",
+                      "Olá! Vim pelo formulário do site da CutCode para pedir um orçamento:",
                       values.nome.trim() ? `• Nome: ${values.nome.trim()}` : "",
                       values.nicho ? `• Nicho: ${values.nicho}` : "",
                       values.servico ? `• Serviço: ${values.servico}` : "",

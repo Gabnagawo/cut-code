@@ -24,15 +24,23 @@ export function Contact() {
       <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_1fr] lg:gap-16">
         <div>
           <Reveal>
-            <p className="mb-5 text-xs font-medium tracking-[0.28em] text-mist uppercase">Vamos começar?</p>
-            <h2 className="font-display text-[clamp(3.2rem,7vw,6.2rem)] leading-[0.9] text-graphite">
+            <p className="mb-5 text-xs font-medium tracking-[0.28em] text-mist uppercase">Contato</p>
+            <h2 className="font-display text-[clamp(3.2rem,7vw,6.2rem)] leading-[0.95] text-graphite">
               Vamos
               <br />
-              <span className="text-iris">conversar!</span>
+              <span className="text-iris">conversar?</span>
             </h2>
-            <p className="mt-6 max-w-sm text-mist">
-              Conte sobre o seu negócio e a gente cuida do resto. Respondemos rápido e o orçamento é sem compromisso.
-            </p>
+            <div className="mt-6 max-w-md space-y-4 text-mist">
+              <p>
+                Seu negócio já tem uma história! A CutCode ajuda a transformá-la em experiência digital.
+              </p>
+              <p>
+                Conte sobre sua marca, seus objetivos e o que você precisa construir. A partir dessas informações, estruturamos uma proposta adequada ao seu momento e ao seu negócio.
+              </p>
+              <p className="text-sm font-medium text-graphite">
+                Orçamento sem compromisso.
+              </p>
+            </div>
           </Reveal>
 
           <Reveal delay={120} className="mt-10">
