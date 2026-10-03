@@ -57,10 +57,7 @@ export function Services() {
                     variant="cta-inverse"
                     className="group/btn mt-8 w-full sm:w-auto"
                   >
-                    <a
-                      {...quoteLinkProps(digitalPkg.title, digitalPkg.whatsapp)}
-                      aria-label={`Pedir orçamento: ${digitalPkg.title}`}
-                    >
+                    <a {...quoteLinkProps(digitalPkg.title, digitalPkg.whatsapp)}>
                       Pedir pacote completo
                       <ArrowRight aria-hidden className="ml-2 size-4 transition-transform duration-150 group-hover/btn:translate-x-1" />
                     </a>
@@ -124,10 +121,7 @@ export function Services() {
                     variant="cta"
                     className="w-full sm:w-auto"
                   >
-                    <a
-                      {...quoteLinkProps(pkg.title, pkg.whatsapp)}
-                      aria-label={`Pedir orçamento: ${pkg.title}`}
-                    >
+                    <a {...quoteLinkProps(pkg.title, pkg.whatsapp)}>
                       Pedir {pkg.title.toLowerCase()}
                       <ArrowRight aria-hidden className="ml-2 size-4" />
                     </a>
