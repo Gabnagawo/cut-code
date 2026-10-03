@@ -14,7 +14,9 @@ import {
 // Canais da Cut Code. Se algum ficar vazio, o card dele some e os botões levam ao formulário.
 export const CONTACT = {
   /** só números, com DDI e DDD. ex.: "5511999999999" */
-  whatsappNumber: "559294215789",
+  whatsappNumber: "5592994215789",
+  /** exibição formatada no site */
+  whatsappFormatted: "+55 92 99421-5789",
   /** ex.: "https://instagram.com/cutandcode" */
   instagram: "https://instagram.com/cut_code",
   email: "cutcode.contato@gmail.com",

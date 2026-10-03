@@ -10,7 +10,7 @@ import { linkProps } from "@/lib/link-props";
 
 // canais sem link configurado em CONTACT ficam fora do site (nada de botão que não abre nada)
 const CHANNELS = [
-  { label: "WhatsApp", detail: "Resposta rápida", href: whatsappHref(), icon: WhatsAppIcon, on: hasWhatsapp() },
+  { label: "WhatsApp", detail: CONTACT.whatsappFormatted, href: whatsappHref(), icon: WhatsAppIcon, on: hasWhatsapp() },
   { label: "Instagram", detail: "Reels e bastidores", href: CONTACT.instagram, icon: InstagramIcon, on: !!CONTACT.instagram },
   { label: "E-mail", detail: CONTACT.email, href: emailHref(), icon: Mail, on: true },
 ].filter((c) => c.on);
