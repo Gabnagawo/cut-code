@@ -1,17 +1,15 @@
 import {
-  Aperture,
   Clapperboard,
   ClipboardList,
   Eye,
   LayoutTemplate,
   PanelsTopLeft,
-  PartyPopper,
   Repeat,
   Rocket,
   type LucideIcon,
 } from "lucide-react";
 
-// Canais da Cut Code. Se algum ficar vazio, o card dele some e os botões levam ao formulário.
+// Canais da CutCode. Se algum ficar vazio, o card dele some e os botões levam ao formulário.
 export const CONTACT = {
   /** só números, com DDI e DDD. ex.: "5511999999999" */
   whatsappNumber: "5592994215789",
@@ -25,7 +23,7 @@ export const CONTACT = {
 export const hasWhatsapp = () => Boolean(CONTACT.whatsappNumber);
 
 /** Link do WhatsApp com mensagem pronta; sem número configurado, cai no formulário de orçamento. */
-export function whatsappHref(message = "Olá! Vim pelo site da Cut Code e quero um orçamento.") {
+export function whatsappHref(message = "Olá! Vim pelo site da CutCode e quero um orçamento.") {
   if (!hasWhatsapp()) return "#orcamento";
   return `https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
@@ -105,40 +103,30 @@ export type Service = {
 
 export const SERVICES: Service[] = [
   {
-    title: "Landing page guiada",
+    title: "Landing Page Guiada",
     description:
-      "Site institucional que conduz o visitante até a ação, como agendar uma consulta. Modelo validado em clínicas reais e adaptado ao seu negócio.",
+      "Uma página construída em torno de um objetivo específico: conduzir o visitante até uma ação. Seja agendar uma consulta, solicitar um orçamento ou iniciar uma conversa pelo WhatsApp, a estrutura utiliza hierarquia visual, informações objetivas e chamadas para ação para tornar o caminho do visitante mais simples. É uma solução especialmente adequada para negócios com um serviço principal, campanhas específicas ou para quem deseja colocar uma oferta no ar de maneira rápida e direcionada.",
     tag: "Site",
     icon: LayoutTemplate,
   },
   {
-    title: "Site completo",
-    description: "Uma versão mais robusta, com mais páginas e conteúdo. Avulso ou dentro do pacote.",
+    title: "Site Institucional Completo",
+    description:
+      "Para marcas que precisam de mais espaço para apresentar quem são, o que oferecem e como podem ser encontradas. O site completo permite reunir serviços, equipe, informações institucionais, história, contato e outros conteúdos em uma estrutura mais ampla. A navegação é planejada para facilitar a compreensão da marca e proporcionar uma experiência digital mais completa.",
     tag: "Site",
     icon: PanelsTopLeft,
   },
   {
-    title: "4 vídeos de divulgação",
+    title: "Produção Audiovisual",
     description:
-      "Vídeos curtos gravados no celular, com edição e recursos audiovisuais de qualidade. Entrega em até 2 dias úteis.",
-    tag: "Vídeo",
+      "Da ideia à publicação, desenvolvemos conteúdos para Stories, Reels e outras plataformas digitais. O trabalho envolve planejamento, roteiro, direção de captação, gravação, edição e pós-produção. Os vídeos recebem tratamento de imagem, legendas, textos em tela, recursos sonoros e adequação ao formato das redes, sempre considerando o objetivo de comunicação da marca.",
+    tag: "Audiovisual",
     icon: Clapperboard,
   },
   {
-    title: "Convites interativos",
-    description: "Convites digitais para eventos, com navegação, confirmação de presença e a sua identidade.",
-    tag: "Site",
-    icon: PartyPopper,
-  },
-  {
-    title: "StoryMaker",
-    description: "Criação de stories para o seu Instagram: roteiro, edição e ritmo pensados para manter o perfil ativo.",
-    tag: "Vídeo",
-    icon: Aperture,
-  },
-  {
-    title: "Edição continuada",
-    description: "Serviço recorrente: você grava e a gente edita. Conteúdo com padrão constante, todo mês.",
+    title: "Edição Continuada",
+    description:
+      "Você grava. A CutCode transforma em conteúdo. Um serviço recorrente de edição para marcas que já produzem suas próprias gravações, mas precisam de constância, acabamento e agilidade na pós-produção. Você envia os materiais e nós cuidamos da edição, mantendo um padrão visual e narrativo consistente ao longo do mês. Uma forma mais prática de manter o conteúdo ativo sem incorporar toda a etapa de gravação à rotina.",
     tag: "Recorrente",
     icon: Repeat,
   },
@@ -161,22 +149,32 @@ export const PACKAGES: Package[] = [
     id: "digital",
     featured: true,
     badge: "Recomendado",
-    title: "Pacote digital completo",
+    title: "Pacote Digital Completo",
     description:
-      "Site + 4 vídeos curtos de divulgação. Sua presença digital inteira, pronta em poucos dias, com o mesmo cuidado estético do começo ao fim.",
-    items: ["Landing page guiada ou site completo", "4 vídeos curtos editados", "Prévia do site em até 1 semana após o questionário", "Vídeos em até 2 dias úteis após a gravação"],
-    whatsapp: "Olá! Vim pelo site e quero um orçamento do pacote digital completo (site + vídeos).",
-    highlight: { big: "+2", small: "vídeos grátis" },
+      "Uma solução para quem precisa estruturar sua comunicação digital e, ao mesmo tempo, criar conteúdo para divulgar o negócio. O pacote reúne uma landing page orientada ou um site institucional completo, além de quatro vídeos curtos para divulgação.",
+    items: [
+      "Landing page orientada ou site institucional completo",
+      "Quatro vídeos curtos para divulgação",
+      "Prévia do site em até uma semana após o briefing",
+      "Vídeos em até dois dias úteis após a captação",
+    ],
+    whatsapp: "Olá! Vim pelo site da CutCode e quero um orçamento do pacote digital completo.",
+    highlight: { big: "+2", small: "vídeos bônus" },
   },
   {
     id: "eventos",
     featured: false,
     badge: "Para eventos",
-    title: "Pacote de eventos",
+    title: "Pacote de Eventos",
     description:
-      "Convite interativo + cobertura do evento. Do convite que chega no celular dos convidados ao vídeo que guarda o dia.",
-    items: ["Convite digital interativo", "Confirmação de presença", "Cobertura do evento em vídeo", "Identidade visual do seu evento"],
-    whatsapp: "Olá! Vim pelo site e quero um orçamento do pacote de eventos (convite + cobertura).",
+      "Do convite ao registro, o objetivo é criar uma experiência que começa antes mesmo do evento. O pacote reúne convite digital interativo, página personalizada e produção de conteúdos audiovisuais para registrar e divulgar cada momento.",
+    items: [
+      "Convite digital interativo e página personalizada",
+      "Produção de conteúdos audiovisuais",
+      "Informações do evento e confirmação de presença",
+      "Personalização com a identidade da ocasião",
+    ],
+    whatsapp: "Olá! Vim pelo site da CutCode e quero um orçamento do pacote de eventos.",
     highlight: { big: "2 em 1", small: "convite + cobertura" },
   },
 ];
@@ -185,7 +183,7 @@ export const PACKAGES: Package[] = [
 export const FORM_SERVICES = [
   ...PACKAGES.map((p) => p.title),
   ...SERVICES.map((s) => s.title),
-  "Cobertura de evento",
+  "Outro",
   "Ainda não sei",
 ];
 

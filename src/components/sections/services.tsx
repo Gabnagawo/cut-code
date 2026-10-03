@@ -20,7 +20,7 @@ export function Services() {
             Tudo o que sua marca precisa para <span className="text-iris">ser vista</span> e escolhida.
           </>
         }
-        lead="Contrate cada serviço separadamente ou escolha um dos pacotes."
+        lead="Cada projeto parte da identidade, do público e dos objetivos da marca para transformar informação em uma experiência digital clara, estratégica e visualmente consistente."
       />
 
       <div className="space-y-4 sm:space-y-6">
@@ -133,12 +133,12 @@ export function Services() {
         ))}
       </div>
 
-      <div className="mt-4 grid gap-4 sm:mt-6 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+      <div className="mt-4 grid gap-4 sm:mt-6 sm:grid-cols-2 sm:gap-6 lg:grid-cols-2">
         {SERVICES.map((s, i) => (
-          <Reveal key={s.title} delay={(i % 3) * 90} className="h-full">
+          <Reveal key={s.title} delay={(i % 2) * 90} className="h-full">
             <GlowCard
               as="a"
-              {...quoteLinkProps(s.title, `Olá! Vim pelo site e quero um orçamento de: ${s.title}.`)}
+              {...quoteLinkProps(s.title, `Olá! Vim pelo site da CutCode e quero um orçamento de: ${s.title}.`)}
               className="block h-full"
               aria-label={`${s.title}: pedir orçamento`}
             >
