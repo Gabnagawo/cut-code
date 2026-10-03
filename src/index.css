@@ -75,8 +75,8 @@
 }
 
 @layer base {
-  /* scroll-padding: âncoras e foco do teclado não ficam atrás do header fixo (WCAG 2.4.11) */
-  html { scroll-behavior: smooth; scroll-padding-top: 6rem; -webkit-text-size-adjust: 100%; }
+  /* scroll-padding: âncoras e foco do teclado não ficam atrás do header fixo ou CTA móvel (WCAG 2.4.11) */
+  html { scroll-behavior: smooth; scroll-padding-top: 6rem; scroll-padding-bottom: 5rem; -webkit-text-size-adjust: 100%; }
   body {
     @apply bg-background text-foreground font-sans antialiased;
     overflow-x: hidden;
@@ -155,9 +155,9 @@
   color: #fff;
 }
 
-/* texto com película iridescente (tons escuros o bastante para contraste no fundo claro) */
+/* texto com película iridescente (tons escuros com contraste >= 4,5:1 em fundos claros) */
 @utility text-iris {
-  background: linear-gradient(100deg, #6d5bd0 0%, #2f9e90 30%, #c45a96 60%, #6d5bd0 100%);
+  background: linear-gradient(100deg, #5945be 0%, #136c62 30%, #a8387a 60%, #5945be 100%);
   background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;

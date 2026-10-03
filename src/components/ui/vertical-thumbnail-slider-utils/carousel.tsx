@@ -17,13 +17,19 @@ import { cn } from "@/lib/utils";
      </Carousel>
    ------------------------------------------------------------------ */
 
+export type ThumbnailItem = {
+  src: string;
+  alt?: string;
+  label?: string;
+};
+
 type CarouselContextValue = {
   mainRef: ReturnType<typeof useEmblaCarousel>[0];
   thumbsRef: ReturnType<typeof useEmblaCarousel>[0];
   mainApi: EmblaCarouselType | undefined;
   selectedIndex: number;
   scrollSnaps: number[];
-  thumbnails: string[];
+  thumbnails: ThumbnailItem[];
   axis: "x" | "y";
   scrollTo: (index: number) => void;
 };
@@ -50,11 +56,12 @@ type CarouselProps = {
 type SliderProps = React.HTMLAttributes<HTMLDivElement> & {
   thumbnailSrc?: string;
   thumbnailAlt?: string;
+  label?: string;
 };
 
-/** Lê os `thumbnailSrc` dos <Slider> dentro do <SliderContainer>. */
-function collectThumbnails(children: React.ReactNode): string[] {
-  const thumbs: string[] = [];
+/** Lê os dados de miniatura e rótulo dos <Slider> dentro do <SliderContainer>. */
+function collectThumbnails(children: React.ReactNode): ThumbnailItem[] {
+  const thumbs: ThumbnailItem[] = [];
   React.Children.forEach(children, (child) => {
     if (!React.isValidElement(child)) return;
     if (child.type === SliderContainer) {
@@ -62,7 +69,12 @@ function collectThumbnails(children: React.ReactNode): string[] {
         (child.props as { children?: React.ReactNode }).children,
         (slide) => {
           if (React.isValidElement(slide)) {
-            thumbs.push((slide.props as SliderProps).thumbnailSrc ?? "");
+            const p = slide.props as SliderProps;
+            thumbs.push({
+              src: p.thumbnailSrc ?? "",
+              alt: p.thumbnailAlt,
+              label: p.label,
+            });
           }
         },
       );
@@ -164,7 +176,7 @@ export function SliderContainer({ className, children }: { className?: string; c
   );
 }
 
-export function Slider({ className, children, thumbnailSrc: _src, thumbnailAlt: _alt, ...props }: SliderProps) {
+export function Slider({ className, children, thumbnailSrc: _src, thumbnailAlt: _alt, label: _label, ...props }: SliderProps) {
   return (
     <div
       role="group"
@@ -193,14 +205,15 @@ export function ThumbsSlider({ className, thumbsClassName, thumbsSliderClassName
   return (
     <div ref={thumbsRef} className={cn("shrink-0 overflow-hidden", className)}>
       <div className={cn("flex gap-2", axis === "y" ? "flex-col" : "flex-row", thumbsClassName)}>
-        {thumbnails.map((src, index) => {
+        {thumbnails.map((item, index) => {
           const active = index === selectedIndex;
+          const slideLabel = item.label || `Ir para o slide ${index + 1} de ${thumbnails.length}`;
           return (
             <button
               key={index}
               type="button"
               onClick={() => scrollTo(index)}
-              aria-label={`Ir para o slide ${index + 1}`}
+              aria-label={slideLabel}
               aria-current={active}
               className={cn(
                 "relative aspect-square w-full shrink-0 overflow-hidden rounded-md border-2 border-transparent bg-gradient-to-br from-white/15 to-white/[0.03] transition-all duration-300",
@@ -208,10 +221,10 @@ export function ThumbsSlider({ className, thumbsClassName, thumbsSliderClassName
                 thumbClassName,
               )}
             >
-              {src && (
+              {item.src && (
                 <img
-                  src={src}
-                  alt=""
+                  src={item.src}
+                  alt={item.alt || ""}
                   loading="lazy"
                   // se a imagem falhar, some e deixa o fundo do botão aparecer
                   onError={(e) => (e.currentTarget.style.visibility = "hidden")}
@@ -227,21 +240,25 @@ export function ThumbsSlider({ className, thumbsClassName, thumbsSliderClassName
 }
 
 export function SliderDotButton({ className, activeClassName }: { className?: string; activeClassName?: string }) {
-  const { scrollSnaps, selectedIndex, scrollTo, axis } = useVerticalCarousel();
+  const { scrollSnaps, thumbnails, selectedIndex, scrollTo, axis } = useVerticalCarousel();
   return (
     <div className={cn("flex gap-2", axis === "y" ? "flex-col" : "flex-row", className)}>
-      {scrollSnaps.map((_, index) => (
-        <button
-          key={index}
-          type="button"
-          onClick={() => scrollTo(index)}
-          aria-label={`Ir para o slide ${index + 1}`}
-          className={cn(
-            "h-2 w-2 rounded-full bg-white/30 transition-all duration-300",
-            index === selectedIndex && cn("bg-white", axis === "y" ? "h-6" : "w-6", activeClassName),
-          )}
-        />
-      ))}
+      {scrollSnaps.map((_, index) => {
+        const item = thumbnails[index];
+        const slideLabel = item?.label || `Ir para o slide ${index + 1} de ${scrollSnaps.length}`;
+        return (
+          <button
+            key={index}
+            type="button"
+            onClick={() => scrollTo(index)}
+            aria-label={slideLabel}
+            className={cn(
+              "h-2 w-2 rounded-full bg-white/30 transition-all duration-300",
+              index === selectedIndex && cn("bg-white", axis === "y" ? "h-6" : "w-6", activeClassName),
+            )}
+          />
+        );
+      })}
     </div>
   );
 }

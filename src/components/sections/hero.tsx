@@ -164,7 +164,13 @@ function HeroShowcase() {
         >
           <SliderContainer className="h-[440px] gap-3 sm:h-[540px]">
             {SHOWCASE.map((item, i) => (
-              <Slider key={item.niche} thumbnailSrc={item.thumb} className="h-full">
+              <Slider
+                key={item.niche}
+                thumbnailSrc={item.thumb}
+                thumbnailAlt={`Miniatura ${item.niche}`}
+                label={`Ver projeto para ${item.niche}: ${item.title}`}
+                className="h-full"
+              >
                 <ShowcaseSlide item={item} index={i} total={SHOWCASE.length} />
               </Slider>
             ))}

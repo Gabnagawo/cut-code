@@ -89,7 +89,13 @@ export function ClientShowcase() {
           >
             <SliderContainer className="h-[460px] gap-3 sm:h-[560px]">
               {client.materials.map((m, i) => (
-                <Slider key={m.title} thumbnailSrc={m.thumb} className="h-full">
+                <Slider
+                  key={m.title}
+                  thumbnailSrc={m.thumb}
+                  thumbnailAlt={`Miniatura ${m.kind}: ${m.title}`}
+                  label={`Ver ${m.kind.toLowerCase()}: ${m.title}`}
+                  className="h-full"
+                >
                   <MaterialSlide item={m} index={i} total={client.materials.length} />
                 </Slider>
               ))}

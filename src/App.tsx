@@ -1,3 +1,4 @@
+import { MobileFloatingCta } from "@/components/mobile-floating-cta";
 import { Contact, Footer } from "@/components/sections/contact";
 import { Faq } from "@/components/sections/faq";
 import { Hero } from "@/components/sections/hero";
@@ -30,6 +31,7 @@ export default function App() {
         <Faq />
         <Contact />
       </main>
+      <MobileFloatingCta />
       <Footer />
     </>
   );
