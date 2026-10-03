@@ -122,13 +122,19 @@ export function Carousel({ options, className, children, autoplay, onSelect, lab
     };
   }, [mainApi, handleSelect]);
 
-  // Autoplay leve, sem plugin
+  // Autoplay leve, sem plugin: faz no máximo 1 volta e para no 1º slide (WCAG 2.2.2)
+  const completedRef = React.useRef(false);
   React.useEffect(() => {
-    if (!mainApi || !autoplay || paused) return;
+    if (!mainApi || !autoplay || paused || completedRef.current) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const id = window.setInterval(() => {
-      if (mainApi.canScrollNext()) mainApi.scrollNext();
-      else mainApi.scrollTo(0);
+      if (mainApi.canScrollNext()) {
+        mainApi.scrollNext();
+      } else {
+        mainApi.scrollTo(0);
+        completedRef.current = true;
+        window.clearInterval(id);
+      }
     }, autoplay);
     return () => window.clearInterval(id);
   }, [mainApi, autoplay, paused]);
@@ -160,6 +166,8 @@ export function Carousel({ options, className, children, autoplay, onSelect, lab
         onPointerLeave={() => setPaused(false)}
         onFocus={() => setPaused(true)}
         onBlur={() => setPaused(false)}
+        onTouchStart={() => setPaused(true)}
+        onTouchEnd={() => setPaused(false)}
       >
         {children}
       </div>

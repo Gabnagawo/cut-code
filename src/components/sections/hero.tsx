@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ArrowDown, ArrowRight, Clock, Gift, Pause, Play, Zap } from "lucide-react";
+import { ArrowDown, ArrowRight, Clock, Gift, Play, Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { GlassBlob } from "@/components/ui/glass-blob";
@@ -9,7 +9,6 @@ import {
   SliderContainer,
   ThumbsSlider,
 } from "@/components/ui/vertical-thumbnail-slider-utils/carousel";
-import { RotatingWords } from "@/components/rotating-words";
 import { SafeImage } from "@/components/safe-image";
 import { HAS_PORTFOLIO, SHOWCASE, whatsappHref, type Showcase } from "@/data/content";
 import { linkProps } from "@/lib/link-props";
@@ -18,11 +17,13 @@ import { cn } from "@/lib/utils";
 const HEADLINE: { text: string; iris?: boolean; br?: boolean }[] = [
   { text: "Sua" },
   { text: "marca,", br: true },
-  { text: "cortada" },
-  { text: "e", br: true },
-  { text: "codificada", iris: true, br: true },
+  { text: "estruturada" },
   { text: "para" },
-  { text: "vender." },
+  { text: "ser" },
+  { text: "vista," },
+  { text: "compreendida" },
+  { text: "e" },
+  { text: "escolhida.", iris: true },
 ];
 
 export function Hero() {
@@ -44,16 +45,16 @@ export function Hero() {
             <ArrowRight aria-hidden className="size-3.5 transition-transform duration-150 group-hover:translate-x-0.5" />
           </a>
 
-          <h1 className="font-display mt-8 text-[clamp(3.4rem,min(8vw,11.5svh),7.2rem)] leading-[0.9] text-graphite">
+          <h1 className="font-display mt-8 text-[clamp(2.3rem,min(4.8vw,6.2svh),4.2rem)] leading-[0.98] text-graphite">
             {HEADLINE.map((w, i) => (
               <React.Fragment key={i}>
                 <span
                   className={cn("inline-block animate-blur-in pr-[0.2em]", w.iris && "text-iris")}
-                  style={{ animationDelay: `${80 + i * 50}ms` }}
+                  style={{ animationDelay: `${80 + i * 45}ms` }}
                 >
                   {w.text}
                 </span>
-                {w.br && <br />}
+                {w.br && <br className="hidden sm:inline" />}
               </React.Fragment>
             ))}
           </h1>
@@ -61,14 +62,10 @@ export function Hero() {
           <span className="rule mt-9 animate-blur-in" style={{ animationDelay: "420ms" }} />
 
           <p
-            className="mt-7 max-w-lg text-lg leading-relaxed text-mist animate-blur-in sm:text-xl"
+            className="mt-7 max-w-xl text-lg leading-relaxed text-mist animate-blur-in sm:text-xl"
             style={{ animationDelay: "460ms" }}
           >
-            Do primeiro clique ao cliente na porta: sites guiados e vídeos curtos de divulgação para{" "}
-            <RotatingWords
-              words={["clínicas", "restaurantes", "lojas", "empresas", "eventos"]}
-              className="font-heading font-semibold text-graphite"
-            />
+            Do primeiro clique ao contato com o seu público: a CutCode cria sites, landing pages e conteúdos audiovisuais pensados para comunicar, conectar e converter.
           </p>
 
           <div className="mt-10 flex flex-col gap-3 animate-blur-in min-[480px]:flex-row min-[480px]:flex-wrap" style={{ animationDelay: "520ms" }}>
@@ -105,9 +102,9 @@ export function Hero() {
             style={{ animationDelay: "580ms" }}
           >
             {[
-              { icon: Clock, strong: "1 semana", text: "prévia após o questionário" },
-              { icon: Zap, strong: "2 dias úteis", text: "vídeos após a gravação" },
-              { icon: Gift, strong: "+2 vídeos", text: "grátis no pacote" },
+              { icon: Clock, strong: "1 semana", text: "prévia após o briefing" },
+              { icon: Zap, strong: "2 dias úteis", text: "vídeos após a captação" },
+              { icon: Gift, strong: "+2 vídeos", text: "bônus no pacote" },
             ].map(({ icon: Icon, strong, text }) => (
               <li key={strong} className="flex items-center gap-3">
                 <span className="grid size-10 shrink-0 place-items-center rounded-full border border-hairline bg-white/70 text-graphite">
@@ -142,8 +139,6 @@ function HeroBackground() {
 }
 
 function HeroShowcase() {
-  // WCAG 2.2.2: o que se move sozinho precisa de um jeito de pausar
-  const [playing, setPlaying] = React.useState(true);
   return (
     <div className="relative mx-auto w-full max-w-[540px] animate-blur-in" style={{ animationDelay: "200ms" }}>
       {/* objeto de vidro atrás da vitrine, vazando para fora */}
@@ -158,7 +153,7 @@ function HeroShowcase() {
             // no toque, o arrasto vertical fica com a rolagem da página (navega pelas miniaturas)
             breakpoints: { "(hover: none)": { watchDrag: false } },
           }}
-          autoplay={playing ? 7000 : undefined}
+          autoplay={7000}
           label="Vitrine de projetos por nicho"
           className="flex gap-2.5 sm:gap-3"
         >
@@ -183,18 +178,7 @@ function HeroShowcase() {
           />
         </Carousel>
       </div>
-      <div className="mt-2 flex items-center justify-center gap-2 text-xs text-mist">
-        <p>Imagens ilustrativas de cada nicho</p>
-        <button
-          type="button"
-          onClick={() => setPlaying((v) => !v)}
-          className="inline-flex min-h-11 items-center gap-1.5 rounded-full px-3 font-medium text-graphite transition-colors duration-150 hover:bg-graphite/5 motion-reduce:hidden"
-        >
-          {playing ? <Pause aria-hidden className="size-3.5" /> : <Play aria-hidden className="size-3.5" />}
-          {playing ? "Pausar" : "Continuar"}
-          <span className="sr-only"> a troca automática da vitrine</span>
-        </button>
-      </div>
+      <p className="mt-2 text-center text-xs text-mist">Imagens ilustrativas de cada nicho</p>
     </div>
   );
 }

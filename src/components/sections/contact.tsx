@@ -77,7 +77,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-8 px-4 pt-12 pb-10 text-sm sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <Brand />
-          <p className="mt-4 max-w-xs text-mist">Sites, vídeos de divulgação e convites interativos para clínicas, restaurantes, lojas, empresas e eventos.</p>
+          <p className="mt-4 max-w-xs text-mist">Sites, landing pages, produção audiovisual e cobertura completa de eventos para marcas que querem comunicação e conexão com o público.</p>
         </div>
         <nav aria-label="Rodapé">
           <p className="mb-3 text-xs font-medium tracking-[0.2em] text-mist uppercase">Site</p>
@@ -106,7 +106,7 @@ export function Footer() {
       </div>
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 border-t border-hairline px-4 py-6 text-sm text-mist sm:px-6">
         <p className="flex flex-wrap items-center gap-x-2">
-          © {new Date().getFullYear()} Cut Code ·
+          © {new Date().getFullYear()} CutCode ·
           <a href="privacidade" className="inline-flex min-h-11 items-center text-graphite underline-offset-4 hover:underline md:min-h-0">
             Privacidade
           </a>
