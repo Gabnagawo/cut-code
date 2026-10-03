@@ -145,6 +145,8 @@ export const SERVICES: Service[] = [
 ];
 
 export type Package = {
+  id: string;
+  featured?: boolean;
   badge: string;
   title: string;
   description: string;
@@ -156,6 +158,8 @@ export type Package = {
 
 export const PACKAGES: Package[] = [
   {
+    id: "digital",
+    featured: true,
     badge: "Recomendado",
     title: "Pacote digital completo",
     description:
@@ -165,6 +169,8 @@ export const PACKAGES: Package[] = [
     highlight: { big: "+2", small: "vídeos grátis" },
   },
   {
+    id: "eventos",
+    featured: false,
     badge: "Para eventos",
     title: "Pacote de eventos",
     description:

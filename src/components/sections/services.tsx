@@ -8,7 +8,8 @@ import { PACKAGES, SERVICES } from "@/data/content";
 import { quoteLinkProps } from "@/lib/link-props";
 
 export function Services() {
-  const [digitalPkg, eventPkg] = PACKAGES;
+  const digitalPkg = PACKAGES.find((p) => p.featured || p.id === "digital") ?? PACKAGES[0];
+  const compactPackages = PACKAGES.filter((p) => p !== digitalPkg);
 
   return (
     <section id="servicos" className="mx-auto max-w-7xl px-4 pt-16 sm:px-6 sm:pt-24">
@@ -27,12 +28,13 @@ export function Services() {
         {digitalPkg && (
           <Reveal>
             <GlowCard
+              variant="dark"
               tilt={2}
               className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[#1c1c20] text-paper shadow-[0_28px_64px_-20px_rgb(20_20_25/0.5)]"
             >
               <div className="grid items-center gap-8 p-6 sm:p-12 lg:grid-cols-[1.4fr_1fr]">
                 <div>
-                  <span className="inline-block rounded-full bg-white/15 px-3.5 py-1.5 text-[0.7rem] font-medium tracking-[0.18em] text-paper uppercase backdrop-blur-xs">
+                  <span className="inline-block rounded-full bg-white/15 px-3.5 py-1.5 text-[0.7rem] font-medium tracking-[0.18em] text-paper uppercase">
                     {digitalPkg.badge}
                   </span>
                   <h3 className="font-display mt-6 text-[clamp(2.3rem,3.8vw,3.4rem)] leading-none text-paper">
@@ -55,15 +57,18 @@ export function Services() {
                     variant="cta-inverse"
                     className="group/btn mt-8 w-full sm:w-auto"
                   >
-                    <a {...quoteLinkProps(digitalPkg.title, digitalPkg.whatsapp)}>
-                      Pedir orçamento do pacote
+                    <a
+                      {...quoteLinkProps(digitalPkg.title, digitalPkg.whatsapp)}
+                      aria-label={`Pedir orçamento: ${digitalPkg.title}`}
+                    >
+                      Pedir pacote completo
                       <ArrowRight aria-hidden className="ml-2 size-4 transition-transform duration-150 group-hover/btn:translate-x-1" />
                     </a>
                   </Button>
                 </div>
 
                 <div className="flex flex-col items-center gap-4">
-                  <div className="relative grid size-44 place-items-center rounded-full border border-white/20 bg-gradient-to-br from-white/15 to-white/5 p-4 text-center shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] backdrop-blur-md transition-transform duration-500 ease-glass group-hover/card:scale-105 sm:size-48">
+                  <div className="relative grid size-44 place-items-center rounded-full border border-white/20 bg-gradient-to-br from-white/15 to-white/5 p-4 text-center shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] transition-transform duration-300 ease-glass group-hover/card:scale-105 sm:size-48">
                     <div className="text-paper">
                       <span className="font-display block text-5xl leading-none sm:text-6xl">{digitalPkg.highlight.big}</span>
                       <span className="mt-2 block text-xs font-medium tracking-[0.2em] text-paper/80 uppercase">{digitalPkg.highlight.small}</span>
@@ -76,23 +81,23 @@ export function Services() {
           </Reveal>
         )}
 
-        {/* Pacote secundário: Eventos (compacto) */}
-        {eventPkg && (
-          <Reveal delay={90}>
+        {/* Pacotes secundários: compacto */}
+        {compactPackages.map((pkg, idx) => (
+          <Reveal key={pkg.id || pkg.title} delay={90 * (idx + 1)}>
             <GlowCard className="glass rounded-[24px] border border-hairline bg-white/60 p-6 sm:p-8">
               <div className="grid items-center gap-6 lg:grid-cols-[1.5fr_auto_auto]">
                 <div>
                   <div className="flex flex-wrap items-center gap-3">
                     <span className="rounded-full border border-hairline bg-white/80 px-3 py-1 text-[0.7rem] font-medium tracking-[0.16em] text-mist uppercase">
-                      {eventPkg.badge}
+                      {pkg.badge}
                     </span>
                     <h3 className="font-heading text-2xl text-graphite sm:text-[1.75rem]">
-                      {eventPkg.title}
+                      {pkg.title}
                     </h3>
                   </div>
-                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-mist">{eventPkg.description}</p>
+                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-mist">{pkg.description}</p>
                   <ul className="mt-4 grid gap-2.5 text-sm text-graphite sm:grid-cols-2">
-                    {eventPkg.items.map((item) => (
+                    {pkg.items.map((item) => (
                       <li key={item} className="flex items-start gap-2">
                         <span className="mt-0.5 grid size-4 shrink-0 place-items-center rounded-full border border-graphite/25 text-graphite">
                           <Check aria-hidden className="size-2.5" strokeWidth={3} />
@@ -103,11 +108,11 @@ export function Services() {
                   </ul>
                 </div>
 
-                <div className="flex flex-col items-center justify-center gap-1.5 border-t border-hairline pt-4 sm:border-t-0 sm:pt-0 lg:border-l lg:pl-8">
+                <div className="flex flex-col items-center justify-center gap-1.5 border-t border-hairline pt-4 lg:border-t-0 lg:pt-0 lg:border-l lg:pl-8">
                   <div className="grid size-28 place-items-center rounded-full border border-hairline bg-white/90 p-2 text-center shadow-xs">
                     <div className="px-2 text-graphite">
-                      <span className="font-heading block text-xl leading-tight font-bold whitespace-nowrap">{eventPkg.highlight.big}</span>
-                      <span className="mt-0.5 block text-[0.62rem] font-medium tracking-[0.14em] text-mist uppercase">{eventPkg.highlight.small}</span>
+                      <span className="font-heading block text-xl leading-tight font-bold whitespace-nowrap">{pkg.highlight.big}</span>
+                      <span className="mt-0.5 block text-[0.62rem] font-medium tracking-[0.14em] text-mist uppercase">{pkg.highlight.small}</span>
                     </div>
                   </div>
                   <p className="text-xs tracking-wider text-mist">Sob consulta</p>
@@ -119,8 +124,11 @@ export function Services() {
                     variant="cta"
                     className="w-full sm:w-auto"
                   >
-                    <a {...quoteLinkProps(eventPkg.title, eventPkg.whatsapp)}>
-                      Pedir pacote
+                    <a
+                      {...quoteLinkProps(pkg.title, pkg.whatsapp)}
+                      aria-label={`Pedir orçamento: ${pkg.title}`}
+                    >
+                      Pedir {pkg.title.toLowerCase()}
                       <ArrowRight aria-hidden className="ml-2 size-4" />
                     </a>
                   </Button>
@@ -128,7 +136,7 @@ export function Services() {
               </div>
             </GlowCard>
           </Reveal>
-        )}
+        ))}
       </div>
 
       <div className="mt-4 grid gap-4 sm:mt-6 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
