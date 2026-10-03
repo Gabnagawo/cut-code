@@ -37,7 +37,7 @@ export function Faq() {
                     <Plus aria-hidden className="size-4" />
                   </span>
                 </summary>
-                <p className="max-w-[66ch] pb-6 text-mist">{a}</p>
+                <p className="max-w-[66ch] pb-6 text-mist whitespace-pre-line">{a}</p>
               </details>
             </li>
           ))}
@@ -63,7 +63,7 @@ function FaqCta({ className }: { className?: string }) {
       variant="cta"
       className={cn("group/btn", className)}
     >
-      <a {...linkProps(whatsappHref("Olá! Vim pelo site da Cut Code e tenho uma dúvida."))}>
+      <a {...linkProps(whatsappHref("Olá! Vim pelo site da CutCode e tenho uma dúvida."))}>
         {hasWhatsapp() ? "Tirar dúvida no WhatsApp" : "Enviar minha dúvida"}
         <ArrowRight aria-hidden className="ml-2 size-4 transition-transform duration-150 group-hover/btn:translate-x-1" />
       </a>

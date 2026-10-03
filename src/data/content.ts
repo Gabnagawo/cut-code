@@ -311,15 +311,15 @@ export const HAS_PORTFOLIO = CLIENTS.length > 0;
    ------------------------------------------------------------------ */
 export const FAQ: { q: string; a: string }[] = [
   {
+    q: "Qual a diferença entre landing page e site completo?",
+    a: "A landing page é uma página única construída para conduzir o visitante a uma ação específica, como agendar uma consulta, solicitar um orçamento ou entrar em contato pelo WhatsApp. É indicada para quem possui um serviço principal ou precisa de uma comunicação mais direta.\n\nJá o site completo possui múltiplas páginas e permite apresentar a marca de maneira mais ampla, reunindo serviços, equipe, informações institucionais, contato e outros conteúdos.",
+  },
+  {
+    q: "Posso contratar apenas um serviço?",
+    a: "Sim. Todos os serviços podem ser contratados individualmente. Os pacotes reúnem soluções que funcionam de forma integrada e oferecem condições e bônus específicos para a contratação conjunta.",
+  },
+  {
     q: "Em quanto tempo fica pronto?",
-    a: "A prévia do site chega em até 1 semana depois do questionário. Os vídeos são entregues em até 2 dias úteis depois da gravação.",
-  },
-  {
-    q: "Qual a diferença entre landing page guiada e site completo?",
-    a: "A landing page guiada é uma página única com um objetivo só: levar o visitante a agir, como agendar uma consulta ou chamar no WhatsApp. É ideal para quem quer resultado rápido e tem um serviço principal. O site completo tem várias páginas (serviços, equipe, sobre, contato) e serve para quem precisa apresentar mais coisas e passar mais credibilidade. Na dúvida, a gente indica o melhor formato no orçamento.",
-  },
-  {
-    q: "Posso contratar só um serviço?",
-    a: "Pode. Cada serviço pode ser contratado separado. O pacote digital completo junta site e 4 vídeos e ainda vem com 2 vídeos grátis. O pacote de eventos junta o convite interativo e a cobertura do evento.",
+    a: "A prévia do site ou da landing page é apresentada em até uma semana após a conclusão do briefing. Os vídeos são entregues em até dois dias úteis após a captação.",
   },
 ];
