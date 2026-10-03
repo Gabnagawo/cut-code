@@ -151,7 +151,8 @@ void main() {
 `;
 
 function compile(gl: WebGLRenderingContext, type: number, src: string) {
-  const s = gl.createShader(type)!;
+  const s = gl.createShader(type);
+  if (!s) return null;
   gl.shaderSource(s, src);
   gl.compileShader(s);
   if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
@@ -169,8 +170,18 @@ export function GlassBlob({ className, shape = "blob", speed = 1, seed = 0, inte
   React.useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
+    let raf = 0;
+    const onContextLost = (e: Event) => {
+      e.preventDefault();
+      cancelAnimationFrame(raf);
+      setFailed(true);
+    };
+    canvas.addEventListener("webglcontextlost", onContextLost);
+
     const gl = canvas.getContext("webgl", { premultipliedAlpha: true, alpha: true, antialias: false });
     if (!gl || gl.isContextLost()) {
+      canvas.removeEventListener("webglcontextlost", onContextLost);
       setFailed(true);
       return;
     }
@@ -180,6 +191,7 @@ export function GlassBlob({ className, shape = "blob", speed = 1, seed = 0, inte
     if (!vs || !fs) {
       if (vs) gl.deleteShader(vs);
       if (fs) gl.deleteShader(fs);
+      canvas.removeEventListener("webglcontextlost", onContextLost);
       setFailed(true);
       return;
     }
@@ -187,6 +199,7 @@ export function GlassBlob({ className, shape = "blob", speed = 1, seed = 0, inte
     if (!prog) {
       gl.deleteShader(vs);
       gl.deleteShader(fs);
+      canvas.removeEventListener("webglcontextlost", onContextLost);
       setFailed(true);
       return;
     }
@@ -198,16 +211,21 @@ export function GlassBlob({ className, shape = "blob", speed = 1, seed = 0, inte
       gl.deleteProgram(prog);
       gl.deleteShader(vs);
       gl.deleteShader(fs);
+      canvas.removeEventListener("webglcontextlost", onContextLost);
       setFailed(true);
       return;
     }
+    // Desvincula e libera os shaders após o link bem-sucedido
+    gl.detachShader(prog, vs);
+    gl.detachShader(prog, fs);
+    gl.deleteShader(vs);
+    gl.deleteShader(fs);
     gl.useProgram(prog);
 
     const buf = gl.createBuffer();
     if (!buf) {
       gl.deleteProgram(prog);
-      gl.deleteShader(vs);
-      gl.deleteShader(fs);
+      canvas.removeEventListener("webglcontextlost", onContextLost);
       setFailed(true);
       return;
     }
@@ -228,7 +246,6 @@ export function GlassBlob({ className, shape = "blob", speed = 1, seed = 0, inte
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
-    let raf = 0;
     let visible = true;
     let time = seed * 3;
     let last = performance.now();
@@ -296,14 +313,13 @@ export function GlassBlob({ className, shape = "blob", speed = 1, seed = 0, inte
     window.addEventListener("pointermove", onMove, { passive: true });
 
     return () => {
+      canvas.removeEventListener("webglcontextlost", onContextLost);
       cancelAnimationFrame(raf);
       ro.disconnect();
       io.disconnect();
       window.removeEventListener("pointermove", onMove);
       gl.deleteBuffer(buf);
       gl.deleteProgram(prog);
-      gl.deleteShader(vs);
-      gl.deleteShader(fs);
     };
   }, [shape, speed, seed, interactive]);
 

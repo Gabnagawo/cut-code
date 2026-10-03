@@ -197,7 +197,7 @@ export type Step = {
   title: string;
   text: string;
   highlight?: string;
-  icon?: LucideIcon;
+  icon: LucideIcon;
 };
 
 export const STEPS: Step[] = [
