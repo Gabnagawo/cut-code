@@ -70,11 +70,12 @@ export function MobileFloatingCta() {
   return (
     <aside
       aria-label="Ação rápida de contato"
+      aria-hidden={!visible}
       className={cn(
-        "fixed right-4 z-40 md:hidden transition-all duration-300 ease-[var(--ease-standard)] motion-reduce:transition-none",
+        "fixed right-4 z-40 md:hidden transition-[opacity,translate,visibility] duration-300 ease-[var(--ease-standard)] motion-reduce:transition-none",
         visible
-          ? "translate-y-0 opacity-100 pointer-events-auto"
-          : "translate-y-4 opacity-0 pointer-events-none"
+          ? "visible translate-y-0 opacity-100 pointer-events-auto"
+          : "invisible translate-y-4 opacity-0 pointer-events-none"
       )}
       style={{ bottom: "calc(1rem + env(safe-area-inset-bottom, 0px))" }}
     >
@@ -84,7 +85,7 @@ export function MobileFloatingCta() {
         className="group flex min-h-11 items-center gap-2.5 rounded-full border border-white/20 bg-graphite/95 px-4 py-2.5 text-sm font-medium text-paper shadow-[0_12px_32px_-8px_rgb(30_30_30/0.6)] backdrop-blur-md transition-transform duration-200 active:scale-95"
       >
         <span className="relative flex size-2">
-          <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+          <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-75 motion-reduce:animate-none" />
           <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
         </span>
         <WhatsAppIcon aria-hidden className="size-4 shrink-0 text-emerald-400" />
