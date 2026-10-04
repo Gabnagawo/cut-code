@@ -155,7 +155,12 @@ export function Services() {
                 <h3 className="font-heading text-[1.75rem] leading-[1.1] text-graphite transition-transform duration-300 ease-glass group-hover/card:translate-x-1">
                   {s.title}
                 </h3>
-                <p className="mt-3 flex-1 text-base leading-relaxed text-mist transition-colors duration-300 group-hover/card:text-graphite/80">
+                {s.lead && (
+                  <p className="mt-3 text-base font-semibold leading-snug text-graphite">
+                    {s.lead}
+                  </p>
+                )}
+                <p className="mt-3 flex-1 text-base leading-relaxed text-mist whitespace-pre-line transition-colors duration-300 group-hover/card:text-graphite/80">
                   {s.description}
                 </p>
 
