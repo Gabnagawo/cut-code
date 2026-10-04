@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import { WhatsAppIcon } from "@/components/brand-icons";
 import { hasWhatsapp, whatsappHref } from "@/data/content";
 import { linkProps } from "@/lib/link-props";
 import { cn } from "@/lib/utils";
@@ -8,7 +7,7 @@ import { cn } from "@/lib/utils";
 /**
  * CTA móvel flutuante discreto:
  * - Aparece após a rolagem ultrapassar o hero.
- * - Oculta-se ao entrar na seção de contato para não cobrir o formulário ou botões.
+ * - Oculta-se nas seções de serviços/pacotes e contato para não cobrir botões ou formulário.
  * - Respeita a safe-area inferior em dispositivos móveis (ex.: iPhones).
  * - Cumpre WCAG AA (alvo >= 44px, foco visível, contraste 12:1).
  */
@@ -17,6 +16,7 @@ export function MobileFloatingCta() {
 
   React.useEffect(() => {
     const hero = document.getElementById("top");
+    const services = document.getElementById("servicos");
     const contact = document.getElementById("contato");
 
     if (!hero) {
@@ -31,10 +31,11 @@ export function MobileFloatingCta() {
     }
 
     let heroPassed = false;
+    let inServices = false;
     let inContact = false;
 
     const update = () => {
-      setVisible(heroPassed && !inContact);
+      setVisible(heroPassed && !inServices && !inContact);
     };
 
     const heroObserver = new IntersectionObserver(
@@ -45,6 +46,18 @@ export function MobileFloatingCta() {
       { threshold: 0.1 }
     );
     heroObserver.observe(hero);
+
+    let servicesObserver: IntersectionObserver | null = null;
+    if (services) {
+      servicesObserver = new IntersectionObserver(
+        ([entry]) => {
+          inServices = entry.isIntersecting;
+          update();
+        },
+        { threshold: 0.1 }
+      );
+      servicesObserver.observe(services);
+    }
 
     let contactObserver: IntersectionObserver | null = null;
     if (contact) {
@@ -60,6 +73,7 @@ export function MobileFloatingCta() {
 
     return () => {
       heroObserver.disconnect();
+      servicesObserver?.disconnect();
       contactObserver?.disconnect();
     };
   }, []);
@@ -88,7 +102,7 @@ export function MobileFloatingCta() {
           <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-75 motion-reduce:animate-none" />
           <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
         </span>
-        <WhatsAppIcon aria-hidden className="size-4 shrink-0 text-emerald-400" />
+        <img src="assets/icons/whatsapp.svg" alt="" aria-hidden="true" className="size-4 shrink-0" />
         <span>Pedir orçamento</span>
       </a>
     </aside>

@@ -1,4 +1,4 @@
-import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { GlowCard } from "@/components/ui/glow-card";
@@ -140,15 +140,12 @@ export function Services() {
               as="a"
               {...quoteLinkProps(s.title, `Olá! Vim pelo site da CutCode e quero um orçamento de: ${s.title}.`)}
               className="block h-full"
-              aria-label={`${s.title}: pedir orçamento`}
+              aria-label={s.title}
             >
               <div className="flex h-full min-h-[320px] flex-col p-6 sm:p-8">
-                <div className="mb-8 flex items-start justify-between">
+                <div className="mb-8">
                   <span className="grid size-14 place-items-center rounded-2xl border border-hairline bg-white/70 text-graphite shadow-[0_1px_0_#fff_inset] transition-all duration-300 ease-glass group-hover/card:-rotate-6 group-hover/card:scale-110 group-hover/card:border-transparent group-hover/card:bg-graphite group-hover/card:text-paper group-hover/card:shadow-[0_14px_30px_-10px_rgb(30_30_30/0.6)]">
                     <s.icon aria-hidden className="size-6" strokeWidth={1.5} />
-                  </span>
-                  <span aria-hidden className="font-display text-4xl text-graphite/10 transition-colors duration-300 group-hover/card:text-graphite/60">
-                    {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
 
@@ -160,21 +157,9 @@ export function Services() {
                     {s.lead}
                   </p>
                 )}
-                <p className="mt-3 flex-1 text-base leading-relaxed text-mist whitespace-pre-line transition-colors duration-300 group-hover/card:text-graphite/80">
+                <p className="mt-3 text-base leading-relaxed text-mist whitespace-pre-line transition-colors duration-300 group-hover/card:text-graphite/80">
                   {s.description}
                 </p>
-
-                <div className="mt-8 flex items-center justify-between">
-                  <span className="rounded-full border border-hairline px-3 py-1 text-[0.7rem] font-medium tracking-[0.14em] text-mist uppercase transition-colors duration-300 group-hover/card:border-graphite/30 group-hover/card:text-graphite">
-                    {s.tag}
-                  </span>
-                  <span className="flex items-center gap-2 text-sm font-medium text-graphite">
-                    Pedir orçamento
-                    <span className="grid size-10 place-items-center rounded-full border border-graphite/15 transition-all duration-300 ease-glass group-hover/card:rotate-45 group-hover/card:border-transparent group-hover/card:bg-graphite group-hover/card:text-paper">
-                      <ArrowUpRight aria-hidden className="size-4" />
-                    </span>
-                  </span>
-                </div>
               </div>
             </GlowCard>
           </Reveal>
