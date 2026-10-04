@@ -20,8 +20,8 @@ export function Niches() {
         onClick={() => setPaused((v) => !v)}
         className="group block w-full border-0 bg-transparent p-0 text-left cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-graphite"
       >
-        <div className="[mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
-          <div
+        <span aria-hidden="true" className="block [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
+          <span
             className={cn(
               "flex w-max items-center gap-9 animate-marquee [animation-iteration-count:1] [animation-fill-mode:forwards] hover:[animation-play-state:paused] group-hover:[animation-play-state:paused] group-focus-visible:[animation-play-state:paused] motion-reduce:animate-none",
               paused && "[animation-play-state:paused]",
@@ -35,8 +35,8 @@ export function Niches() {
                 <span className="size-2 rounded-full bg-gradient-to-br from-iris-aqua via-iris-lilac to-iris-pink" />
               </span>
             ))}
-          </div>
-        </div>
+          </span>
+        </span>
       </button>
     </section>
   );
