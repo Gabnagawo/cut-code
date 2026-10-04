@@ -17,7 +17,7 @@ export function Brand({ className }: { className?: string }) {
     <a href="#top" className={cn("font-heading inline-flex shrink-0 items-center gap-2.5 text-[1.2rem] whitespace-nowrap text-graphite", className)}>
       <span
         aria-hidden="true"
-        className="inline-block h-[30px] w-6 shrink-0 bg-current [mask:url(assets/logo/cutcode-simbolo.svg)_center/contain_no-repeat] [-webkit-mask:url(assets/logo/cutcode-simbolo.svg)_center/contain_no-repeat]"
+        className="inline-block h-[30px] w-6 shrink-0 bg-current [mask:url(/assets/logo/cutcode-simbolo.svg)_center/contain_no-repeat] [-webkit-mask:url(/assets/logo/cutcode-simbolo.svg)_center/contain_no-repeat]"
       />
       CutCode
     </a>
