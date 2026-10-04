@@ -49,12 +49,14 @@ export function Hero() {
             {HEADLINE.map((w, i) => (
               <React.Fragment key={i}>
                 <span
-                  className={cn("inline-block animate-blur-in pr-[0.2em]", w.iris && "text-iris")}
+                  className={cn("inline-block animate-blur-in", w.iris && "text-iris")}
                   style={{ animationDelay: `${80 + i * 45}ms` }}
                 >
                   {w.text}
                 </span>
                 {w.br && <br className="hidden sm:inline" />}
+                {w.br && <span className="sm:hidden">{" "}</span>}
+                {!w.br && i < HEADLINE.length - 1 && " "}
               </React.Fragment>
             ))}
           </h1>

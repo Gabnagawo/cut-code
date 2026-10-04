@@ -26,7 +26,7 @@ export function Contact() {
           <Reveal>
             <p className="mb-5 text-xs font-medium tracking-[0.28em] text-mist uppercase">Contato</p>
             <h2 className="font-display text-[clamp(3.2rem,7vw,6.2rem)] leading-[0.95] text-graphite">
-              Vamos
+              Vamos{" "}
               <br />
               <span className="text-iris">conversar?</span>
             </h2>
