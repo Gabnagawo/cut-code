@@ -15,7 +15,7 @@ export const NAV_LINKS = [
 export function Brand({ className }: { className?: string }) {
   return (
     <a href="#top" className={cn("font-heading inline-flex shrink-0 items-center gap-2.5 text-[1.2rem] whitespace-nowrap text-graphite", className)}>
-      <img src="assets/logo-mark-dark.png" alt="" width={20} height={25} className="h-auto w-5" />
+      <img src="assets/logo/cutcode-grafite.svg" alt="" width={36} height={36} className="size-9" />
       CutCode
     </a>
   );

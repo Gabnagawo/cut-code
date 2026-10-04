@@ -4,7 +4,7 @@ import { GlassBlob } from "@/components/ui/glass-blob";
 import { InstagramIcon, WhatsAppIcon } from "@/components/brand-icons";
 import { Reveal } from "@/components/reveal";
 import { ContactForm } from "@/components/sections/contact-form";
-import { Brand, NAV_LINKS } from "@/components/sections/nav";
+import { NAV_LINKS } from "@/components/sections/nav";
 import { CONTACT, emailHref, hasWhatsapp, whatsappHref } from "@/data/content";
 import { linkProps } from "@/lib/link-props";
 
@@ -84,7 +84,16 @@ export function Footer() {
     <footer className="mt-16 border-t border-hairline sm:mt-24">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 pt-12 pb-10 text-sm sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <Brand />
+          <a href="#top" className="inline-block">
+            <img
+              src="assets/logo/cutcode-grafite-texto.svg"
+              alt="CutCode"
+              width={96}
+              height={96}
+              loading="lazy"
+              className="h-auto w-24"
+            />
+          </a>
           <p className="mt-4 max-w-xs text-mist">Sites, landing pages, produção audiovisual e cobertura completa de eventos para marcas que querem comunicação e conexão com o público.</p>
         </div>
         <nav aria-label="Rodapé">
