@@ -15,15 +15,10 @@ import { linkProps } from "@/lib/link-props";
 import { cn } from "@/lib/utils";
 
 const HEADLINE: { text: string; iris?: boolean; br?: boolean }[] = [
-  { text: "Sua" },
-  { text: "marca,", br: true },
-  { text: "estruturada" },
-  { text: "para" },
-  { text: "ser" },
-  { text: "vista," },
-  { text: "compreendida" },
-  { text: "e" },
-  { text: "escolhida.", iris: true },
+  { text: "Do" },
+  { text: "corte", br: true },
+  { text: "ao" },
+  { text: "código.", iris: true },
 ];
 
 export function Hero() {
@@ -50,7 +45,7 @@ export function Hero() {
               <React.Fragment key={i}>
                 <span
                   className={cn("inline-block animate-blur-in", w.iris && "text-iris")}
-                  style={{ animationDelay: `${80 + i * 45}ms` }}
+                  style={{ animationDelay: `${80 + i * 50}ms` }}
                 >
                   {w.text}
                 </span>
@@ -61,24 +56,22 @@ export function Hero() {
             ))}
           </h1>
 
-          <span className="rule mt-9 animate-blur-in" style={{ animationDelay: "420ms" }} />
-
           <p
-            className="mt-7 max-w-xl text-lg leading-relaxed text-mist animate-blur-in sm:text-xl"
-            style={{ animationDelay: "460ms" }}
+            className="mt-6 max-w-xl text-lg leading-relaxed text-mist animate-blur-in sm:text-xl"
+            style={{ animationDelay: "280ms" }}
           >
-            Do primeiro clique ao contato com o seu público: a CutCode cria sites, landing pages e conteúdos audiovisuais pensados para comunicar, conectar e converter.
+            Vídeos para as redes e sites que levam seu cliente direto ao WhatsApp.
           </p>
 
-          <div className="mt-10 flex flex-col gap-3 animate-blur-in min-[480px]:flex-row min-[480px]:flex-wrap" style={{ animationDelay: "520ms" }}>
+          <div className="mt-10 flex flex-col gap-3 animate-blur-in min-[480px]:flex-row min-[480px]:flex-wrap" style={{ animationDelay: "360ms" }}>
             <Button
               asChild
               variant="cta"
-              className="group"
+              className="group gap-2.5"
             >
               <a {...linkProps(whatsappHref())}>
+                <img src="assets/icons/whatsapp.svg" alt="" aria-hidden="true" className="size-5 shrink-0" />
                 Pedir orçamento
-                <ArrowRight aria-hidden className="ml-2 size-4 transition-transform duration-150 group-hover:translate-x-1" />
               </a>
             </Button>
             <Button
@@ -101,7 +94,7 @@ export function Hero() {
 
           <ul
             className="mt-12 grid max-w-xl grid-cols-1 gap-4 text-sm animate-blur-in sm:grid-cols-3"
-            style={{ animationDelay: "580ms" }}
+            style={{ animationDelay: "420ms" }}
           >
             {[
               { icon: Clock, strong: "1 semana", text: "prévia após o briefing" },
@@ -180,7 +173,6 @@ function HeroShowcase() {
           />
         </Carousel>
       </div>
-      <p className="mt-2 text-center text-xs text-mist">Imagens ilustrativas de cada nicho</p>
     </div>
   );
 }
@@ -190,7 +182,7 @@ function ShowcaseSlide({ item, index, total }: { item: Showcase; index: number; 
     <div className={cn("group/slide relative h-full overflow-hidden rounded-[24px] bg-gradient-to-br", item.tone)}>
       <SafeImage
         src={item.image}
-        alt={`Imagem ilustrativa: ${item.niche.toLowerCase()}`}
+        alt={`Exemplo de projeto: ${item.niche.toLowerCase()}`}
         loading={index === 0 ? "eager" : "lazy"}
         fetchPriority={index === 0 ? "high" : "auto"}
         className="absolute inset-0 scale-[1.02] transition-transform duration-700 ease-glass group-hover/slide:scale-110"

@@ -17,7 +17,10 @@ export default function App() {
         <span className="absolute top-[35vh] -right-[18vmax] size-[46vmax] rounded-full bg-[radial-gradient(circle,#dcecee,transparent_62%)]" />
         <span className="absolute -bottom-[22vmax] -left-[14vmax] size-[44vmax] rounded-full bg-[radial-gradient(circle,#d5ebe8,transparent_62%)]" />
       </div>
-      <a href="#conteudo" className="skip-link">
+      <a
+        href="#conteudo"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100 focus:rounded-full focus:bg-graphite focus:px-5 focus:py-2.5 focus:text-sm focus:font-medium focus:text-paper focus:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-graphite"
+      >
         Pular para o conteúdo
       </a>
       <Nav />

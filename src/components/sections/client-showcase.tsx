@@ -118,7 +118,6 @@ function ClientInfo({ client }: { client: Client }) {
     <div className="animate-blur-in">
       <p className="mt-8 text-xs font-medium tracking-[0.28em] text-mist uppercase">{client.niche}</p>
       <h3 className="font-heading mt-3 text-[clamp(2.2rem,4vw,3.4rem)] leading-[1.05] text-graphite">{client.name}</h3>
-      <span className="rule mt-6" />
       <p className="mt-6 max-w-md text-mist">{client.summary}</p>
 
       <ul className="mt-6 flex flex-wrap gap-2">

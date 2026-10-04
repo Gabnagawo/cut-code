@@ -98,7 +98,6 @@ export type Service = {
   title: string;
   lead?: string;
   description: string;
-  tag: string;
   icon: LucideIcon;
 };
 
@@ -107,21 +106,18 @@ export const SERVICES: Service[] = [
     title: "Landing Page Guiada",
     description:
       "Uma página construída em torno de um objetivo específico: conduzir o visitante até uma ação. Seja agendar uma consulta, solicitar um orçamento ou iniciar uma conversa pelo WhatsApp, a estrutura utiliza hierarquia visual, informações objetivas e chamadas para ação para tornar o caminho do visitante mais simples.\n\nÉ uma solução especialmente adequada para negócios com um serviço principal, campanhas específicas ou para quem deseja colocar uma oferta no ar de maneira rápida e direcionada.",
-    tag: "Site",
     icon: LayoutTemplate,
   },
   {
     title: "Site Institucional Completo",
     description:
       "Para marcas que precisam de mais espaço para apresentar quem são, o que oferecem e como podem ser encontradas.\n\nO site completo permite reunir serviços, equipe, informações institucionais, história, contato e outros conteúdos em uma estrutura mais ampla. A navegação é planejada para facilitar a compreensão da marca e proporcionar uma experiência digital mais completa.",
-    tag: "Site",
     icon: PanelsTopLeft,
   },
   {
     title: "Produção Audiovisual",
     description:
       "Da ideia à publicação, desenvolvemos conteúdos para Stories, Reels e outras plataformas digitais.\n\nO trabalho envolve planejamento, roteiro, direção de captação, gravação, edição e pós-produção. Os vídeos recebem tratamento de imagem, legendas, textos em tela, recursos sonoros e adequação ao formato das redes, sempre considerando o objetivo de comunicação da marca.",
-    tag: "Audiovisual",
     icon: Clapperboard,
   },
   {
@@ -129,7 +125,6 @@ export const SERVICES: Service[] = [
     lead: "Você grava. A CutCode transforma em conteúdo.",
     description:
       "Um serviço recorrente de edição para marcas que já produzem suas próprias gravações, mas precisam de constância, acabamento e agilidade na pós-produção.\n\nVocê envia os materiais e nós cuidamos da edição, mantendo um padrão visual e narrativo consistente ao longo do mês. Uma forma mais prática de manter o conteúdo ativo sem incorporar toda a etapa de gravação à rotina.",
-    tag: "Recorrente",
     icon: Repeat,
   },
 ];

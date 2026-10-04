@@ -45,7 +45,6 @@ export function Contact() {
 
           <Reveal delay={120} className="mt-10">
             <h3 className="font-heading text-2xl text-graphite">Contato</h3>
-            <span className="rule mt-4 w-24" />
             <ul className="mt-6 max-w-md space-y-3">
               {CHANNELS.map(({ label, detail, href, icon: Icon }) => (
                 <li key={label}>
