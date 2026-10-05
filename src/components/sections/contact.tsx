@@ -1,6 +1,7 @@
 import { ArrowUp, ArrowUpRight, Mail } from "lucide-react";
 
 import { GlassBlob } from "@/components/ui/glass-blob";
+import { GlowCard } from "@/components/ui/glow-card";
 import { InstagramIcon, WhatsAppIcon } from "@/components/brand-icons";
 import { Reveal } from "@/components/reveal";
 import { ContactForm } from "@/components/sections/contact-form";
@@ -48,19 +49,24 @@ export function Contact() {
             <ul className="mt-6 max-w-md space-y-3">
               {CHANNELS.map(({ label, detail, href, icon: Icon }) => (
                 <li key={label}>
-                  <a
+                  <GlowCard
+                    as="a"
+                    variant="glass"
+                    tilt={0}
                     {...linkProps(href)}
-                    className="glass group flex items-center gap-4 rounded-2xl p-3 pr-4 transition-all duration-300 ease-glass hover:-translate-y-1 hover:shadow-[0_1px_0_#fff_inset,0_30px_60px_-28px_rgb(30_34_40/0.4)]"
+                    className="block rounded-2xl p-3 pr-4 hover:-translate-y-1"
                   >
-                    <span className="grid size-11 shrink-0 place-items-center rounded-full bg-graphite text-paper transition-transform duration-300 group-hover:scale-110">
+                    <span className="flex items-center gap-4">
+                    <span className="grid size-11 shrink-0 place-items-center rounded-full bg-graphite text-paper transition-transform duration-300 group-hover/card:scale-110">
                       <Icon aria-hidden className="size-5" />
                     </span>
                     <span className="min-w-0 flex-1 leading-tight">
                       <b className="block font-medium text-graphite">{label}</b>
                       <small className="block truncate text-mist">{detail}</small>
                     </span>
-                    <ArrowUpRight aria-hidden className="size-5 shrink-0 text-graphite transition-transform duration-300 group-hover:rotate-45" />
-                  </a>
+                    <ArrowUpRight aria-hidden className="size-5 shrink-0 text-graphite transition-transform duration-300 group-hover/card:rotate-45" />
+                    </span>
+                  </GlowCard>
                 </li>
               ))}
             </ul>
@@ -83,15 +89,29 @@ export function Footer() {
     <footer className="mt-16 border-t border-hairline sm:mt-24">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 pt-12 pb-10 text-sm sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <a href="#top" className="inline-block">
-            <img
-              src="assets/logo/cutcode-grafite-texto.svg"
-              alt="CutCode"
-              width={96}
-              height={96}
-              loading="lazy"
-              className="h-auto w-24"
-            />
+          <a
+            href="#top"
+            aria-label="Voltar ao topo"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+              history.replaceState(null, '', location.pathname + location.search);
+            }}
+            className="group inline-flex items-center gap-3 transition-transform duration-200 hover:scale-105 focus-visible:outline-offset-4 motion-reduce:hover:scale-100"
+          >
+            <div className="rounded-full bg-[conic-gradient(from_210deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5,#feda75)] p-[3px]">
+              <div className="rounded-full bg-paper p-[3px]">
+                <img
+                  src="assets/logo/cutcode-grafite-texto.svg"
+                  alt=""
+                  width={88}
+                  height={88}
+                  loading="lazy"
+                  className="size-22 rounded-full object-cover"
+                />
+              </div>
+            </div>
+            <span className="text-sm font-medium text-graphite">@cut_code</span>
           </a>
           <p className="mt-4 max-w-xs text-mist">Sites, landing pages, produção audiovisual e cobertura completa de eventos para marcas que querem comunicação e conexão com o público.</p>
         </div>

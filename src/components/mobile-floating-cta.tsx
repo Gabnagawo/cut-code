@@ -18,6 +18,7 @@ export function MobileFloatingCta() {
     const hero = document.getElementById("top");
     const services = document.getElementById("servicos");
     const contact = document.getElementById("contato");
+    const footer = document.querySelector("footer");
 
     if (!hero) {
       const onScroll = () => {
@@ -33,9 +34,10 @@ export function MobileFloatingCta() {
     let heroPassed = false;
     let inServices = false;
     let inContact = false;
+    let inFooter = false;
 
     const update = () => {
-      setVisible(heroPassed && !inServices && !inContact);
+      setVisible(heroPassed && !inServices && !inContact && !inFooter);
     };
 
     const heroObserver = new IntersectionObserver(
@@ -71,10 +73,23 @@ export function MobileFloatingCta() {
       contactObserver.observe(contact);
     }
 
+    let footerObserver: IntersectionObserver | null = null;
+    if (footer) {
+      footerObserver = new IntersectionObserver(
+        ([entry]) => {
+          inFooter = entry.isIntersecting;
+          update();
+        },
+        { threshold: 0 }
+      );
+      footerObserver.observe(footer);
+    }
+
     return () => {
       heroObserver.disconnect();
       servicesObserver?.disconnect();
       contactObserver?.disconnect();
+      footerObserver?.disconnect();
     };
   }, []);
 

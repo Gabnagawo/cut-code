@@ -1,16 +1,13 @@
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { GlowCard } from "@/components/ui/glow-card";
 import { Reveal } from "@/components/reveal";
 import { SectionHead } from "@/components/sections/section-head";
 import { PACKAGES, SERVICES } from "@/data/content";
 import { quoteLinkProps } from "@/lib/link-props";
+import { cn } from "@/lib/utils";
 
 export function Services() {
-  const digitalPkg = PACKAGES.find((p) => p.featured || p.id === "digital") ?? PACKAGES[0];
-  const compactPackages = PACKAGES.filter((p) => p !== digitalPkg);
-
   return (
     <section id="servicos" className="mx-auto max-w-7xl px-4 pt-16 sm:px-6 sm:pt-24">
       <SectionHead
@@ -23,147 +20,145 @@ export function Services() {
         lead="Cada projeto parte da identidade, do público e dos objetivos da marca para transformar informação em uma experiência digital clara, estratégica e visualmente consistente."
       />
 
-      <div className="space-y-4 sm:space-y-6">
-        {/* Pacote dominante: Digital completo (escuro, destacado) */}
-        {digitalPkg && (
-          <Reveal>
-            <GlowCard
-              variant="dark"
-              tilt={2}
-              className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[#1c1c20] text-paper shadow-[0_28px_64px_-20px_rgb(20_20_25/0.5)]"
-            >
-              <div className="grid items-center gap-8 p-6 sm:p-12 lg:grid-cols-[1.4fr_1fr]">
-                <div>
-                  <span className="inline-block rounded-full bg-white/15 px-3.5 py-1.5 text-[0.7rem] font-medium tracking-[0.18em] text-paper uppercase">
-                    {digitalPkg.badge}
-                  </span>
-                  <h3 className="font-display mt-6 text-[clamp(2.3rem,3.8vw,3.4rem)] leading-none text-paper">
-                    {digitalPkg.title}
-                  </h3>
-                  <span className="mt-6 block h-px w-24 bg-white/20" />
-                  <p className="mt-6 max-w-lg text-base leading-relaxed text-paper/75">{digitalPkg.description}</p>
-                  <ul className="mt-6 grid gap-3 text-base text-paper/90 sm:grid-cols-2">
-                    {digitalPkg.items.map((item) => (
-                      <li key={item} className="flex items-start gap-2.5">
-                        <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full border border-white/25 bg-white/10 text-paper">
-                          <Check aria-hidden className="size-3" strokeWidth={3} />
-                        </span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button
-                    asChild
-                    variant="cta-inverse"
-                    className="group/btn mt-8 w-full sm:w-auto"
-                  >
-                    <a {...quoteLinkProps(digitalPkg.title, digitalPkg.whatsapp)}>
-                      Pedir pacote completo
-                      <ArrowRight aria-hidden className="ml-2 size-4 transition-transform duration-150 group-hover/btn:translate-x-1" />
-                    </a>
-                  </Button>
-                </div>
+      {/* Bloco dos 2 pacotes */}
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
+        {PACKAGES.map((pkg, idx) => {
+          const isDigital = pkg.id === "digital";
+          return (
+            <Reveal key={pkg.id} delay={idx * 100} className="h-full">
+              <GlowCard
+                variant={isDigital ? "dark" : "light"}
+                className={cn(
+                  "h-full rounded-2xl p-8 sm:p-10",
+                  isDigital
+                    ? "bg-graphite text-paper border border-transparent"
+                    : "bg-paper text-graphite border border-hairline",
+                )}
+              >
+                <div className="flex h-full flex-col sm:flex-row sm:items-stretch sm:gap-8">
+                  {/* Coluna esquerda */}
+                  <div className="flex flex-1 flex-col justify-between">
+                    <div>
+                      <h3
+                        id={`pkg-${pkg.id}`}
+                        className={cn(
+                          "relative overflow-hidden inline-block rounded-full px-3 py-1 text-xs font-medium transition-all duration-300 group-hover/card:shadow-sm",
+                          isDigital ? "bg-white text-graphite" : "bg-graphite text-paper",
+                        )}
+                      >
+                        <span className={cn(
+                          "absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent to-transparent transition-transform duration-700 ease-glass group-hover/card:translate-x-[150%] motion-reduce:transition-none",
+                          isDigital ? "via-graphite/10" : "via-white/25"
+                        )} />
+                        <span className="relative">{pkg.title}</span>
+                      </h3>
+                      <p className={cn("mt-4 text-sm leading-relaxed", isDigital ? "text-paper/80" : "text-mist")}>
+                        {pkg.description}
+                      </p>
+                    </div>
 
-                <div className="flex flex-col items-center gap-4">
-                  <div className="relative grid size-44 place-items-center rounded-full border border-white/20 bg-gradient-to-br from-white/15 to-white/5 p-4 text-center shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] transition-transform duration-300 ease-glass group-hover/card:scale-105 sm:size-48">
-                    <div className="text-paper">
-                      <span className="font-display block text-5xl leading-none sm:text-6xl">{digitalPkg.highlight.big}</span>
-                      <span className="mt-2 block text-xs font-medium tracking-[0.2em] text-paper/80 uppercase">{digitalPkg.highlight.small}</span>
+                    <div className="mt-8">
+                      <div>
+                        <span className={cn("font-heading block whitespace-nowrap text-4xl font-semibold", isDigital ? "text-paper" : "text-graphite")}>
+                          Sob consulta
+                        </span>
+                        <span className={cn("mt-1 block text-xs font-medium", isDigital ? "text-paper/60" : "text-mist")}>
+                          {pkg.highlight}
+                        </span>
+                      </div>
+
+                      <div className="mt-6">
+                        <a
+                          {...quoteLinkProps(pkg.title, pkg.whatsapp)}
+                          aria-describedby={`pkg-${pkg.id}`}
+                          className={cn(
+                            "group/btn inline-flex items-center justify-between gap-4 rounded-full border py-1.5 pr-1.5 pl-5 text-sm font-medium shadow-xs transition-all duration-300",
+                            isDigital
+                              ? "border-transparent bg-white text-graphite hover:bg-white/90"
+                              : "border-hairline/80 bg-white text-graphite hover:border-graphite/30 hover:shadow-sm",
+                          )}
+                        >
+                          <span>Pedir orçamento</span>
+                          <span className={cn("grid size-9 shrink-0 place-items-center rounded-full transition-transform duration-500 ease-glass group-hover/btn:-translate-x-1.5 group-hover/btn:rotate-45 motion-reduce:transition-none motion-reduce:group-hover/btn:translate-x-0 motion-reduce:group-hover/btn:rotate-0", isDigital ? "bg-graphite text-white" : "bg-graphite text-paper")}>
+                            <ArrowUpRight aria-hidden="true" className="size-4" />
+                          </span>
+                        </a>
+                      </div>
                     </div>
                   </div>
-                  <p className="text-sm tracking-[0.06em] text-paper/60">Sob consulta</p>
-                </div>
-              </div>
-            </GlowCard>
-          </Reveal>
-        )}
 
-        {/* Pacotes secundários: compacto */}
-        {compactPackages.map((pkg, idx) => (
-          <Reveal key={pkg.id || pkg.title} delay={90 * (idx + 1)}>
-            <GlowCard className="glass rounded-[24px] border border-hairline bg-white/60 p-6 sm:p-8">
-              <div className="grid items-center gap-6 lg:grid-cols-[1.5fr_auto_auto]">
-                <div>
-                  <div className="flex flex-wrap items-center gap-3">
-                    <span className="rounded-full border border-hairline bg-white/80 px-3 py-1 text-[0.7rem] font-medium tracking-[0.16em] text-mist uppercase">
-                      {pkg.badge}
-                    </span>
-                    <h3 className="font-heading text-2xl text-graphite sm:text-[1.75rem]">
-                      {pkg.title}
-                    </h3>
+                  {/* Separador: horizontal no mobile, vertical no desktop */}
+                  <div className={cn("my-8 h-px w-full sm:my-0 sm:h-auto sm:w-px sm:self-stretch", isDigital ? "bg-white/15" : "bg-hairline")} />
+
+                  {/* Coluna direita */}
+                  <div className="flex flex-1 flex-col">
+                    <p className={cn("font-heading text-sm font-semibold uppercase tracking-wider", isDigital ? "text-paper" : "text-graphite")}>
+                      O que inclui
+                    </p>
+                    <ul className="mt-4 space-y-3">
+                      {pkg.items.map((item) => (
+                        <li key={item} className={cn("flex items-start gap-2.5 text-sm leading-snug", isDigital ? "text-paper/90" : "text-graphite/90")}>
+                          <Check aria-hidden="true" className={cn("mt-0.5 size-4 shrink-0", isDigital ? "text-white" : "text-graphite")} strokeWidth={2.5} />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-mist">{pkg.description}</p>
-                  <ul className="mt-4 grid gap-2.5 text-sm text-graphite sm:grid-cols-2">
-                    {pkg.items.map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="mt-0.5 grid size-4 shrink-0 place-items-center rounded-full border border-graphite/25 text-graphite">
-                          <Check aria-hidden className="size-2.5" strokeWidth={3} />
-                        </span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
-
-                <div className="flex flex-col items-center justify-center gap-1.5 border-t border-hairline pt-4 lg:border-t-0 lg:pt-0 lg:border-l lg:pl-8">
-                  <div className="grid size-28 place-items-center rounded-full border border-hairline bg-white/90 p-2 text-center shadow-xs">
-                    <div className="px-2 text-graphite">
-                      <span className="font-heading block text-xl leading-tight font-bold whitespace-nowrap">{pkg.highlight.big}</span>
-                      <span className="mt-0.5 block text-[0.62rem] font-medium tracking-[0.14em] text-mist uppercase">{pkg.highlight.small}</span>
-                    </div>
-                  </div>
-                  <p className="text-xs tracking-wider text-mist">Sob consulta</p>
-                </div>
-
-                <div className="flex items-center justify-end">
-                  <Button
-                    asChild
-                    variant="cta"
-                    className="w-full sm:w-auto"
-                  >
-                    <a {...quoteLinkProps(pkg.title, pkg.whatsapp)}>
-                      Pedir {pkg.title.toLowerCase()}
-                      <ArrowRight aria-hidden className="ml-2 size-4" />
-                    </a>
-                  </Button>
-                </div>
-              </div>
-            </GlowCard>
-          </Reveal>
-        ))}
+              </GlowCard>
+            </Reveal>
+          );
+        })}
       </div>
 
-      <div className="mt-4 grid gap-4 sm:mt-6 sm:grid-cols-2 sm:gap-6 lg:grid-cols-2">
-        {SERVICES.map((s, i) => (
-          <Reveal key={s.title} delay={(i % 2) * 90} className="h-full">
-            <GlowCard
-              as="a"
-              {...quoteLinkProps(s.title, `Olá! Vim pelo site da CutCode e quero um orçamento de: ${s.title}.`)}
-              className="block h-full"
-              aria-label={s.title}
-            >
-              <div className="flex h-full min-h-[320px] flex-col p-6 sm:p-8">
-                <div className="mb-8">
-                  <span className="grid size-14 place-items-center rounded-2xl border border-hairline bg-white/70 text-graphite shadow-[0_1px_0_#fff_inset] transition-all duration-300 ease-glass group-hover/card:-rotate-6 group-hover/card:scale-110 group-hover/card:border-transparent group-hover/card:bg-graphite group-hover/card:text-paper group-hover/card:shadow-[0_14px_30px_-10px_rgb(30_30_30/0.6)]">
-                    <s.icon aria-hidden className="size-6" strokeWidth={1.5} />
+      <div className="mt-4 grid gap-4 sm:mt-6 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
+        {SERVICES.map((s, i) => {
+          const highlightText = "Você grava. A CutCode transforma em conteúdo.";
+          const hasHighlight = s.description.includes(highlightText);
+
+          return (
+            <Reveal key={s.title} delay={i * 90} className="h-full">
+              <GlowCard className="h-full p-6 sm:p-8">
+                <div className="flex h-full flex-col">
+                <div className="mb-6">
+                  <span className="grid size-11 place-items-center rounded-xl border border-hairline bg-white text-graphite">
+                    <s.icon aria-hidden className="size-5" strokeWidth={1.5} />
                   </span>
                 </div>
-
-                <h3 className="font-heading text-[1.75rem] leading-[1.1] text-graphite transition-transform duration-300 ease-glass group-hover/card:translate-x-1">
+                
+                <h3 className="font-heading text-2xl leading-tight text-graphite">
                   {s.title}
                 </h3>
-                {s.lead && (
-                  <p className="mt-3 text-base font-semibold leading-snug text-graphite">
-                    {s.lead}
-                  </p>
-                )}
-                <p className="mt-3 text-base leading-relaxed text-mist whitespace-pre-line transition-colors duration-300 group-hover/card:text-graphite/80">
-                  {s.description}
+                
+                <p className="mt-4 flex-1 text-sm leading-relaxed text-mist whitespace-pre-line sm:text-base">
+                  {hasHighlight ? (
+                    <>
+                      <span className="font-semibold text-graphite">{highlightText}</span>
+                      <br />
+                      <br />
+                      {s.description.replace(highlightText, "").trim()}
+                    </>
+                  ) : (
+                    s.description
+                  )}
                 </p>
-              </div>
-            </GlowCard>
-          </Reveal>
-        ))}
+
+                <div className="mt-8 flex justify-end">
+                  <a
+                    {...quoteLinkProps(s.title, s.whatsapp || `Olá! Vim pelo site da CutCode e quero um orçamento de: ${s.title}.`)}
+                    className="group/btn inline-flex items-center gap-3 text-sm font-medium text-graphite transition-opacity hover:opacity-80"
+                  >
+                    Pedir orçamento
+                    <span className="grid size-8 place-items-center rounded-full border border-graphite/15 transition-transform duration-300 group-hover/btn:rotate-45">
+                      <ArrowUpRight aria-hidden className="size-3.5" />
+                    </span>
+                  </a>
+                </div>
+                </div>
+              </GlowCard>
+            </Reveal>
+          );
+        })}
       </div>
     </section>
   );

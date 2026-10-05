@@ -1,6 +1,7 @@
 import { ArrowRight, Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { GlowCard } from "@/components/ui/glow-card";
 import { Reveal } from "@/components/reveal";
 import { SectionHead } from "@/components/sections/section-head";
 import { FAQ, hasWhatsapp, whatsappHref } from "@/data/content";
@@ -27,20 +28,24 @@ export function Faq() {
           </Reveal>
         </div>
 
-        <Reveal as="ul" delay={120} className="glass divide-y divide-hairline self-start rounded-[28px] px-4 sm:px-6">
-          {FAQ.map(({ q, a }) => (
-            <li key={q}>
-              <details className="group/faq">
-                <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 text-left [&::-webkit-details-marker]:hidden">
-                  <span className="font-heading text-xl leading-snug text-graphite sm:text-[1.375rem]">{q}</span>
-                  <span className="grid size-8 shrink-0 place-items-center rounded-full border border-graphite/15 text-graphite transition-transform duration-300 ease-[var(--ease-standard)] group-open/faq:rotate-45">
-                    <Plus aria-hidden className="size-4" />
-                  </span>
-                </summary>
-                <p className="max-w-[66ch] pb-6 text-mist whitespace-pre-line">{a}</p>
-              </details>
-            </li>
-          ))}
+        <Reveal delay={120} className="self-start lg:mt-9">
+          <GlowCard variant="glass" tilt={0} className="px-4 sm:px-6">
+            <ul className="divide-y divide-hairline">
+            {FAQ.map(({ q, a }) => (
+              <li key={q}>
+                <details className="group/faq">
+                  <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 text-left [&::-webkit-details-marker]:hidden">
+                    <span className="font-heading text-xl leading-snug text-graphite sm:text-[1.375rem]">{q}</span>
+                    <span className="grid size-8 shrink-0 place-items-center rounded-full border border-graphite/15 text-graphite transition-transform duration-300 ease-[var(--ease-standard)] group-open/faq:rotate-45">
+                      <Plus aria-hidden className="size-4" />
+                    </span>
+                  </summary>
+                  <p className="max-w-[66ch] pb-6 text-mist whitespace-pre-line">{a}</p>
+                </details>
+              </li>
+            ))}
+            </ul>
+          </GlowCard>
         </Reveal>
 
         <div className="lg:hidden">

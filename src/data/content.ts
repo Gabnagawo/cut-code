@@ -3,9 +3,9 @@ import {
   ClipboardList,
   Compass,
   LayoutTemplate,
-  PanelsTopLeft,
   Repeat,
   Rocket,
+  Video,
   type LucideIcon,
 } from "lucide-react";
 
@@ -35,16 +35,12 @@ export const SELECT_SERVICE_EVENT = "cutcode:servico";
 
 export const emailHref = () => `mailto:${CONTACT.email}`;
 
-const unsplash = (id: string, w = 900) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=75`;
-
 export type Showcase = {
   niche: string;
   title: string;
   meta: string;
-  image: string;
-  thumb: string;
-  /** gradiente de fallback caso a imagem não carregue */
+  videoSlug: string;
+  /** gradiente de fallback caso o vídeo não carregue */
   tone: string;
 };
 
@@ -52,100 +48,89 @@ export type Showcase = {
 export const SHOWCASE: Showcase[] = [
   {
     niche: "Clínicas",
-    title: "Agendamento em 3 cliques",
-    meta: "Landing page guiada + 4 reels",
-    image: unsplash("1519494026892-80bbd2d6fd0d"),
-    thumb: unsplash("1519494026892-80bbd2d6fd0d", 200),
+    title: "Procedimentos que geram confiança",
+    meta: "Reels de divulgação",
+    videoSlug: "clinicas",
     tone: "from-[#8fa3a4] to-[#3a4245]",
   },
   {
-    niche: "Restaurantes",
-    title: "Cardápio que dá fome",
-    meta: "Reels de pratos + site com reservas",
-    image: unsplash("1517248135467-4c7edcad34c4"),
-    thumb: unsplash("1517248135467-4c7edcad34c4", 200),
+    niche: "Profissionais",
+    title: "Seu trabalho em destaque",
+    meta: "Reels de divulgação",
+    videoSlug: "profissionais",
     tone: "from-[#a39a92] to-[#45403b]",
   },
   {
     niche: "Lojas",
-    title: "Vitrine aberta 24h",
-    meta: "Vídeos de produto + StoryMaker",
-    image: unsplash("1441986300917-64674bd600d8"),
-    thumb: unsplash("1441986300917-64674bd600d8", 200),
+    title: "Produtos que chamam atenção",
+    meta: "Vídeo de produto",
+    videoSlug: "lojas",
     tone: "from-[#9c98ad] to-[#3f3d4a]",
   },
   {
     niche: "Empresas",
     title: "Presença que passa confiança",
-    meta: "Site completo + vídeo institucional",
-    image: unsplash("1497366216548-37526070297c"),
-    thumb: unsplash("1497366216548-37526070297c", 200),
+    meta: "Vídeo institucional",
+    videoSlug: "empresas",
     tone: "from-[#93a0a8] to-[#3b4349]",
   },
   {
     niche: "Eventos",
-    title: "Convites que viram assunto",
-    meta: "Cobertura e convites interativos",
-    image: unsplash("1511578314322-379afb476865"),
-    thumb: unsplash("1511578314322-379afb476865", 200),
+    title: "Cada momento registrado",
+    meta: "Cobertura em vídeo",
+    videoSlug: "eventos",
     tone: "from-[#a7979f] to-[#4a3f45]",
   },
 ];
 
-export const NICHES = ["Clínicas particulares", "Clínicas multiprofissionais", "Restaurantes", "Lojas", "Empresas", "Eventos"];
+export const NICHES = ["Clínicas particulares", "Clínicas multiprofissionais", "Profissionais", "Lojas", "Empresas", "Eventos"];
 
 export type Service = {
   title: string;
-  lead?: string;
   description: string;
+  whatsapp: string;
   icon: LucideIcon;
 };
 
 export const SERVICES: Service[] = [
   {
-    title: "Landing Page Guiada",
-    description:
-      "Uma página construída em torno de um objetivo específico: conduzir o visitante até uma ação. Seja agendar uma consulta, solicitar um orçamento ou iniciar uma conversa pelo WhatsApp, a estrutura utiliza hierarquia visual, informações objetivas e chamadas para ação para tornar o caminho do visitante mais simples.\n\nÉ uma solução especialmente adequada para negócios com um serviço principal, campanhas específicas ou para quem deseja colocar uma oferta no ar de maneira rápida e direcionada.",
+    title: "Landing Page ou Site Institucional",
+    description: "Uma página focada em levar o visitante a uma ação, ou um site completo para apresentar sua marca, seus serviços, equipe e contato. Você escolhe o formato que o seu negócio precisa.",
+    whatsapp: "Olá! Vim pelo site da CutCode e quero um orçamento de landing page ou site institucional.",
     icon: LayoutTemplate,
   },
   {
-    title: "Site Institucional Completo",
-    description:
-      "Para marcas que precisam de mais espaço para apresentar quem são, o que oferecem e como podem ser encontradas.\n\nO site completo permite reunir serviços, equipe, informações institucionais, história, contato e outros conteúdos em uma estrutura mais ampla. A navegação é planejada para facilitar a compreensão da marca e proporcionar uma experiência digital mais completa.",
-    icon: PanelsTopLeft,
-  },
-  {
-    title: "Produção Audiovisual",
-    description:
-      "Da ideia à publicação, desenvolvemos conteúdos para Stories, Reels e outras plataformas digitais.\n\nO trabalho envolve planejamento, roteiro, direção de captação, gravação, edição e pós-produção. Os vídeos recebem tratamento de imagem, legendas, textos em tela, recursos sonoros e adequação ao formato das redes, sempre considerando o objetivo de comunicação da marca.",
+    title: "Vídeos de Divulgação",
+    description: "Vídeos para Stories, Reels e outras redes, com planejamento, roteiro, direção de captação, gravação, edição, tratamento de imagem, legendas, textos na tela e som.",
+    whatsapp: "Olá! Vim pelo site da CutCode e quero um orçamento de vídeos de divulgação.",
     icon: Clapperboard,
   },
   {
     title: "Edição Continuada",
-    lead: "Você grava. A CutCode transforma em conteúdo.",
-    description:
-      "Um serviço recorrente de edição para marcas que já produzem suas próprias gravações, mas precisam de constância, acabamento e agilidade na pós-produção.\n\nVocê envia os materiais e nós cuidamos da edição, mantendo um padrão visual e narrativo consistente ao longo do mês. Uma forma mais prática de manter o conteúdo ativo sem incorporar toda a etapa de gravação à rotina.",
+    description: "Você grava. A CutCode transforma em conteúdo. Serviço de edição para quem já grava os próprios vídeos.",
+    whatsapp: "Olá! Vim pelo site da CutCode e quero saber da edição continuada.",
     icon: Repeat,
+  },
+  {
+    title: "Cobertura de Eventos",
+    description: "Captação em vídeo do seu evento e edição de conteúdos prontos para as redes, para registrar e divulgar cada momento: antes, durante e depois.",
+    whatsapp: "Olá! Vim pelo site da CutCode e quero um orçamento de cobertura de evento.",
+    icon: Video,
   },
 ];
 
 export type Package = {
   id: string;
-  featured?: boolean;
-  badge: string;
   title: string;
   description: string;
   items: string[];
   whatsapp: string;
-  /** destaque no círculo de vidro */
-  highlight: { big: string; small: string };
+  highlight: string;
 };
 
 export const PACKAGES: Package[] = [
   {
     id: "digital",
-    featured: true,
-    badge: "Recomendado",
     title: "Pacote Digital Completo",
     description:
       "Uma solução para quem precisa estruturar sua comunicação digital e, ao mesmo tempo, criar conteúdo para divulgar o negócio. O pacote reúne uma landing page orientada ou um site institucional completo, além de quatro vídeos curtos para divulgação.",
@@ -156,12 +141,10 @@ export const PACKAGES: Package[] = [
       "Vídeos em até dois dias úteis após a captação",
     ],
     whatsapp: "Olá! Vim pelo site da CutCode e quero um orçamento do pacote digital completo.",
-    highlight: { big: "+2", small: "vídeos bônus" },
+    highlight: "+2 vídeos bônus inclusos",
   },
   {
     id: "eventos",
-    featured: false,
-    badge: "Para eventos",
     title: "Pacote de Eventos",
     description:
       "Do convite ao registro, o objetivo é criar uma experiência que começa antes mesmo do evento. O pacote reúne convite digital interativo, página personalizada e produção de conteúdos audiovisuais para registrar e divulgar cada momento.",
@@ -172,7 +155,7 @@ export const PACKAGES: Package[] = [
       "Personalização com a identidade da ocasião",
     ],
     whatsapp: "Olá! Vim pelo site da CutCode e quero um orçamento do pacote de eventos.",
-    highlight: { big: "2 em 1", small: "convite + cobertura" },
+    highlight: "2 em 1: convite + cobertura",
   },
 ];
 
@@ -187,7 +170,7 @@ export const FORM_SERVICES = [
 export const FORM_NICHES = [
   "Clínica particular",
   "Clínica multiprofissional",
-  "Restaurante",
+  "Profissional",
   "Loja",
   "Empresa",
   "Evento",
@@ -259,9 +242,9 @@ export type Client = {
   materials: ClientMaterial[];
 };
 
-const ph = (id: string): Pick<ClientMaterial, "image" | "thumb"> => ({
-  image: unsplash(id, 1000),
-  thumb: unsplash(id, 200),
+const ph = (): Pick<ClientMaterial, "image" | "thumb"> => ({
+  image: "assets/videos/clinicas-poster.jpg",
+  thumb: "assets/videos/clinicas-poster.jpg",
 });
 
 const ALL_CLIENTS: Client[] = [
@@ -275,10 +258,10 @@ const ALL_CLIENTS: Client[] = [
     delivered: ["Landing page guiada", "Agendamento online", "Reels de divulgação"],
     url: "", // TODO: link real (o botão "Ver site no ar" só aparece quando preenchido)
     materials: [
-      { kind: "Site", title: "Página inicial", ...ph("1519494026892-80bbd2d6fd0d"), tone: "from-[#8fa3a4] to-[#3a4245]" },
-      { kind: "Site", title: "Escolha da especialidade", ...ph("1576091160550-2173dba999ef"), tone: "from-[#93a0a8] to-[#3b4349]" },
-      { kind: "Reel", title: "Conheça a clínica", ...ph("1505751172876-fa1923c5c528"), tone: "from-[#9aa7a3] to-[#3d4442]" },
-      { kind: "Reel", title: "Equipe e atendimento", ...ph("1551076805-e1869033e561"), tone: "from-[#a39a92] to-[#45403b]" },
+      { kind: "Site", title: "Página inicial", ...ph(), tone: "from-[#8fa3a4] to-[#3a4245]" },
+      { kind: "Site", title: "Escolha da especialidade", ...ph(), tone: "from-[#93a0a8] to-[#3b4349]" },
+      { kind: "Reel", title: "Conheça a clínica", ...ph(), tone: "from-[#9aa7a3] to-[#3d4442]" },
+      { kind: "Reel", title: "Equipe e atendimento", ...ph(), tone: "from-[#a39a92] to-[#45403b]" },
     ],
   },
   {
@@ -291,10 +274,10 @@ const ALL_CLIENTS: Client[] = [
     delivered: ["Landing page guiada", "StoryMaker", "Edição continuada"],
     url: "", // TODO: link real (o botão "Ver site no ar" só aparece quando preenchido)
     materials: [
-      { kind: "Site", title: "Apresentação", ...ph("1579684385127-1ef15d508118"), tone: "from-[#a7979f] to-[#4a3f45]" },
-      { kind: "Site", title: "Agende sua consulta", ...ph("1460925895917-afdab827c52f"), tone: "from-[#9c98ad] to-[#3f3d4a]" },
-      { kind: "Stories", title: "Dicas da semana", ...ph("1498050108023-c5249f4df085"), tone: "from-[#a39a92] to-[#45403b]" },
-      { kind: "Reel", title: "Bastidores do consultório", ...ph("1522202176988-66273c2fd55f"), tone: "from-[#8fa3a4] to-[#3a4245]" },
+      { kind: "Site", title: "Apresentação", ...ph(), tone: "from-[#a7979f] to-[#4a3f45]" },
+      { kind: "Site", title: "Agende sua consulta", ...ph(), tone: "from-[#9c98ad] to-[#3f3d4a]" },
+      { kind: "Stories", title: "Dicas da semana", ...ph(), tone: "from-[#a39a92] to-[#45403b]" },
+      { kind: "Reel", title: "Bastidores do consultório", ...ph(), tone: "from-[#8fa3a4] to-[#3a4245]" },
     ],
   },
 ];

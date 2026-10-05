@@ -1,6 +1,6 @@
-import { GlowCard } from "@/components/ui/glow-card";
 import { Reveal } from "@/components/reveal";
 import { SectionHead } from "@/components/sections/section-head";
+import { GlowCard } from "@/components/ui/glow-card";
 import { STEPS } from "@/data/content";
 
 export function Process() {
@@ -15,32 +15,28 @@ export function Process() {
         }
       />
 
-      <ol className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-        {STEPS.map((step, i) => {
-          const Icon = step.icon;
-          return (
-            <Reveal as="li" key={step.title} delay={i * 90} className="h-full">
-              <GlowCard className="h-full">
-                <div className="p-6 sm:p-8">
-                  <span className="grid size-12 place-items-center rounded-full border border-hairline bg-white/70 text-graphite transition-all duration-300 ease-glass group-hover/card:scale-110 group-hover/card:bg-graphite group-hover/card:text-paper">
-                    <Icon aria-hidden className="size-5" strokeWidth={1.5} />
-                  </span>
-                  <h3 className="font-heading mt-8 text-[1.6rem] leading-tight text-graphite">{step.title}</h3>
-                  <p className="mt-2 text-base text-mist">
-                    {step.highlight
-                      ? step.text.split(step.highlight).flatMap((part, j, arr) =>
-                          j < arr.length - 1
-                            ? [part, <b key={j} className="font-semibold text-graphite">{step.highlight}</b>]
-                            : [part],
-                        )
-                      : step.text}
-                  </p>
-                </div>
-              </GlowCard>
-            </Reveal>
-          );
-        })}
-      </ol>
+      <ul className="flex flex-col border-t border-hairline">
+        {STEPS.map((step, i) => (
+          <Reveal as="li" key={step.title} delay={i * 90} className="border-b border-hairline">
+            <GlowCard variant="light" tilt={0} className="-mx-4 p-4 sm:-mx-8 sm:p-8 rounded-2xl sm:rounded-[28px]">
+              <div className="flex flex-col gap-2 sm:flex-row sm:gap-8 lg:gap-16">
+                <h3 className="font-heading shrink-0 text-[1.6rem] leading-tight text-graphite sm:w-1/3">
+                  {step.title}
+                </h3>
+                <p className="text-base text-mist sm:w-2/3">
+                  {step.highlight
+                    ? step.text.split(step.highlight).flatMap((part, j, arr) =>
+                        j < arr.length - 1
+                          ? [part, <b key={j} className="font-semibold text-graphite">{step.highlight}</b>]
+                          : [part],
+                      )
+                    : step.text}
+                </p>
+              </div>
+            </GlowCard>
+          </Reveal>
+        ))}
+      </ul>
     </section>
   );
 }
