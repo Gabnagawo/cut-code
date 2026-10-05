@@ -94,7 +94,13 @@ export function Footer() {
             aria-label="Voltar ao topo"
             onClick={(e) => {
               e.preventDefault();
-              window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+              const behavior = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+              const target = matchMedia('(max-width: 1023px)').matches ? document.getElementById('vitrine') : null;
+              if (target) {
+                target.scrollIntoView({ behavior });
+              } else {
+                window.scrollTo({ top: 0, behavior });
+              }
               history.replaceState(null, '', location.pathname + location.search);
             }}
             className="group inline-flex items-center gap-3 transition-transform duration-200 hover:scale-105 focus-visible:outline-offset-4 motion-reduce:hover:scale-100"
@@ -147,7 +153,21 @@ export function Footer() {
             Privacidade
           </a>
         </p>
-        <a href="#top" className="group inline-flex items-center gap-2 text-graphite">
+        <a 
+          href="#top" 
+          className="group inline-flex items-center gap-2 text-graphite"
+          onClick={(e) => {
+            e.preventDefault();
+            const behavior = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+            const target = matchMedia('(max-width: 1023px)').matches ? document.getElementById('vitrine') : null;
+            if (target) {
+              target.scrollIntoView({ behavior });
+            } else {
+              window.scrollTo({ top: 0, behavior });
+            }
+            history.replaceState(null, '', location.pathname + location.search);
+          }}
+        >
           Voltar ao topo
           <span className="grid size-8 place-items-center rounded-full border border-graphite/15 transition-transform duration-300 group-hover:-translate-y-0.5">
             <ArrowUp aria-hidden className="size-3.5" />

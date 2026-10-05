@@ -8,11 +8,7 @@ export function Process() {
     <section id="processo" className="mx-auto max-w-7xl px-4 pt-16 sm:px-6 sm:pt-24">
       <SectionHead
         eyebrow="Como funciona"
-        title={
-          <>
-            Simples, rápido e <span className="text-iris">sem enrolação</span>.
-          </>
-        }
+        title="Simples e rápido."
       />
 
       <ul className="flex flex-col border-t border-hairline">

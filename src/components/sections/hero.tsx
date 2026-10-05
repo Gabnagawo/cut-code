@@ -18,8 +18,7 @@ const HEADLINE: { text: string; iris?: boolean; br?: boolean }[] = [
   { text: "Presença" },
   { text: "digital", br: true },
   { text: "que" },
-  { text: "traz" },
-  { text: "clientes.", iris: true },
+  { text: "converte.", iris: true },
 ];
 
 export function Hero() {
@@ -126,7 +125,7 @@ function HeroBackground() {
 
 function HeroShowcase() {
   return (
-    <div className="relative mx-auto w-full max-w-[540px] animate-blur-in" style={{ animationDelay: "200ms" }}>
+    <div id="vitrine" className="relative mx-auto w-full max-w-[540px] animate-blur-in scroll-mt-24" style={{ animationDelay: "200ms" }}>
       {/* objeto de vidro atrás da vitrine, vazando para fora */}
       <GlassBlob className="absolute top-1/2 left-1/2 -z-10 size-[150%] -translate-x-1/2 -translate-y-1/2 sm:size-[165%] lg:-translate-x-[38%]" />
 
@@ -175,37 +174,54 @@ function ShowcaseSlide({ item, index, total }: { item: Showcase; index: number; 
   const shouldLoad = isActive || isNext;
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const [userPaused, setUserPaused] = React.useState(false);
+  const [videoSrc, setVideoSrc] = React.useState<string | undefined>();
 
+  // Define a resolução adequada e força o carregamento
   React.useEffect(() => {
-    if (isActive && !userPaused) {
+    if (shouldLoad && !videoSrc) {
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      const src = `assets/videos/${item.videoSlug}-${isMobile ? "720" : "1080"}.mp4`;
+      setVideoSrc(src);
+      
+      if (videoRef.current) {
+        videoRef.current.src = src;
+        videoRef.current.load();
+      }
+    }
+  }, [shouldLoad, videoSrc, item.videoSlug]);
+
+  // Controle de play/pause
+  React.useEffect(() => {
+    if (isActive && !userPaused && videoSrc) {
       videoRef.current?.play().catch(() => {});
     } else {
       videoRef.current?.pause();
     }
-  }, [isActive, userPaused]);
+  }, [isActive, userPaused, videoSrc]);
 
   return (
     <div 
-      className={cn("group/slide relative h-full w-full cursor-pointer overflow-hidden rounded-[24px] bg-gradient-to-br", item.tone)}
+      className={cn("group/slide relative h-full w-full cursor-pointer overflow-hidden rounded-[24px] bg-gradient-to-br focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-iris", item.tone)}
       onClick={() => setUserPaused(!userPaused)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setUserPaused(!userPaused);
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-label={userPaused ? "Retomar vídeo" : "Pausar vídeo"}
     >
       <video
         ref={videoRef}
         muted
         loop
         playsInline
-        autoPlay
         preload={shouldLoad ? "metadata" : "none"}
         poster={`assets/videos/${item.videoSlug}-poster.jpg`}
         className="absolute inset-0 h-full w-full scale-[1.02] object-cover transition-transform duration-700 ease-glass group-hover/slide:scale-110"
-      >
-        {shouldLoad && (
-          <>
-            <source src={`assets/videos/${item.videoSlug}-720.mp4`} media="(max-width: 767px)" type="video/mp4" />
-            <source src={`assets/videos/${item.videoSlug}-1080.mp4`} type="video/mp4" />
-          </>
-        )}
-      </video>
+      />
       <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-black/5" />
 
       <div className="absolute inset-x-5 top-5 flex items-center justify-between text-xs text-white">

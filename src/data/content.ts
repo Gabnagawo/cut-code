@@ -48,7 +48,7 @@ export type Showcase = {
 export const SHOWCASE: Showcase[] = [
   {
     niche: "Clínicas",
-    title: "Procedimentos que geram confiança",
+    title: "Produção audiovisual pra clínicas",
     meta: "Reels de divulgação",
     videoSlug: "clinicas",
     tone: "from-[#8fa3a4] to-[#3a4245]",
@@ -63,7 +63,7 @@ export const SHOWCASE: Showcase[] = [
   {
     niche: "Lojas",
     title: "Produtos que chamam atenção",
-    meta: "Vídeo de produto",
+    meta: "Vídeo comercial",
     videoSlug: "lojas",
     tone: "from-[#9c98ad] to-[#3f3d4a]",
   },
